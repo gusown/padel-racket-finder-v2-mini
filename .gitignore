@@ -6,6 +6,7 @@ Thumbs.db
 *~
 
 # IDE
+.claude/
 .vscode/
 .idea/
 *.sublime-project

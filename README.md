@@ -6,7 +6,7 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 
 - **Zwei Testmodi:** Quick Test (15 Fragen, ~3–5 Min) oder Pro Test (bis zu 23 Fragen, ~7–9 Min) mit zusätzlichen Fragen zu Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Marke und Budget-Flexibilität
 - **Mehrfachauswahl** bei Schwächen und Racketsport-Erfahrung
-- **37 reale, aktuell erhältliche Schläger** von 9 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, u. a.) mit echten Produktlinks
+- **49 reale, aktuell erhältliche Schläger** von 12 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, Tecnifibre, Dunlop, Oxdog, Osaka) mit echten Produktlinks
 - **Erklärung zu jeder Frage**, damit auch Einsteiger die Fachbegriffe verstehen
 - **Visuelle Profil-Analyse:** Netzdiagramm, das dein Spielprofil mit deinem Top-Match vergleicht
 - **Detaillierte Spieler-Analyse:** Spielertyp, Entwicklungsstand, Stärken/Baustellen und persönliche Trainingstipps
@@ -41,7 +41,7 @@ Alle Schläger, ihre technischen Daten (Form, Gewicht, Balance, Kernhärte, Spie
 
 ⚠️ **Wichtig:** Preise und Verfügbarkeit ändern sich laufend. Die App zeigt den Preis zum Zeitpunkt der Recherche — vor dem Kauf immer den aktuellen Preis über den Link im Shop prüfen.
 
-## Die Auswahl: Warum nur 37 Modelle?
+## Die Auswahl: Warum nur 49 Modelle?
 
 Das Projekt ist bewusst ein **Finder**, nicht ein **Shop**. Eine kuratierte Auswahl über alle Preisklassen, Kopfformen und Spielniveaus verhindert, dass das Ergebnis durch hunderte kaum unterscheidbare Modelle verwässert wird — deckt aber trotzdem Einsteiger- bis Profi-Schläger von 9 Marken ab.
 

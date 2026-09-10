@@ -1,16 +1,19 @@
-# Padel Racket Finder — Mini
+# Padel Racket Finder
 
-Ein schneller, persönlicher Finder für den perfekten Padel-Schläger. 12 Fragen. 8 kuratierte Modelle. Keine Anmeldung, kein Backend, kein Tracking.
+Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Modellen, echten Daten und einer ausführlichen Spielerprofil-Analyse. Keine Anmeldung, kein Backend, kein Tracking.
 
 ## Features
 
-- **12 intelligente Fragen** zu Spielstil, Niveau, Vorlieben und Budget
-- **8 kuratierte Top-Modelle** (2026) von NOX, HEAD, Adidas, Bullpadel und Babolat
-- **Smart Matching** basierend auf Kontrolle, Power, Fehlertoleranz, Komfort und Technik-Anforderungen
-- **Top 3 Empfehlungen** mit detaillierten Gründen
-- **Live-Preis-Links** zu Preisvergleichen und Händlern
-- **Vollständig privat** — keine Anmeldung, Backend oder Tracking
+- **Zwei Testmodi:** Quick Test (15 Fragen, ~3–5 Min) oder Pro Test (bis zu 23 Fragen, ~7–9 Min) mit zusätzlichen Fragen zu Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Marke und Budget-Flexibilität
+- **Mehrfachauswahl** bei Schwächen und Racketsport-Erfahrung
+- **37 reale, aktuell erhältliche Schläger** von 9 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, u. a.) mit echten Produktlinks
+- **Erklärung zu jeder Frage**, damit auch Einsteiger die Fachbegriffe verstehen
+- **Visuelle Profil-Analyse:** Netzdiagramm, das dein Spielprofil mit deinem Top-Match vergleicht
+- **Detaillierte Spieler-Analyse:** Spielertyp, Entwicklungsstand, Stärken/Baustellen und persönliche Trainingstipps
+- **Top 3 Empfehlungen** mit Stat-Vergleich und nachvollziehbarer Begründung
+- **Dunkles Design** in Tennisball-Grün
 - **Mobile-optimiert** — perfekt für Smartphone und Tablet
+- **Vollständig privat** — keine Anmeldung, Backend oder Tracking
 
 ## Schnelleinstieg
 
@@ -32,20 +35,15 @@ Ein schneller, persönlicher Finder für den perfekten Padel-Schläger. 12 Frage
 ### Option 3: Lokal teilen
 Einfach die Datei `index.html` mit Freunden teilen — sie öffnen sie im Browser, fertig.
 
-## Wichtig zu Preisen
+## Woher kommen die Daten?
 
-⚠️ Die Preise im Code sind nur Indikatoren für das Matching-Algorithmus. Sie sind NICHT aktuell und werden nicht live aktualisiert.
+Alle Schläger, ihre technischen Daten (Form, Gewicht, Balance, Kernhärte, Spielniveau) und Testwerte (Power, Kontrolle, Komfort, Handling, Effet, Fehlertoleranz — jeweils 0–10) stammen von **[padelreference.com](https://www.padelreference.com)**, Stand September 2026. Zwei Werte (Netzspiel, Defensive) gibt es dort nicht direkt — die leiten wir rechnerisch aus den vorhandenen Testwerten ab.
 
-**Vor dem Kauf:** Nutze die Links in der App, um die aktuellen Preise bei deinem Lieblingshändler zu prüfen.
+⚠️ **Wichtig:** Preise und Verfügbarkeit ändern sich laufend. Die App zeigt den Preis zum Zeitpunkt der Recherche — vor dem Kauf immer den aktuellen Preis über den Link im Shop prüfen.
 
-## Die Auswahl: Warum nur 8 Modelle?
+## Die Auswahl: Warum nur 37 Modelle?
 
-Das Projekt ist bewusst ein **Finder**, nicht ein **Shop**. Eine kleine, redaktionell gepflegte Auswahl verhindert:
-- Überforderung durch hunderte Modelle
-- Mittelmäßige oder veraltete Rackets in den Ergebnissen
-- Unklare Empfehlungen
-
-Stattdessen: Die Top-Modelle des Jahres, sauber kalibriert.
+Das Projekt ist bewusst ein **Finder**, nicht ein **Shop**. Eine kuratierte Auswahl über alle Preisklassen, Kopfformen und Spielniveaus verhindert, dass das Ergebnis durch hunderte kaum unterscheidbare Modelle verwässert wird — deckt aber trotzdem Einsteiger- bis Profi-Schläger von 9 Marken ab.
 
 ## Code-Struktur
 

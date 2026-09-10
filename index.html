@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Padel Racket Finder · Mini</title>
+  <meta name="description" content="Finde den Padel-Schläger, der am besten zu deinem Spiel, Niveau und Budget passt.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <div class="badge">PADEL RACKET FINDER</div>
+      <h1>Finde deinen<br><span>perfekten Schläger.</span></h1>
+      <p>Ein kurzer Racket-Fit-Test analysiert deinen Spielstil, deine Technik, deine Wünsche und dein Budget.</p>
+      <button id="startBtn" class="primary">Test starten <span>→</span></button>
+      <div class="meta">ca. 3–5 Minuten · unabhängig · persönliches Matching</div>
+    </header>
+
+    <section id="quiz" class="hidden">
+      <div class="progress-wrap">
+        <div class="progress-top"><span id="stepLabel">1 / 12</span><span id="progressPct">8%</span></div>
+        <div class="progress"><div id="bar"></div></div>
+      </div>
+      <div id="questionCard" class="card"></div>
+    </section>
+
+    <section id="results" class="hidden"></section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

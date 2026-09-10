@@ -1,0 +1,21 @@
+# System
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node (if added later)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build outputs (if added later)
+dist/
+build/

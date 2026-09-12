@@ -55,7 +55,7 @@ const PADELREFERENCE_DATA = [
   { name: "Drop Shot Explorer Pro Attack Soft 2026", brand: "Drop Shot", url: "https://www.padelreference.com/en/padel-rackets/p/drop-shot-explorer-pro-attack-soft-2026", image: "https://www.padelreference.com/storage/24722/124175-pala-drop-shot-explorer-pro-attack-soft-dp344009-1500x1500-vista1.jpg.webp", price: 251.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 8, control: 9, comfort: 8, maneuverability: 8, effect: 9, tolerance: 8 } },
   { name: "Drop Shot Explorer Pro Attack 2.0", brand: "Drop Shot", url: "https://www.padelreference.com/en/padelschlager/p/drop-shot-explorer-pro-attack-20", image: "https://www.padelreference.com/storage/24710/124174-pala-drop-shot-explorer-pro-attack-2-0-dp3440416-1500x1500-1.jpg.webp", price: 271.90, shape: "Teardrop", weight: 360, balance: "Head Heavy", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 9, control: 8, comfort: 6, maneuverability: 6, effect: 8, tolerance: 7 } },
   { name: "Joma Hyper Pro HRD", brand: "Joma", url: "https://www.padelreference.com/en/padel-rackets/p/joma-hyper-pro-hrd", image: "https://www.padelreference.com/storage/26303/394c09bfa887d8b98d0a055bd9d013916e9bae48_712600015_1.webp", price: 169.90, shape: "Diamond", weight: 370, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 7, maneuverability: 6, effect: 9, tolerance: 8 } },
-  { name: "HEAD Coello Pro 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-coello-pro-2026", image: "https://www.padelreference.com/storage/15993/5cHcZtXb7NOY3TZMjwBkhVIgHwEeww-metacmcucG5n-.webp", price: 279.90, shape: "Diamond", weight: 375, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 8, comfort: 8, maneuverability: 7, effect: 7, tolerance: 7 } },
+  { name: "HEAD Coello Pro 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-coello-pro-2026", image: "https://www.padelreference.com/storage/22251/kgpSUg2NHnTOYp0aIIkj4NZ5LrH932-metaMS5wbmc%3D-.webp", price: 279.90, shape: "Diamond", weight: 375, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 8, comfort: 8, maneuverability: 7, effect: 7, tolerance: 7 } },
   { name: "Head Radical Pro 2026", brand: "HEAD", url: "https://www.padelreference.com/en/raquettes-de-padel/p/head-radical-pro-2026", image: "https://www.padelreference.com/storage/21762/byOwd7x0pWjj9rejNTkCqceLuDQKZ8-metaMjIyMDM2IFJhZGljYWwgUHJvIDIwMjZfMiBLb3BpZS5wbmc%3D-.webp", price: 174.90, shape: "Teardrop", weight: 370, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 8, control: 9, comfort: 8, maneuverability: 8, effect: 6, tolerance: 8 } },
   { name: "Head Speed XTR 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-speed-xtr-2026", image: "https://www.padelreference.com/storage/25590/raquette-de-padel-head-speed-xtr-2026-face2.webp", price: 119.90, shape: "Teardrop", weight: 368, balance: "Balanced", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 8, control: 8, comfort: 6, maneuverability: 7, effect: 6, tolerance: 7 } },
   { name: "Adidas Metalbone Carbon 3.5 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-metalbone-carbon-35-2026", image: "https://www.padelreference.com/storage/20369/siCsngEFYngAZSnXV2dRa9fOrommUZ-metabG0wM3BKNHcucG5n-.webp", price: 214.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 8, effect: 8, tolerance: 9 } },
@@ -106,7 +106,84 @@ const PADELREFERENCE_DATA = [
   { name: "Royal Padel M27 LTD 2024", brand: "Royal Padel", url: "https://www.padelreference.com/en/padel-rackets/p/royal-padel-m27-ltd-2024", image: "https://www.padelreference.com/storage/6193/raquette-royal-padel-m27-ltd-2024.webp", price: 239.90, shape: "Round", weight: 367.5, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 9, comfort: 7, maneuverability: 7, effect: 9, tolerance: 8 } },
   { name: "Royal Padel M27 Control-X 2023", brand: "Royal Padel", url: "https://www.padelreference.com/en/royal-padel-padel-rackets/p/royal-padel-m27-control-x-2023", image: "https://www.padelreference.com/storage/6178/raquette-royal-padel-m27-control-x-2023.webp", price: 299.90, shape: "Round", weight: 362.5, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 8, comfort: 7, maneuverability: 7, effect: 7, tolerance: 8 } },
   { name: "Royal Padel RP 24 Whip Polietileno 2024", brand: "Royal Padel", url: "https://www.padelreference.com/en/padel-rackets/p/royal-padel-rp-24-whip-polietileno-2024", image: "https://www.padelreference.com/storage/6174/raquette-royal-padel-rp-24-whip-polietileno-2024.webp", price: 179.90, shape: "Round", weight: 362.5, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 7, comfort: 9, maneuverability: 7, effect: 9, tolerance: 9 } },
-  { name: "Royal Padel 4.0 Oxide Mexico WPT", brand: "Royal Padel", url: "https://www.padelreference.com/en/padel-rackets/p/royal-padel-40-oxide-mexico-wpt", image: "https://www.padelreference.com/storage/6240/raquette-royal-padel-40-oxide-mexico-wpt.webp", price: 229.90, shape: "Diamond", weight: 370, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 8, comfort: 8, maneuverability: 7, effect: 9, tolerance: 6 } }
+  { name: "Royal Padel 4.0 Oxide Mexico WPT", brand: "Royal Padel", url: "https://www.padelreference.com/en/padel-rackets/p/royal-padel-40-oxide-mexico-wpt", image: "https://www.padelreference.com/storage/6240/raquette-royal-padel-40-oxide-mexico-wpt.webp", price: 229.90, shape: "Diamond", weight: 370, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 8, comfort: 8, maneuverability: 7, effect: 9, tolerance: 6 } },
+  { name: "Adidas Metalbone HRD+ 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-metalbone-hrd-2026", image: "https://www.padelreference.com/storage/20343/xgGcdrKKfQTZaFVCpgiF8bwHse7KNL-metaOGFESTN5SWcucG5n-.webp", price: 284.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 8, comfort: 7, maneuverability: 7, effect: 8, tolerance: 7 } },
+  { name: "Adidas Metalbone CTRL 3.5 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-metalbone-ctrl-35-2026", image: "https://www.padelreference.com/storage/20354/UXyv6AZogZAmYI4HoeXyemYxvAlxDs-metaOHZSODFmVmcucG5n-.webp", price: 259.90, shape: "Round", weight: 360, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 7, comfort: 7, maneuverability: 9, effect: 7, tolerance: 8 } },
+  { name: "Adidas Metalbone Team 3.5 2026", brand: "Adidas", url: "https://www.padelreference.com/en/adidas-padel-rackets/p/adidas-metalbone-team-35-2026", image: "https://www.padelreference.com/storage/20395/ONU8FWoDajSfj8XesWcks6lmVbe42w-metadlRCR1U3WUEucG5n-.webp", price: 149.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 8, control: 7, comfort: 8, maneuverability: 9, effect: 8, tolerance: 8 } },
+  { name: "Adidas Cross It Carbon 3.5 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-cross-it-carbon-2026", image: "https://www.padelreference.com/storage/20582/VzbYAMKBcoRVJnQUEmh9GziPr5wKyT-metaUFpjRHd5SncucG5n-.webp", price: 199.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 8, effect: 8, tolerance: 8 } },
+  { name: "Adidas Arrow Hit Attack 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-arrow-hit-attack-2026", image: "https://www.padelreference.com/storage/22076/BDNaC0EsVOFUMniELNxJ5kewJ7CK4e-metacmFxdWV0dGUtcGFkZWwtYWRpZGFzLWFycm93LWhpdC1hdHRhY2stMjAyNi53ZWJw-.webp", price: 310.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "Adidas RX Series 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-rx-series-2026", image: "https://www.padelreference.com/storage/21320/rTLwNN8UNzSTE2LejJjnfQgJSbVS9Z-metaUmFxdWV0dGUtZGUtcGFkZWwtQWRpZGFzLVJYLVNlcmllcy0yMDI2LUZhY2UucG5nLndlYnA%3D-.webp", price: 107.90, shape: "Round", weight: 365, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Beginner", ratings: { power: 6, control: 7, comfort: 9, maneuverability: 8, effect: 5, tolerance: 6 } },
+  { name: "Adidas Drive Light 3.5 2026", brand: "Adidas", url: "https://www.padelreference.com/en/padel-rackets/p/adidas-drive-light-35-2026", image: "https://www.padelreference.com/storage/21339/BCw6OqbvNXz8WuqDDzqi6iCUWPjB9k-metaQ2FwdHVyZSBk4oCZw6ljcmFuIDIwMjUtMTItMDIgw6AgMTMuMDUuMjcucG5n-.webp", price: 71.90, shape: "Round", weight: 355, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Beginner", ratings: { power: 6, control: 7, comfort: 6, maneuverability: 9, effect: 5, tolerance: 6 } },
+  { name: "Babolat Viper Juan Lebron 3.0 2026", brand: "Babolat", url: "https://www.padelreference.com/en/padel-rackets/p/babolat-viper-juan-lebron-2026", image: "https://www.padelreference.com/storage/21006/JlZ1I40M9sQmB6utZT6mf6Ik4arzN6-metaMS5wbmc%3D-.webp", price: 299.90, shape: "Diamond", weight: 372.5, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 8, comfort: 8, maneuverability: 6, effect: 9, tolerance: 7 } },
+  { name: "Babolat Technical Viper Soft 3.0", brand: "Babolat", url: "https://www.padelreference.com/en/padel-rackets/p/babolat-technical-viper-soft-30", image: "https://www.padelreference.com/storage/22810/ubOqSSmkcIWmi3udcG2dwp3nYfttbp-metaMS5wbmc%3D-.webp", price: 239.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 9, control: 7, comfort: 7, maneuverability: 7, effect: 8, tolerance: 7 } },
+  { name: "Babolat Air Vertuo 2026", brand: "Babolat", url: "https://www.padelreference.com/en/padel-rackets/p/babolat-air-vertuo-2026-padel-racket", image: "https://www.padelreference.com/storage/22677/1xdYI3fuey8hXyMwkFedJXU1NmayQj-metaMS5wbmc%3D-.webp", price: 119.90, shape: "Teardrop", weight: 345, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 7, comfort: 7, maneuverability: 8, effect: 6, tolerance: 8 } },
+  { name: "Babolat Counter Vertuo 2026", brand: "Babolat", url: "https://www.padelreference.com/en/padel-rackets/p/babolat-counter-vertuo-2026-padel-racket", image: "https://www.padelreference.com/storage/22687/kfxEM1mUblg5OQ69xkGz3pCyD04q0w-metaMS5wbmc%3D-.webp", price: 161.90, shape: "Round", weight: 355, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 8, comfort: 8, maneuverability: 8, effect: 7, tolerance: 9 } },
+  { name: "Babolat Stima Spirit", brand: "Babolat", url: "https://www.padelreference.com/en/padel-rackets/p/babolat-stima-spirit", image: "https://www.padelreference.com/storage/5449/raquette-babolat-stima-spirit.webp", price: 123.90, shape: "Round", weight: 320, balance: "Balanced", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 5, control: 7, comfort: 8, maneuverability: 10, effect: 7, tolerance: 9 } },
+  { name: "Babolat Dyna Energy", brand: "Babolat", url: "https://www.padelreference.com/en/padel-rackets/p/babolat-dyna-energy", image: "https://www.padelreference.com/storage/5438/raquette-babolat-dyna-energy-.webp", price: 170.90, shape: "Teardrop", weight: 320, balance: "Balanced", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 6, control: 8, comfort: 7, maneuverability: 10, effect: 7, tolerance: 8 } },
+  { name: "Bullpadel Hack 05 2027", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-hack-05-2027", image: "https://www.padelreference.com/storage/26163/hack-05.webp", price: 349.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 8, comfort: 7, maneuverability: 7, effect: 9, tolerance: 6 } },
+  { name: "Bullpadel Hack 05 Hybrid 2027", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-hack-05-hybrid-2027", image: "https://www.padelreference.com/storage/26169/hack-hybrid.webp", price: 349.90, shape: "Teardrop", weight: 365, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 10, comfort: 8, maneuverability: 10, effect: 9, tolerance: 8 } },
+  { name: "Bullpadel Xplo 02 2027", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-xplo-02-2027", image: "https://www.padelreference.com/storage/26221/raquette-de-padel-Bullpadel-xplo-02-2027-face1_36f9a623-9f36-41a9-828a-87012a1474d7.webp", price: 329.90, shape: "Diamond", weight: 370, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 9, comfort: 7, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "Bullpadel Neuron 02 Edge 2027", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-neuron-02-edge-2027", image: "https://www.padelreference.com/storage/26199/raquette-de-padel-Bullpadel-neuron-edge-02-2027-face1.webp", price: 339.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 9, control: 10, comfort: 7, maneuverability: 9, effect: 9, tolerance: 7 } },
+  { name: "Bullpadel Wonder 2027", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullapdel-wonder-2027", image: "https://www.padelreference.com/storage/26232/raquette-de-padel-Bullpadel-wonder-2027-face.webp", price: 284.90, shape: "Teardrop", weight: 357, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 8, control: 8, comfort: 8, maneuverability: 8, effect: 7, tolerance: 9 } },
+  { name: "Bullpadel Elite 02 Woman 2027", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-elite-02-woman-2027", image: "https://www.padelreference.com/storage/26238/raquette-de-padel-Bullpadel-elite-2027-face_6d3620ac-21fe-4d07-bf24-d106287ff647.webp", price: 294.90, shape: "Teardrop", weight: 355, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 8, control: 8, comfort: 8, maneuverability: 7, effect: 7, tolerance: 8 } },
+  { name: "Bullpadel Ionic Power 26", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-ionic-power-26", image: "https://www.padelreference.com/storage/20512/z2ZcWw79xr74QZztK3AaNHwpwwTei2-metadW5uYW1lZCAoMykuanBn-.webp", price: 139.90, shape: "Diamond", weight: 367.5, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 7, control: 5, comfort: 7, maneuverability: 6, effect: 7, tolerance: 8 } },
+  { name: "Bullpadel Vertex Advance 2026", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-vertex-advance-2026", image: "https://www.padelreference.com/storage/22373/ddY2zmnAER5hSvAcj8UNLdJ27zjtUH-metaUmFxdWV0dGUtZGUtcGFkZWwtQnVsbHBhZGVsLVZlcnRleC1BZHZhbmNlLTIwMjYtRmFjZS53ZWJw-.webp", price: 110.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 8, control: 7, comfort: 7, maneuverability: 7, effect: 7, tolerance: 7 } },
+  { name: "Bullpadel Hack 02 Advance 2026", brand: "Bullpadel", url: "https://www.padelreference.com/en/padel-rackets/p/bullpadel-hack-02-advance-2026", image: "https://www.padelreference.com/storage/22367/xbcOf9jbxbX6OLdShpcRpWQ9lhy7ao-metaUmFxdWV0dGUtZGUtcGFkZWwtQnVsbHBhZGVsLUhhY2stMDItQWR2YW5jZS0yMDI2LUZhY2Uud2VicA%3D%3D-.webp", price: 109.90, shape: "Round", weight: 365, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 8, comfort: 9, maneuverability: 8, effect: 7, tolerance: 8 } },
+  { name: "HEAD Extreme Motion 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-extreme-motion-2026", image: "https://www.padelreference.com/storage/26341/Raquette-de-padel-Head-Extreme-Motion-2026-Face_301ed7c7-7a6b-4643-a226-64867109cab3.webp", price: 239.90, shape: "Diamond", weight: 362.5, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 8, control: 8, comfort: 7, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "HEAD Extreme XTR 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-extreme-xtr-2026", image: "https://www.padelreference.com/storage/25600/raquette-de-padel-head-extreme-xtr-2026-face2.webp", price: 119.90, shape: "Diamond", weight: 368, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 8, control: 7, comfort: 6, maneuverability: 7, effect: 6, tolerance: 7 } },
+  { name: "HEAD Coello Team 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-coello-team-2026", image: "https://www.padelreference.com/storage/22260/ioncCgSenppyBT8Aiad5rlghmeVVhp-metaMS5wbmc%3D-.webp", price: 181.90, shape: "Diamond", weight: 360, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 7, control: 7, comfort: 9, maneuverability: 6, effect: 6, tolerance: 7 } },
+  { name: "HEAD Cyber 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-cyber-2026", image: "https://www.padelreference.com/storage/25603/raquette-de-padel-head-cyber-2026-face.webp", price: 89.90, shape: "Teardrop", weight: 363, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 8, comfort: 8, maneuverability: 8, effect: 6, tolerance: 8 } },
+  { name: "HEAD Master 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-master-2026", image: "https://www.padelreference.com/storage/25596/raquette-de-padel-head-master-2026-face.webp", price: 179.90, shape: "Round", weight: 363, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 6, control: 8, comfort: 8, maneuverability: 9, effect: 6, tolerance: 9 } },
+  { name: "HEAD Radical Team 2026", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-radical-team-2026", image: "https://www.padelreference.com/storage/21784/YfdC4gDQI5Q3ndMRDiYxGqHG0krllO-metaMjIyMDU2IFJhZGljYWwgVGVhbSAyMDI2XzIgS29waWUucG5n-.webp", price: 113.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 6, control: 9, comfort: 9, maneuverability: 9, effect: 6, tolerance: 9 } },
+  { name: "HEAD Speed Pro 2025", brand: "HEAD", url: "https://www.padelreference.com/en/padel-rackets/p/head-speed-pro-2025", image: "https://www.padelreference.com/storage/11890/0JX1bs7sym1HisrDW6L936wWMddFIp-metaMjIxMDY1X1NwZWVkIFBybyAyMDI1XzJfMS5wbmc%3D-.webp", price: 159.90, shape: "Teardrop", weight: 370, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 8, effect: 6, tolerance: 8 } },
+  { name: "NOX AT10 Genius Attack 12K Alum Xtrem 2026", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-AT10-genius-attack-12K-alum-xtrem-2026", image: "https://www.padelreference.com/storage/19681/sZiffadOXkWrxtU7L1loaFyvd0mTZK-metaNS5qcGc%3D-.webp", price: 223.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 8, comfort: 7, maneuverability: 8, effect: 8, tolerance: 9 } },
+  { name: "NOX AT10 Luxury Genius 18K Alum 2026 by Agustín Tapia", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-AT10-genius-18K-alum-2026", image: "https://www.padelreference.com/storage/19692/VoiCYIanDQmVzK6YJC1oT2yp07FaPa-metaQVQxMCBMdXh1cnkgR2VuaXVzIDE4SyBBbHVtIDIwMjYgYnkgQWd1c3TDrW4gVGFwaWE0LmpwZw%3D%3D-.webp", price: 269.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 10, comfort: 7, maneuverability: 8, effect: 9, tolerance: 8 } },
+  { name: "NOX EA10 Ventus Hybrid 12K Xtrem 2026", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-EA10-ventus-hybrid-12K-xtrem-2026", image: "https://www.padelreference.com/storage/19739/UAwcl8IL7dTpU3ha5JHiCAjBGDJohR-metaZWExMC12ZW50dXMtaHlicmlkLTEyay14dHJlbS1ieS1lZHUtYWxvbnNvLXBlYTEwdmVudHVzaDEyMjYtODQzNTc3ODkwM.webp", price: 213.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "NOX NextGen Pro Attack 12K NFA Series 2026", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-nextgen-pro-attack-12k-nfa-series-2026", image: "https://www.padelreference.com/storage/25306/nextgen-pro-attack-12k-nfa-series-palas-pnfangat1226nox-3380371.webp", price: 199.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 9, control: 7, comfort: 8, maneuverability: 8, effect: 8, tolerance: 8 } },
+  { name: "NOX NextGen Pro Hybrid 12K NFA Series 2026", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-nextgen-pro-hybrid-12k-nfa-series-2026", image: "https://www.padelreference.com/storage/25301/nextgen-pro-hybrid-12k-nfa-series-palas-pnfanghy1226nox-5304296.webp", price: 199.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 7, control: 9, comfort: 8, maneuverability: 8, effect: 7, tolerance: 8 } },
+  { name: "NOX Equation Hard 2026", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-equation-hard-2026", image: "https://www.padelreference.com/storage/19908/uJKnGIw1kDaz33TjAJ85EwaNBZwNF8-metaZXF1YXRpb24taGFyZC1hZHZhbmNlZC1wZXF1aGFkdjI2LTg0MzU3Nzg5MDI3NDQtNzE0MzIzMC53ZWJw-.webp", price: 109.90, shape: "Round", weight: 360, balance: "Balanced", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 8, effect: 7, tolerance: 6 } },
+  { name: "NOX X-ZERO Red", brand: "NOX", url: "https://www.padelreference.com/en/padel-rackets/p/nox-Xzero-red-2026", image: "https://www.padelreference.com/storage/19547/dyFvToJtMGD23d7Dcmq2ONiBXAI0vc-metaTk9YWC1aRVJPUmVkMjAyNl9QYWxhXzFfZmE5NzBlN2YtYTAzZC00N2E2LTlhZTQtNjkwMWRiYjM3ZDdiXzk2MHg5NjBfY.webp", price: 64.90, shape: "Round", weight: 355, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Beginner", ratings: { power: 5, control: 9, comfort: 8, maneuverability: 9, effect: 6, tolerance: 9 } },
+  { name: "Siux Diablo Elite 2026", brand: "Siux", url: "https://www.padelreference.com/en/padel-rackets/p/siux-diablo-elite-2026", image: "https://www.padelreference.com/storage/20813/H47iFmd3rfIib0C8JoYMoYATWeU37s-metaMS5wbmc%3D-.webp", price: 169.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 8, control: 10, comfort: 7, maneuverability: 6, effect: 5, tolerance: 8 } },
+  { name: "Siux Electra Stupa Pro 2026 Black", brand: "Siux", url: "https://www.padelreference.com/en/padel-rackets/p/siux-electra-stupa-pro-2026-shadow-red", image: "https://www.padelreference.com/storage/19052/EdAVlYGySGHBBbDj6cesCcvbN5uAn1-metaMS5wbmc%3D-.webp", price: 207.90, shape: "Teardrop", weight: 362.5, balance: "Balanced", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 7, effect: 9, tolerance: 7 } },
+  { name: "Siux Fenix Pro 2026 Black", brand: "Siux", url: "https://www.padelreference.com/en/padel-rackets/p/siux-fenix-pro-2026-black", image: "https://www.padelreference.com/storage/19076/OiNMyIE3M6aGolUS9GiT1U7rdyCmBu-metaMS5wbmc%3D-.webp", price: 204.90, shape: "Diamond", weight: 367.5, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 10, control: 7, comfort: 7, maneuverability: 7, effect: 7, tolerance: 7 } },
+  { name: "Siux Pegasus Pro 2026 Storm Grey", brand: "Siux", url: "https://www.padelreference.com/en/padel-rackets/p/siux-pegasus-pro-2026-storm-grey", image: "https://www.padelreference.com/storage/19169/btcFuzHTxlcwCqYoBHQwggm9QqOEk2-metaMS5wbmc%3D-.webp", price: 199.90, shape: "Teardrop", weight: 362.5, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 7, comfort: 7, maneuverability: 6, effect: 5, tolerance: 7 } },
+  { name: "Siux Valkiria Elite 2026", brand: "Siux", url: "https://www.padelreference.com/en/padel-rackets/p/siux-valkiria-elite-2026", image: "https://www.padelreference.com/storage/19182/H5hQhPrWZb1wXGuARWmCaDkITUwSXk-metaMS5wbmc%3D-.webp", price: 169.90, shape: "Round", weight: 350, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 7, effect: 5, tolerance: 7 } },
+  { name: "Siux Beat Play Hybrid 2026", brand: "Siux", url: "https://www.padelreference.com/en/padel-rackets/p/siux-beat-play-hybrid-2026", image: "https://www.padelreference.com/storage/19224/UmhuZzz91GN4iuPkiq0jYPU2EoERid-metaYmVhdCBoeWJyaWQucG5n-.webp", price: 54.90, shape: "Teardrop", weight: 362.5, balance: "Balanced", feel: "Flexible / Comfort", level: "Beginner", ratings: { power: 5, control: 6, comfort: 8, maneuverability: 7, effect: 5, tolerance: 8 } },
+  { name: "StarVie Astrum Pro 2025", brand: "StarVie", url: "https://www.padelreference.com/en/padel-rackets/p/starvie-astrum-pro-2025", image: "https://www.padelreference.com/storage/14653/IlSUWqBRzzrdngiEmFCcKLs0AQ4Ta5-metaQ29waWUgZGUgU2FucyB0aXRyZS5wbmc%3D-.webp", price: 249.90, shape: "Round", weight: 365, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 8, control: 9, comfort: 8, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "StarVie Basalto 2025", brand: "StarVie", url: "https://www.padelreference.com/en/starvie-padel-rackets/p/starvie-basalto-2025", image: "https://www.padelreference.com/storage/12451/VcOCrsC5objiiUWIpWurVuOybYppb9-metaNS5wbmc%3D-.webp", price: 179.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 9, comfort: 7, maneuverability: 7, effect: 7, tolerance: 7 } },
+  { name: "StarVie Dronos Galaxy 2.0 Speed", brand: "StarVie", url: "https://www.padelreference.com/en/padel-rackets/p/starvie-dronos-galaxy-20-speed-2023", image: "https://www.padelreference.com/storage/5164/raquette-starvie-dronos-galaxy-20-speed-2023.webp", price: 159.90, shape: "Teardrop", weight: 372.5, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 6, effect: 7, tolerance: 7 } },
+  { name: "Dunlop FX Hybrid", brand: "Dunlop", url: "https://www.padelreference.com/en/padel-rackets/p/dunlop-fx-hybrid", image: "https://www.padelreference.com/storage/25516/1.webp", price: 269.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 7, effect: 9, tolerance: 8 } },
+  { name: "Dunlop FX Lite", brand: "Dunlop", url: "https://www.padelreference.com/en/padel-rackets/p/dunlop-fx-lite", image: "https://www.padelreference.com/storage/21928/S41Mf2IiOuNUJXqxGJey60bI5sPkJ1-metaMS5wbmc%3D-.webp", price: 169.90, shape: "Diamond", weight: 355, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 9, control: 7, comfort: 9, maneuverability: 8, effect: 8, tolerance: 8 } },
+  { name: "Dunlop FX Start", brand: "Dunlop", url: "https://www.padelreference.com/en/padel-rackets/p/dunlop-fx-start", image: "https://www.padelreference.com/storage/21970/bWgu2RRzgrdvILAZoe2IEjemzodZb3-metaUmFxdWV0dGUtZGUtcGFkZWwtRHVubG9wLUZYLVN0YXJ0LTIwMjYtRmFjZS5wbmcud2VicA%3D%3D-.webp", price: 79.90, shape: "Teardrop", weight: 365, balance: "Handle Heavy", feel: "Hybrid / Intermediate", level: "Beginner", ratings: { power: 8, control: 7, comfort: 8, maneuverability: 7, effect: 8, tolerance: 7 } },
+  { name: "Dunlop Megamax Silver 2026", brand: "Dunlop", url: "https://www.padelreference.com/en/padel-rackets/p/dunlop-megamax-silver-2026", image: "https://www.padelreference.com/storage/23772/zj0hDKhMIl0cRqL6gFrTQ55bnFwQBS-metaUmFxdWV0dGUtZGUtcGFkZWwtRHVubG9wLU1lZ2FtYXgtU2lsdmVyLTIwMjYtRmFjZS53ZWJw-.webp", price: 59.90, shape: "Round", weight: 365, balance: "Handle Heavy", feel: "Hybrid / Intermediate", level: "Beginner", ratings: { power: 7, control: 7, comfort: 9, maneuverability: 9, effect: 6, tolerance: 8 } },
+  { name: "Dunlop Tristorm Lite 2025", brand: "Dunlop", url: "https://www.padelreference.com/en/padel-rackets/p/dunlop-tristorm-lite-2025", image: "https://www.padelreference.com/storage/22058/a95vMKukv0rCHyHpBGZlx3danmjuG1-metaUmFxdWV0dGUtZGUtcGFkZWwtRHVubG9wLVRyaXN0b3JtLUxpdGUtMjAyNS1GYWNlLnBuZy53ZWJw-.webp", price: 94.90, shape: "Diamond", weight: 350, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 8, control: 7, comfort: 8, maneuverability: 8, effect: 6, tolerance: 8 } },
+  { name: "Tecnifibre Bomba Soft", brand: "Tecnifibre", url: "https://www.padelreference.com/en/padel-rackets/p/tecnifibre-bomba-soft", image: "https://www.padelreference.com/storage/23610/dB6YDj8jPxteonIbKcyyU5pSVidTbs-metaMS5wbmc%3D-.webp", price: 159.90, shape: "Diamond", weight: 355, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 7, comfort: 9, maneuverability: 8, effect: 6, tolerance: 8 } },
+  { name: "Tecnifibre Bomba Speed", brand: "Tecnifibre", url: "https://www.padelreference.com/en/padel-rackets/p/tecnifibre-bomba-speed", image: "https://www.padelreference.com/storage/23603/0ncRuhdUfeBcfILJE8anjjVWDAicj7-metaMS5wbmc%3D-.webp", price: 191.90, shape: "Diamond", weight: 360, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 8, effect: 7, tolerance: 7 } },
+  { name: "Tecnifibre Curva Speed 2026", brand: "Tecnifibre", url: "https://www.padelreference.com/en/padel-rackets/p/tecnifibre-curva-speed-2026", image: "https://www.padelreference.com/storage/25787/16CURSPE26-01_BD.webp", price: 229.90, shape: "Teardrop", weight: 355, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 7, control: 8, comfort: 8, maneuverability: 8, effect: 8, tolerance: 8 } },
+  { name: "Tecnifibre Curva Team 2025", brand: "Tecnifibre", url: "https://www.padelreference.com/en/padel-rackets/p/tecnifibre-curva-team-2025", image: "https://www.padelreference.com/storage/17384/HEu3brMLX0VO6KC7WUGCtWj2VEghO7-metaNC5wbmc%3D-.webp", price: 135.90, shape: "Teardrop", weight: 340, balance: "Balanced", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 5, control: 8, comfort: 9, maneuverability: 7, effect: 5, tolerance: 7 } },
+  { name: "Tecnifibre Wall Breaker 360", brand: "Tecnifibre", url: "https://www.padelreference.com/en/tecnifibre-padel-rackets/p/tecnifibre-wall-breaker-360", image: "https://www.padelreference.com/storage/5542/raquette-tecnifibre-wall-breaker-360.webp", price: 79.90, shape: "Teardrop", weight: 360, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 8, control: 9, comfort: 8, maneuverability: 8, effect: 7, tolerance: 8 } },
+  { name: "Oxdog Ultimate Pro 2026", brand: "Oxdog", url: "https://www.padelreference.com/en/padel-rackets/p/oxdog-ultimate-pro-2026", image: "https://www.padelreference.com/storage/21391/9D0DCUPy852fADNhjLUxbo8Mm9IXPZ-metaMS5wbmc%3D-.webp", price: 329.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 9, control: 8, comfort: 7, maneuverability: 8, effect: 8, tolerance: 7 } },
+  { name: "Oxdog Hyper Pro 2.0 2026", brand: "Oxdog", url: "https://www.padelreference.com/en/padel-rackets/p/oxdog-hyper-pro-2-2026", image: "https://www.padelreference.com/storage/21521/faf0wr6REadELYOByCi2zb2X6u7rXr-metaMS5wbmc%3D-.webp", price: 309.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 9, comfort: 7, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "Oxdog Hyper Tour X 2.0 2026", brand: "Oxdog", url: "https://www.padelreference.com/en/padel-rackets/p/oxdog-hyper-tour-2-2026", image: "https://www.padelreference.com/storage/21570/3QiC0AoSfZEKQ8Nnt0Oxy44qzgVMnn-metaMS5wbmc%3D-.webp", price: 249.90, shape: "Teardrop", weight: 365, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 9, control: 8, comfort: 7, maneuverability: 8, effect: 9, tolerance: 9 } },
+  { name: "Oxdog Pure Pro+ 2026", brand: "Oxdog", url: "https://www.padelreference.com/en/padel-rackets/p/oxdog-pure-pro-2026", image: "https://www.padelreference.com/storage/21583/njg0grHIGGSZGcfM1ImaWyc5qNNsHU-metaMS5wbmc%3D-.webp", price: 299.90, shape: "Teardrop", weight: 370, balance: "Head Heavy", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 8, effect: 8, tolerance: 7 } },
+  { name: "Oxdog Sense Pro 2026", brand: "Oxdog", url: "https://www.padelreference.com/en/padel-rackets/p/oxdog-sense-pro-2026", image: "https://www.padelreference.com/storage/21473/xUwFhrxSDD7Lac7RJeNnT0OxgRnlfz-metaMS5wbmc%3D-.webp", price: 224.90, shape: "Round", weight: 363, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 9, control: 10, comfort: 8, maneuverability: 8, effect: 8, tolerance: 8 } },
+  { name: "Osaka Pro Tour LTD Power 2026", brand: "Osaka", url: "https://www.padelreference.com/en/padel-rackets/p/osaka-pro-tour-ltd-power-2026", image: "https://www.padelreference.com/storage/25213/raquette-osaka-pro-tour-ltd-power-2026.webp", price: 239.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 9, control: 7, comfort: 7, maneuverability: 6, effect: 7, tolerance: 7 } },
+  { name: "Osaka Vision Pro Control", brand: "Osaka", url: "https://www.padelreference.com/en/padel-rackets/p/osaka-vision-pro-control-padel-racket", image: "https://www.padelreference.com/storage/23732/gnyHuMrjA25HMOoa8Bdoxb06AziqTZ-metaUmFxdWV0dGUtZGUtcGFkZWwtT3Nha2EtVmlzaW9uLVByby1Db250cm9sLTIwMjYtRmFjZS53ZWJw-.webp", price: 189.90, shape: "Round", weight: 360, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 9, comfort: 8, maneuverability: 8, effect: 7, tolerance: 8 } },
+  { name: "Osaka Vision Pro Power", brand: "Osaka", url: "https://www.padelreference.com/en/padel-rackets/p/osaka-vision-pro-power-padel-racket", image: "https://www.padelreference.com/storage/23730/OHgB1xei0vgbbfjsXY9W8TqgMJmrvX-metaUmFxdWV0dGUtZGUtcGFkZWwtT3Nha2EtVmlzaW9uLVByby1Qb3dlci0yMDI2LUZhY2Uud2VicA%3D%3D-.webp", price: 199.90, shape: "Teardrop", weight: 360, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 7, maneuverability: 8, effect: 8, tolerance: 7 } },
+  { name: "Black Crown Hurricane Pro 3.0", brand: "Black Crown", url: "https://www.padelreference.com/en/padel-rackets/p/black-crown-hurricane-pro-30-padel-racket", image: "https://www.padelreference.com/storage/16083/zyfvVlZ5yDAWbqKx0K7LjyLYvJCs7K-metaUmFxdWV0dGUtZGUtcGFkZWwtQmxhY2stQ3Jvd24tSHVycmljYW5lLVByby0zLjAtRmFjZV8xMjAweC53ZWJw-.webp", price: 199.90, shape: "Round", weight: 360, balance: "Balanced", feel: "Flexible / Comfort", level: "Advanced to Expert", ratings: { power: 7, control: 9, comfort: 8, maneuverability: 9, effect: 7, tolerance: 8 } },
+  { name: "Black Crown Piton 13 2025", brand: "Black Crown", url: "https://www.padelreference.com/en/padel-rackets/p/black-crown-piton-13-2025", image: "https://www.padelreference.com/storage/16075/VT9HbId0HsifyOqdPEqE9DqAG7hacv-metaUmFxdWV0dGUtZGUtcGFkZWwtQmxhY2stQ3Jvd24tUGl0b24tMTMtMjAyNS1GYWNlXzEyMDB4LndlYnA%3D-.webp", price: 199.90, shape: "Round", weight: 360, balance: "Handle Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 6, control: 7, comfort: 5, maneuverability: 7, effect: 8, tolerance: 8 } },
+  { name: "Black Crown Special Power", brand: "Black Crown", url: "https://www.padelreference.com/en/padel-rackets/p/black-crown-special-power", image: "https://www.padelreference.com/storage/4651/raquette-black-crown-special-power.webp", price: 80.90, shape: "Teardrop", weight: 355, balance: "Balanced", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 8, control: 9, comfort: 7, maneuverability: 8, effect: 9, tolerance: 7 } },
+  { name: "Royal Padel 130 Factor", brand: "Royal Padel", url: "https://www.padelreference.com/en/padel-rackets/p/royal-padel-130-factor", image: "https://www.padelreference.com/storage/6237/raquette-royal-padel-130-factor.webp", price: 99.90, shape: "Round", weight: 360, balance: "Handle Heavy", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 4, control: 6, comfort: 9, maneuverability: 8, effect: 5, tolerance: 9 } },
+  { name: "Royal Padel M27 R Control 2024", brand: "Royal Padel", url: "https://www.padelreference.com/en/padel-rackets/p/royal-padel-m27-r-control-2024", image: "https://www.padelreference.com/storage/6182/raquette-royal-padel-r-control-2024.webp", price: 239.90, shape: "Round", weight: 362.5, balance: "Handle Heavy", feel: "Stiff / Power", level: "Intermediate", ratings: { power: 7, control: 9, comfort: 8, maneuverability: 8, effect: 9, tolerance: 8 } },
+  { name: "Lok Maxx Hype Gen 2 Mike Yanguas 2026", brand: "Lok", url: "https://www.padelreference.com/en/padel-rackets/p/lok-maxx-hype-gen-2-mike-yanguas-2026", image: "https://www.padelreference.com/storage/23438/4gvpLx8RSNlaytKNMjKoE2fJR9R4XV-metaUmFxdWV0dGUtZGUtcGFkZWwtTG9rLU1heHgtSHlwZS1HZW4tMi0yMDI2LUZhY2Uud2VicA%3D%3D-.webp", price: 194.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 9, comfort: 8, maneuverability: 6, effect: 9, tolerance: 8 } },
+  { name: "Lok CARB-ON Hype Gen 2 2026", brand: "Lok", url: "https://www.padelreference.com/en/padel-rackets/p/lok-carb-on-hype-gen-2-2026", image: "https://www.padelreference.com/storage/23445/eVn4hpSagifoS0rjoGKVv7ey5ml3Yd-metacmFxdWV0dGUtZGUtcGFkZWwtbG9rLWNhcmJvbi1oeXBlLWdlbi0yLTIwMjYtZmFjZS53ZWJw-.webp", price: 189.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 8, effect: 7, tolerance: 9 } },
+  { name: "Lok Easy Flow Gen 2 2026", brand: "Lok", url: "https://www.padelreference.com/en/padel-rackets/p/lok-easy-flow-gen-2-2026", image: "https://www.padelreference.com/storage/23428/j1olDhcaOLq9cm6a0XWogpMuukVeZm-metacmFxdWV0dGUtZGUtcGFkZWwtbG9rLWVhc3ktZmxvdy1nZW4tMi0yMDI2LWZhY2Uud2VicA%3D%3D-.webp", price: 119.90, shape: "Round", weight: 365, balance: "Handle Heavy", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 7, control: 8, comfort: 8, maneuverability: 8, effect: 6, tolerance: 9 } },
+  { name: "Lok Jungle 2026", brand: "Lok", url: "https://www.padelreference.com/en/padel-rackets/p/lok-jungle-2026", image: "https://www.padelreference.com/storage/23405/qvH5D1GzD5cKJ9Ws5MAV6ZtWUq1444-metacmFxdWV0dGUtZGUtcGFkZWwtTG9rLUp1bmdsZS1GYWNlLndlYnA%3D-.webp", price: 209.90, shape: "Diamond", weight: 370, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Advanced to Expert", ratings: { power: 9, control: 8, comfort: 8, maneuverability: 7, effect: 8, tolerance: 9 } },
+  { name: "Lok BE Hype Gen 2 2026", brand: "Lok", url: "https://www.padelreference.com/en/padel-rackets/p/lok-be-hype-gen-2-2026", image: "https://www.padelreference.com/storage/23410/8PprhqjQbSRN4BQh3fDhUYpxvIrfYt-metacmFxdWV0dGUtZGUtcGFkZWwtTG9rLUJlLUh5cGUtR2VuLTItZmFjZS53ZWJw-.webp", price: 89.90, shape: "Diamond", weight: 365, balance: "Head Heavy", feel: "Hybrid / Intermediate", level: "Beginner", ratings: { power: 8, control: 7, comfort: 8, maneuverability: 8, effect: 8, tolerance: 9 } },
+  { name: "Wilson Bela LS V3 2025", brand: "Wilson", url: "https://www.padelreference.com/en/padel-rackets/p/wilson-bela-ls-v3-2025", image: "https://www.padelreference.com/storage/16661/pTSQx23hhoS30CEzX3jwOYFjUf0q8J-metaRkFDRS53ZWJw-.webp", price: 149.90, shape: "Diamond", weight: 355, balance: "Head Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 8, control: 7, comfort: 8, maneuverability: 10, effect: 7, tolerance: 7 } },
+  { name: "Wilson Defy LS V1 2025", brand: "Wilson", url: "https://www.padelreference.com/en/padel-rackets/p/wilson-defy-ls-v1-2025", image: "https://www.padelreference.com/storage/14954/2Ob4jl2k6J6FvAjD59AVN3XnntQa4C-metaMS53ZWJw-.webp", price: 131.90, shape: "Diamond", weight: 355, balance: "Head Heavy", feel: "Stiff / Power", level: "Advanced to Expert", ratings: { power: 8, control: 6, comfort: 8, maneuverability: 6, effect: 9, tolerance: 10 } },
+  { name: "Wilson Endure V1", brand: "Wilson", url: "https://www.padelreference.com/en/padel-rackets/p/wilson-endure-v1", image: "https://www.padelreference.com/storage/23583/yiTtZg0CwQ2wCeLkF4OVZFNauVjD6N-metaMS5wbmc%3D-.webp", price: 189.90, shape: "Round", weight: 365, balance: "Handle Heavy", feel: "Flexible / Comfort", level: "Intermediate", ratings: { power: 6, control: 10, comfort: 8, maneuverability: 9, effect: 7, tolerance: 8 } },
+  { name: "Wilson Optix V2 Power Red", brand: "Wilson", url: "https://www.padelreference.com/en/padel-rackets/p/wilson-optix-v2-power-red", image: "https://www.padelreference.com/storage/23485/9Jz9HkZyY8g4VrMaQFF3NcR5s82SW9-metacmFxdWV0dGUtcGFkZWwtd2lsc29uLW9wdGl4LXYyLXBvd2VyLXJvdWdlLWZhY2Uud2VicA%3D%3D-.webp", price: 88.90, shape: "Teardrop", weight: 360, balance: "Balanced", feel: "Hybrid / Intermediate", level: "Intermediate", ratings: { power: 6, control: 8, comfort: 7, maneuverability: 8, effect: 6, tolerance: 6 } }
 ];
 
 const BALANCE_MAP = { "Handle Heavy": "Low", "Balanced": "Medium", "Head Heavy": "High" };
@@ -149,11 +226,36 @@ function findRacketByName(name) {
   return needle ? RACKETS.find(r => r.name.toLowerCase() === needle) : undefined;
 }
 
+// Accepts an exact name, or a partial query that matches exactly one racket
+// (Firefox Android has no datalist dropdown, so typing the full name is tedious).
+function matchRacketQuery(query) {
+  const exact = findRacketByName(query);
+  if (exact) return exact;
+  const needle = String(query || "").trim().toLowerCase();
+  if (needle.length < 3) return undefined;
+  const partial = RACKETS.filter(r => r.name.toLowerCase().includes(needle));
+  return partial.length === 1 ? partial[0] : undefined;
+}
+
 const BALANCE_ORDER = { Low: 0, Medium: 1, High: 2 };
 
 // ============================== i18n ==============================
 
-let LANG = localStorage.getItem("padelFinderLang") === "en" ? "en" : "de";
+// localStorage throws when site data is blocked — the app must keep working without it.
+function safeGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* storage blocked */ }
+}
+function safeRemove(key) {
+  try { localStorage.removeItem(key); } catch (e) { /* storage blocked */ }
+}
+
+const storedLang = safeGet("padelFinderLang");
+let LANG = storedLang === "de" || storedLang === "en"
+  ? storedLang
+  : ((navigator.language || "").toLowerCase().startsWith("de") ? "de" : "en");
 
 const UI = {
   de: {
@@ -260,7 +362,14 @@ const UI = {
     "level.Beginner": "Einsteiger",
     "level.Intermediate": "Mittelklasse",
     "level.Advanced": "Fortgeschritten/Profi",
-    "kernLabel": "Kern",
+    "coreText": feel => `Kern ${feel}`,
+    "lang.toggle": "Sprache wechseln",
+    "share.invalid": "Dieser Link ist leider ungültig oder unvollständig.",
+    "share.copyFailed": "Kopieren nicht möglich — bitte den Link manuell kopieren.",
+    "restartShared": "Mach den Test selbst →",
+    "invite.ownTest": "Jetzt selbst den kompletten Test machen →",
+    "current.matched": name => `Gefunden: ${name}`,
+    "confidence.clearNoNum": "Klarer Favorit — Platz 1 passt spürbar besser als Platz 2.",
 
     "share.title": "Ergebnis teilen",
     "share.desc": "Der Link öffnet dein Ergebnis exakt so, wie du es siehst — inklusive aller drei Schläger.",
@@ -285,7 +394,7 @@ const UI = {
 
     "partner.badge": "DOPPEL-CHECK",
     "partner.title": "Wie passt ihr als Team zusammen?",
-    "partner.desc": "Padel wird zu zweit gespielt. Lass deinen Partner / deine Partnerin einen kurzen 15-Fragen-Check machen — wir zeigen euch, wie sich eure Profile ergänzen und wer eher Netz oder hinten spielen sollte.",
+    "partner.desc": n => `Padel wird zu zweit gespielt. Lass deinen Partner / deine Partnerin einen kurzen ${n}-Fragen-Check machen — wir zeigen euch, wie sich eure Profile ergänzen und wer eher Netz oder hinten spielen sollte.`,
     "partner.start": "Partner-Check starten →",
     "partner.inviteLink": "Einladungslink für Partner kopieren",
     "invite.badge": "DOPPEL-CHECK EINLADUNG",
@@ -352,7 +461,7 @@ const UI = {
     "current.desc": "Wähle dein aktuelles Modell aus der Liste — wir zeigen dir, was sich mit deinem Top-Match konkret verbessern würde.",
     "current.placeholder": "Aktuellen Schläger eingeben…",
     "current.vsTop": name => `Dein aktueller Schläger → ${name}`,
-    "current.priceDiff": diff => `Preisunterschied zum Top-Match: ${diff} €.`,
+    "current.priceDiff": diff => `Preisunterschied zum Top-Match: ${diff}.`,
     "current.notFound": "Modell nicht in der Datenbank — bitte einen Namen aus der Vorschlagsliste wählen.",
     "browse.yourScore": "Für dein Profil",
     "browse.yourScoreHint": "Persönlicher Score auf Basis deines Tests",
@@ -361,7 +470,7 @@ const UI = {
     "meta.desc": "Finde den Padel-Schläger, der am besten zu deinem Spiel, Niveau und Budget passt — mit echten Testwerten, Score-Aufschlüsselung und Profil-Analyse.",
     "hero.statRackets": "Schläger",
     "hero.statBrands": "Marken",
-    "hero.statQuestions": "Fragen im Pro-Test",
+    "hero.statMatches": "mögliche Ergebnis-Profile",
     "bd.title": "Warum dieser Score?",
     "bd.desc": n => `Wo dein Top-Match gegenüber dem Durchschnitt aller ${n} Modelle Punkte holt oder verliert.`,
     "bd.style": "Spielstil & Position",
@@ -371,9 +480,9 @@ const UI = {
     "bd.budget": "Budget",
     "bd.nogo": "No-Gos",
     "bd.nogoOk": "Keine No-Gos verletzt",
-    "bd.current": "Besser als dein Schläger",
+    "bd.current": "Vergleich zu deinem Schläger",
     "bd.refine": "Deine Regler",
-    "card.noGoWarning": list => `<b>Achtung:</b> verletzt dein No-Go „${list}“ — es gibt aber kaum Alternativen, die sonst passen.`,
+    "card.noGoWarning": (list, count) => `<b>Achtung:</b> verletzt ${count > 1 ? "deine No-Gos" : "dein No-Go"} „${list}“ — es gibt aber kaum Alternativen, die sonst passen.`,
     "results.browseCta": "Schläger vergleichen (mit deinem Score)",
     "results.backToResults": "← Zurück zu deinem Ergebnis",
     "browse.compareJump": "Vergleich ansehen ↓",
@@ -505,7 +614,14 @@ const UI = {
     "level.Beginner": "Beginner",
     "level.Intermediate": "Mid-range",
     "level.Advanced": "Advanced/Pro",
-    "kernLabel": "Core",
+    "coreText": feel => `${feel} core`,
+    "lang.toggle": "Switch language",
+    "share.invalid": "This link is invalid or incomplete.",
+    "share.copyFailed": "Couldn't copy — please copy the link manually.",
+    "restartShared": "Take the test yourself →",
+    "invite.ownTest": "Now take the full test yourself →",
+    "current.matched": name => `Found: ${name}`,
+    "confidence.clearNoNum": "Clear favorite — #1 fits noticeably better than #2.",
 
     "share.title": "Share result",
     "share.desc": "The link opens your result exactly as you see it — including all three rackets.",
@@ -530,7 +646,7 @@ const UI = {
 
     "partner.badge": "DOUBLES CHECK",
     "partner.title": "How well do you match as a team?",
-    "partner.desc": "Padel is played in pairs. Have your partner take a short 15-question check — we'll show you how your profiles complement each other and who should play net or back.",
+    "partner.desc": n => `Padel is played in pairs. Have your partner take a short ${n}-question check — we'll show you how your profiles complement each other and who should play net or back.`,
     "partner.start": "Start partner check →",
     "partner.inviteLink": "Copy invite link for partner",
     "invite.badge": "DOUBLES CHECK INVITE",
@@ -574,7 +690,7 @@ const UI = {
     "browse.compareClear": "Clear selection",
     "browse.noResults": "No rackets found — adjust your filters.",
     "browse.back": "← Back to home",
-    "browse.resultsCount": n => `${n} rackets`,
+    "browse.resultsCount": n => `${n} ${n === 1 ? "racket" : "rackets"}`,
 
     "pwa.installTitle": "Install app",
     "pwa.installDesc": "Save to your home screen — opens like an app, even on a weak connection.",
@@ -597,7 +713,7 @@ const UI = {
     "current.desc": "Pick your current model from the list — we'll show you exactly what would improve with your top match.",
     "current.placeholder": "Enter your current racket…",
     "current.vsTop": name => `Your current racket → ${name}`,
-    "current.priceDiff": diff => `Price difference to your top match: €${diff}.`,
+    "current.priceDiff": diff => `Price difference to your top match: ${diff}.`,
     "current.notFound": "Model not in the database — please pick a name from the suggestion list.",
     "browse.yourScore": "For your profile",
     "browse.yourScoreHint": "Personal score based on your test",
@@ -606,7 +722,7 @@ const UI = {
     "meta.desc": "Find the padel racket that best fits your game, level and budget — with real test scores, a score breakdown and a player profile analysis.",
     "hero.statRackets": "rackets",
     "hero.statBrands": "brands",
-    "hero.statQuestions": "questions in the Pro test",
+    "hero.statMatches": "possible result profiles",
     "bd.title": "Why this score?",
     "bd.desc": n => `Where your top match gains or loses points compared to the average of all ${n} models.`,
     "bd.style": "Style & position",
@@ -616,9 +732,9 @@ const UI = {
     "bd.budget": "Budget",
     "bd.nogo": "No-gos",
     "bd.nogoOk": "No-gos respected",
-    "bd.current": "Better than your racket",
+    "bd.current": "Compared to your racket",
     "bd.refine": "Your sliders",
-    "card.noGoWarning": list => `<b>Heads-up:</b> breaks your no-go "${list}" — but hardly any alternatives fit otherwise.`,
+    "card.noGoWarning": (list, count) => `<b>Heads-up:</b> breaks your ${count > 1 ? "no-gos" : "no-go"} "${list}" — but hardly any alternatives fit otherwise.`,
     "results.browseCta": "Compare rackets (with your score)",
     "results.backToResults": "← Back to your result",
     "browse.compareJump": "View comparison ↓",
@@ -790,15 +906,15 @@ const getElement = id => document.getElementById(id);
 
 getElement("startBtn").onclick = () => {
   getElement("startBtn").blur();
-  document.querySelector(".hero").classList.add("hidden");
-  getElement("modeSelect").classList.remove("hidden");
+  showScreen("mode");
+  pushScreen("mode");
 };
 
 getElement("quickModeBtn").onclick = () => startTest("quick");
 getElement("proModeBtn").onclick = () => startTest("pro");
 getElement("modeBackBtn").onclick = () => {
-  getElement("modeSelect").classList.add("hidden");
-  document.querySelector(".hero").classList.remove("hidden");
+  if (history.state && history.state.screen === "mode") history.back();
+  else showScreen("hero");
 };
 
 getElement("langToggle").onclick = () => {
@@ -807,14 +923,15 @@ getElement("langToggle").onclick = () => {
 
 function setLang(lang) {
   LANG = lang;
-  localStorage.setItem("padelFinderLang", lang);
+  safeSet("padelFinderLang", lang);
   getElement("langToggle").textContent = lang === "de" ? "EN" : "DE";
+  renderHeroStats(false);
   applyStaticTranslations();
   if (!getElement("quiz").classList.contains("hidden")) {
     const range = getElement("range");
     const pendingRange = range && range.value;
     const typedRacket = getElement("racketSearchInput") && getElement("racketSearchInput").value;
-    renderQuestion();
+    renderQuestion({ animate: false });
     if (pendingRange) { getElement("range").value = pendingRange; getElement("rv").textContent = pendingRange; }
     if (typedRacket && getElement("racketSearchInput")) { getElement("racketSearchInput").value = typedRacket; getElement("racketSearchInput").oninput(); }
   } else if (!getElement("results").classList.contains("hidden")) {
@@ -826,8 +943,11 @@ function setLang(lang) {
       applyCurrentRacket();
     }
     window.scrollTo(0, scrollY);
+  } else if (!getElement("browseSection").classList.contains("hidden")) {
+    // The hidden results page still has the old language; re-render it when browse closes.
+    if (browseOpenedFromResults && lastResults) resultsNeedRerender = true;
   } else if (!getElement("partnerInvite").classList.contains("hidden")) {
-    if (partnerStage === "quiz") renderPartnerQuestion();
+    if (partnerStage === "quiz") renderPartnerQuestion({ restore: true });
     else if (partnerStage === "done") finishPartnerQuiz();
   }
 }
@@ -868,6 +988,44 @@ function restartApp() {
   location.href = location.pathname + location.search;
 }
 
+// --- Screens & browser history: back/forward moves between screens instead of leaving the app ---
+
+const SCREEN_IDS = { mode: "modeSelect", quiz: "quiz", results: "results", browse: "browseSection", invite: "partnerInvite" };
+let resultsNeedRerender = false;
+
+function showScreen(screen) {
+  document.querySelector(".hero").classList.toggle("hidden", screen !== "hero");
+  Object.keys(SCREEN_IDS).forEach(name => getElement(SCREEN_IDS[name]).classList.toggle("hidden", name !== screen));
+}
+
+function pushScreen(screen) {
+  if (!history.state || history.state.screen !== screen) history.pushState({ screen }, "");
+}
+
+window.addEventListener("popstate", event => {
+  const screen = (event.state && event.state.screen) || "hero";
+  const browseOpen = !getElement("browseSection").classList.contains("hidden");
+  if (screen === "browse") {
+    if (!browseOpen) openBrowse({ fromHistory: true });
+    return;
+  }
+  if (browseOpen) closeBrowse({ fromHistory: true });
+  if (screen === "results" && lastResults) {
+    showScreen("results");
+  } else if (screen === "quiz" && getVisibleQuestions()[currentQuestion]) {
+    showScreen("quiz");
+    renderQuestion();
+  } else if (screen === "invite" && invitedProfile) {
+    showScreen("invite");
+  } else if (screen === "mode") {
+    showScreen("mode");
+    window.scrollTo(0, 0);
+  } else {
+    showScreen("hero");
+    window.scrollTo(0, 0);
+  }
+});
+
 function startTest(mode) {
   testMode = mode;
   activeQuestions = mode === "pro" ? QUICK_QUESTION_DEFS.concat(PRO_EXTRA_QUESTION_DEFS) : QUICK_QUESTION_DEFS;
@@ -875,10 +1033,11 @@ function startTest(mode) {
   answers = {};
   resultsRecorded = false;
   isSharedView = false;
+  partnerStage = "idle";
   refineWeights = { control: 0, power: 0, comfort: 0, price: 0 };
-  history.replaceState(null, "", location.pathname + location.search);
-  getElement("modeSelect").classList.add("hidden");
-  getElement("quiz").classList.remove("hidden");
+  history.replaceState(history.state, "", location.pathname + location.search);
+  showScreen("quiz");
+  pushScreen("quiz");
   renderQuestion();
 }
 
@@ -893,7 +1052,10 @@ function playCardAnimation() {
   card.classList.add("anim-in");
 }
 
-function renderQuestion() {
+let answerLockUntil = 0; // swallows an accidental double tap that would also answer the next question
+
+function renderQuestion(options = {}) {
+  const animate = options.animate !== false;
   const questions = getVisibleQuestions();
   const def = questions[currentQuestion];
   const text = questionText(def.id);
@@ -901,6 +1063,7 @@ function renderQuestion() {
   const progressPercent = Math.round((currentQuestion + 1) / questions.length * 100);
   getElement("progressPct").textContent = progressPercent + "%";
   getElement("bar").style.width = progressPercent + "%";
+  getElement("progressBar").setAttribute("aria-valuenow", progressPercent);
 
   let html = `<div class="eyebrow">${t("q.frage")} ${currentQuestion + 1}${def.multi ? t("q.multiTag") : ""}</div><h2>${text.title}</h2>`;
   if (text.hint) html += `<p class="hint">${text.hint}</p>`;
@@ -924,35 +1087,43 @@ function renderQuestion() {
     html += `<div class="options">`;
     html += def.opts.map(key => {
       const isSelected = selected.includes(key);
-      return `<button class="option option-multi${isSelected ? " selected" : ""}" aria-pressed="${isSelected}" onclick="toggleAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
+      return `<button class="option option-multi${isSelected ? " selected" : ""}" aria-pressed="${isSelected}" data-key="${key}" onclick="toggleAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
     }).join("");
     html += `</div>`;
     html += `<div class="actions">${backButton}<button class="primary" onclick="goToNext()"${selected.length ? "" : " disabled"}>${t("q.next")}</button></div>`;
   } else {
     html += `<div class="options">`;
     html += def.opts.map(key =>
-      `<button class="option${answers[def.id] === key ? " selected" : ""}" onclick="chooseAnswer('${key}')">${key}) ${text.opts[key]}</button>`
+      `<button class="option${answers[def.id] === key ? " selected" : ""}" aria-pressed="${answers[def.id] === key}" data-key="${key}" onclick="chooseAnswer('${key}')">${key}) ${text.opts[key]}</button>`
     ).join("");
     html += `</div>`;
     html += `<div class="actions">${backButton}</div>`;
   }
 
-  getElement("questionCard").innerHTML = html;
-  playCardAnimation();
-  const heading = getElement("questionCard").querySelector("h2");
-  heading.setAttribute("tabindex", "-1");
-  if (document.activeElement === document.body || !getElement("questionCard").contains(document.activeElement)) {
+  const card = getElement("questionCard");
+  card.innerHTML = html;
+  card.classList.toggle("no-anim", !animate);
+  if (animate) {
+    playCardAnimation();
+    const heading = card.querySelector("h2");
+    heading.setAttribute("tabindex", "-1");
     heading.focus({ preventScroll: true });
+    if (getElement("quiz").getBoundingClientRect().top < 0) getElement("quiz").scrollIntoView({ block: "start" });
+  } else if (options.focusKey) {
+    const option = card.querySelector(`[data-key="${options.focusKey}"]`);
+    if (option) option.focus({ preventScroll: true });
   }
 
   if (def.racketSearch) {
     const input = getElement("racketSearchInput");
     const update = () => {
       const query = input.value.trim().toLowerCase();
-      const match = findRacketByName(query);
+      const match = matchRacketQuery(query);
       const anyPartial = !query || RACKETS.some(r => r.name.toLowerCase().includes(query));
       getElement("racketSearchNext").disabled = !match;
-      getElement("racketSearchStatus").textContent = anyPartial ? "" : t("current.notFound");
+      const status = getElement("racketSearchStatus");
+      if (match && match.name.toLowerCase() !== query) status.textContent = t("current.matched")(match.name);
+      else status.textContent = anyPartial ? "" : t("current.notFound");
     };
     input.oninput = update;
     input.onkeydown = e => { if (e.key === "Enter") submitRacketSearch(); };
@@ -967,6 +1138,8 @@ function renderQuestion() {
 }
 
 function chooseAnswer(choice) {
+  if (Date.now() < answerLockUntil) return;
+  answerLockUntil = Date.now() + 250;
   answers[getVisibleQuestions()[currentQuestion].id] = choice;
   goToNext();
 }
@@ -983,11 +1156,11 @@ function toggleAnswer(choice) {
     selected = selected.filter(key => !exclusiveKeys.includes(key)).concat(choice);
   }
   answers[def.id] = selected;
-  renderQuestion();
+  renderQuestion({ animate: false, focusKey: choice });
 }
 
 function submitRacketSearch() {
-  const match = findRacketByName(getElement("racketSearchInput").value);
+  const match = matchRacketQuery(getElement("racketSearchInput").value);
   if (!match) return;
   answers.currentRacket = match.name;
   goToNext();
@@ -1053,7 +1226,7 @@ function rankRackets(ansObj) {
 }
 
 function getMaxBudget() {
-  const budgetMap = { A: 99, B: 130, C: 150, D: 180, E: 220, F: 999 };
+  const budgetMap = { A: 99.99, B: 130, C: 150, D: 180, E: 220, F: 999 };
   let max = budgetMap[getAnswer("budget")] || 180;
   const flex = getAnswer("budgetFlex");
   if (flex === "B") max += 20;
@@ -1388,12 +1561,18 @@ function encodeShareState() {
   return btoa(encodeURIComponent(JSON.stringify({ m: testMode, a: answers, r: refineWeights })));
 }
 
-function decodeShareState(str) {
+function decodeHashPayload(str) {
   try {
-    return JSON.parse(decodeURIComponent(atob(str)));
+    // Messengers sometimes percent-encode the "=" padding or turn "+" into spaces.
+    const base64 = decodeURIComponent(str).replace(/ /g, "+");
+    return JSON.parse(decodeURIComponent(atob(base64)));
   } catch (e) {
     return null;
   }
+}
+
+function decodeShareState(str) {
+  return decodeHashPayload(str);
 }
 
 function buildShareUrl() {
@@ -1401,18 +1580,18 @@ function buildShareUrl() {
   return `${base}#r=${encodeShareState()}`;
 }
 
-function buildShareText() {
+function buildShareText(includeUrl = true) {
   if (!lastResults) return "";
   const lines = [t("share.textIntro")(lastResults.topThree[0].score)];
   lastResults.topThree.forEach((r, i) => lines.push(t("share.textLine")(i + 1, r.name, r.score)));
-  lines.push(`${t("share.textOutro")} ${buildShareUrl()}`);
+  lines.push(includeUrl ? `${t("share.textOutro")} ${buildShareUrl()}` : t("share.textOutro"));
   return lines.join("\n");
 }
 
 async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);
-    return;
+    return true;
   } catch (e) {
     const ta = document.createElement("textarea");
     ta.value = text;
@@ -1420,8 +1599,10 @@ async function copyToClipboard(text) {
     ta.style.opacity = "0";
     document.body.appendChild(ta);
     ta.select();
-    try { document.execCommand("copy"); } catch (e2) { /* clipboard unavailable, ignore */ }
+    let copied = false;
+    try { copied = document.execCommand("copy"); } catch (e2) { copied = false; }
     document.body.removeChild(ta);
+    return copied;
   }
 }
 
@@ -1444,23 +1625,22 @@ function showToast(message) {
 }
 
 async function shareResults() {
-  const url = buildShareUrl();
-  const text = buildShareText();
   if (navigator.share) {
     try {
-      await navigator.share({ title: t("share.native"), text, url });
+      // The URL is passed separately; putting it in the text too makes apps show it twice.
+      await navigator.share({ title: t("share.native"), text: buildShareText(false), url: buildShareUrl() });
       return;
     } catch (e) {
       if (e && e.name === "AbortError") return;
     }
   }
-  await copyToClipboard(text);
-  showToast(t("share.copiedText"));
+  const copied = await copyToClipboard(buildShareText());
+  showToast(copied ? t("share.copiedText") : t("share.copyFailed"));
 }
 
 async function copyShareLink() {
-  await copyToClipboard(buildShareUrl());
-  showToast(t("share.copiedLink"));
+  const copied = await copyToClipboard(buildShareUrl());
+  showToast(copied ? t("share.copiedLink") : t("share.copyFailed"));
 }
 
 function buildShareSection() {
@@ -1481,9 +1661,20 @@ const HISTORY_KEY = "padelFinderHistory";
 let resultsRecorded = false;
 let isSharedView = false;
 
+// Stored history is untrusted (other pages on the same github.io origin share storage):
+// only entries with a known racket name and numeric values are kept, since they end up in innerHTML.
+function isValidHistoryEntry(entry) {
+  return !!entry
+    && typeof entry.date === "number" && isFinite(entry.date)
+    && !!findRacketByName(entry.topName)
+    && !!entry.profile
+    && ["control", "power", "forgive", "comfort"].every(key => typeof entry.profile[key] === "number" && isFinite(entry.profile[key]));
+}
+
 function loadHistory() {
   try {
-    return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+    const parsed = JSON.parse(safeGet(HISTORY_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed.filter(isValidHistoryEntry) : [];
   } catch (e) {
     return [];
   }
@@ -1492,13 +1683,13 @@ function loadHistory() {
 function saveHistoryEntry(entry) {
   const history = loadHistory();
   history.push(entry);
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(-10)));
+  safeSet(HISTORY_KEY, JSON.stringify(history.slice(-10)));
 }
 
 function clearHistory() {
-  localStorage.removeItem(HISTORY_KEY);
+  safeRemove(HISTORY_KEY);
   resultsRecorded = false;
-  if (lastResults) showResults();
+  if (lastResults) showResults({ keepScroll: true });
 }
 
 function formatHistoryDate(timestamp) {
@@ -1523,7 +1714,7 @@ function recordHistoryEntry(profile, topThree) {
 let hasOwnProfile = false;
 
 function personalScoreFor(racket) {
-  return calculateScore(calculateRawScore(racket));
+  return calculateScore(calculateRawScore(racket) + refineBonus(racket));
 }
 
 // --- Refine: live re-weighting on top of the quiz result, no retake needed ---
@@ -1606,10 +1797,13 @@ function resetRefine() {
 
 function buildConfidenceBadge(topThree) {
   if (topThree.length < 2) return "";
-  // Raw scores, not the clamped 0-100 value: two rackets can both display 100 yet differ clearly.
-  const gap = Math.round((topThree[0].rawScore - topThree[1].rawScore) / SCORE_DIVISORS[testMode]);
-  const isClose = gap < 6;
-  return `<div class="confidence-badge ${isClose ? "close" : "clear"} anim-in">${isClose ? t("confidence.close") : t("confidence.clear")(gap)}</div>`;
+  // Raw scores decide closeness (two rackets can both display 100 yet differ clearly);
+  // a number is only shown when the displayed scores actually back it up.
+  const rawGap = Math.round((topThree[0].rawScore - topThree[1].rawScore) / SCORE_DIVISORS[testMode]);
+  const shownGap = topThree[0].score - topThree[1].score;
+  const isClose = rawGap < 6;
+  const text = isClose ? t("confidence.close") : shownGap >= 6 ? t("confidence.clear")(shownGap) : t("confidence.clearNoNum");
+  return `<div class="confidence-badge ${isClose ? "close" : "clear"} anim-in">${text}</div>`;
 }
 
 const BREAKDOWN_KEYS = ["style", "wishes", "level", "health", "budget", "nogo", "current"];
@@ -1739,7 +1933,7 @@ function buildAccessoriesSection() {
       <div class="acc-category">${t("acc.cat." + item.category)}</div>
       <h3>${item.name}</h3>
       <p class="acc-why">${t("acc.why")} ${joinList(matched.map(n => t("need." + n)))}.</p>
-      <div class="acc-price">${formatPrice(item.price)} €</div>
+      <div class="acc-price">${formatEuro(item.price)}</div>
       <a class="buy" href="${item.url}" target="_blank" rel="noopener">${t("card.buy")}</a>
     </div>
   </article>`).join("");
@@ -1787,7 +1981,7 @@ function applyCurrentRacket() {
   });
   html += `</div>`;
   const priceDiff = Math.round(top.price - current.price);
-  html += `<p class="reason">${t("current.priceDiff")(priceDiff > 0 ? "+" + priceDiff : String(priceDiff))}</p>`;
+  html += `<p class="reason">${t("current.priceDiff")(formatEuro(priceDiff, { signed: true, decimals: 0 }))}</p>`;
   container.innerHTML = html;
 }
 
@@ -1828,7 +2022,7 @@ function buildPartnerSection() {
   return `<section class="analysis anim-in" id="partnerSection">
     <div class="badge">${t("partner.badge")}</div>
     <h2 class="analysis-title">${t("partner.title")}</h2>
-    <p class="hint">${t("partner.desc")}</p>
+    <p class="hint">${t("partner.desc")(PARTNER_QUESTION_DEFS.length)}</p>
     <div id="partnerContent"><button class="primary" onclick="startPartnerQuiz()">${t("partner.start")}</button></div>
     <button class="link-btn partner-invite-link" onclick="copyPartnerInvite()">${t("partner.inviteLink")}</button>
   </section>`;
@@ -1851,8 +2045,9 @@ function startPartnerQuiz() {
 
 function buildPartnerInviteUrl() {
   const profile = lastResults ? lastResults.profile : getUserProfile();
+  const half = v => Math.round(v * 2) / 2;
   const payload = {
-    p: [profile.control, profile.power, profile.forgive, profile.comfort, profile.net, profile.defense],
+    p: [profile.control, profile.power, profile.forgive, profile.comfort, profile.net, profile.defense].map(half),
     pos: getAnswer("position"),
     sty: getAnswer("style")
   };
@@ -1861,13 +2056,13 @@ function buildPartnerInviteUrl() {
 }
 
 async function copyPartnerInvite() {
-  await copyToClipboard(buildPartnerInviteUrl());
-  showToast(t("share.copiedLink"));
+  const copied = await copyToClipboard(buildPartnerInviteUrl());
+  showToast(copied ? t("share.copiedLink") : t("share.copyFailed"));
 }
 
 function decodeInviteState(str) {
   try {
-    return JSON.parse(decodeURIComponent(atob(str)));
+    return decodeHashPayload(str);
   } catch (e) {
     return null;
   }
@@ -1875,7 +2070,7 @@ function decodeInviteState(str) {
 
 function sanitizeInvitedProfile(raw) {
   if (!raw || !Array.isArray(raw.p) || raw.p.length !== 6) return null;
-  const [control, power, forgive, comfort, net, defense] = raw.p.map(v => Math.max(0, Math.min(10, Math.round(+v) || 0)));
+  const [control, power, forgive, comfort, net, defense] = raw.p.map(v => Math.max(0, Math.min(10, Math.round((+v || 0) * 2) / 2)));
   return { control, power, forgive, comfort, net, defense };
 }
 
@@ -1889,9 +2084,11 @@ function tryRestoreInvite() {
     position: ["A", "B", "C", "D"].includes(decoded.pos) ? decoded.pos : undefined,
     style: ["A", "B", "C"].includes(decoded.sty) ? decoded.sty : undefined
   };
-  document.querySelector(".hero").classList.add("hidden");
-  ["modeSelect", "quiz", "results", "browseSection"].forEach(id => getElement(id).classList.add("hidden"));
-  getElement("partnerInvite").classList.remove("hidden");
+  partnerStage = "idle";
+  partnerTargetId = "partnerContent";
+  getElement("inviteContent").innerHTML = `<button class="primary" onclick="startInvitedPartnerQuiz()"><span data-i18n="invite.start">${t("invite.start")}</span> <span class="arrow" aria-hidden="true">→</span></button>`;
+  showScreen("invite");
+  history.replaceState({ screen: "invite" }, "");
   return true;
 }
 
@@ -1900,7 +2097,8 @@ function startInvitedPartnerQuiz() {
   startPartnerQuiz();
 }
 
-function renderPartnerQuestion() {
+// options: { animate:false, focusKey } after a toggle, { restore:true } when re-rendering for a language switch
+function renderPartnerQuestion(options = {}) {
   const def = PARTNER_QUESTION_DEFS[partnerCurrentQuestion];
   const text = questionText(def.id);
   const total = PARTNER_QUESTION_DEFS.length;
@@ -1921,26 +2119,40 @@ function renderPartnerQuestion() {
     html += `<div class="options">`;
     html += def.opts.map(key => {
       const isSelected = selected.includes(key);
-      return `<button class="option option-multi${isSelected ? " selected" : ""}" aria-pressed="${isSelected}" onclick="togglePartnerAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
+      return `<button class="option option-multi${isSelected ? " selected" : ""}" aria-pressed="${isSelected}" data-key="${key}" onclick="togglePartnerAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
     }).join("");
     html += `</div>`;
     html += `<div class="actions">${backButton}<button class="primary" onclick="goToNextPartner()"${selected.length ? "" : " disabled"}>${t("q.next")}</button></div>`;
   } else {
     html += `<div class="options">`;
     html += def.opts.map(key =>
-      `<button class="option${partnerAnswers[def.id] === key ? " selected" : ""}" onclick="choosePartnerAnswer('${key}')">${key}) ${text.opts[key]}</button>`
+      `<button class="option${partnerAnswers[def.id] === key ? " selected" : ""}" aria-pressed="${partnerAnswers[def.id] === key}" data-key="${key}" onclick="choosePartnerAnswer('${key}')">${key}) ${text.opts[key]}</button>`
     ).join("");
     html += `</div>`;
     html += `<div class="actions">${backButton}</div>`;
   }
 
-  getElement(partnerTargetId).innerHTML = html;
+  const container = getElement(partnerTargetId);
+  container.innerHTML = html;
+  container.classList.toggle("no-anim", options.animate === false);
   if (def.range) {
     getElement("partnerRange").oninput = e => { getElement("prv").textContent = e.target.value; };
+  }
+  if (options.focusKey) {
+    const option = container.querySelector(`[data-key="${options.focusKey}"]`);
+    if (option) option.focus({ preventScroll: true });
+  } else if (!options.restore) {
+    // The clicked button was replaced, so focus would otherwise fall back to <body>.
+    const heading = container.querySelector("h3");
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+    if (container.getBoundingClientRect().top < 0) container.scrollIntoView({ block: "start" });
   }
 }
 
 function choosePartnerAnswer(choice) {
+  if (Date.now() < answerLockUntil) return;
+  answerLockUntil = Date.now() + 250;
   partnerAnswers[PARTNER_QUESTION_DEFS[partnerCurrentQuestion].id] = choice;
   goToNextPartner();
 }
@@ -1957,7 +2169,7 @@ function togglePartnerAnswer(choice) {
     selected = selected.filter(k => !exclusiveKeys.includes(k)).concat(choice);
   }
   partnerAnswers[def.id] = selected;
-  renderPartnerQuestion();
+  renderPartnerQuestion({ animate: false, focusKey: choice });
 }
 
 function submitPartnerRange() {
@@ -2019,6 +2231,7 @@ function finishPartnerQuiz() {
   html += `<h3>${t("partner.partnerTop")}</h3>`;
   html += partnerCard;
   html += `<button class="secondary" onclick="startPartnerQuiz()">${t("partner.restart")}</button>`;
+  if (invitedProfile) html += `<button class="primary invite-own-test" onclick="restartApp()">${t("invite.ownTest")}</button>`;
 
   getElement(partnerTargetId).innerHTML = html;
   animateFillsAndScores(getElement(partnerTargetId));
@@ -2036,7 +2249,10 @@ function showResults(options = {}) {
 
   getElement("quiz").classList.add("hidden");
   getElement("results").classList.remove("hidden");
-  if (!options.keepScroll) scrollToTop();
+  if (!options.keepScroll) {
+    scrollToTop();
+    history.replaceState({ screen: "results" }, "");
+  }
 
   let html = `<div class="results-head anim-in">`;
   html += `<div class="badge">${RACKET_ICON}${t("results.badge")} · ${modeLabel}</div>`;
@@ -2058,25 +2274,38 @@ function showResults(options = {}) {
     </button>`;
   }
   html += buildRefinePanel();
-  html += buildCurrentRacketSection();
+  // Upgrade check and doubles check are about the viewer's own game, not a friend's shared result.
+  if (!isSharedView) html += buildCurrentRacketSection();
   html += buildAccessoriesSection();
   html += buildPlayerAnalysis(profile);
   html += buildHistorySection(profile, topThree);
-  html += buildPartnerSection();
+  if (!isSharedView) html += buildPartnerSection();
   html += buildShareSection();
   html += `<div class="notice anim-in">${t("notice")(RACKETS.length)}</div>`;
-  html += `<button class="secondary restart" onclick="restartApp()">${t("restart")}</button>`;
+  html += `<button class="${isSharedView ? "primary" : "secondary"} restart" onclick="restartApp()">${t(isSharedView ? "restartShared" : "restart")}</button>`;
 
   getElement("results").innerHTML = html;
   renderResultsBody(profile, topThree, !!options.keepScroll);
   animateFillsAndScores(getElement("results"), !!options.keepScroll);
-  if (partnerStage === "quiz") renderPartnerQuestion();
+  if (partnerStage === "quiz") renderPartnerQuestion({ restore: true });
   if (partnerStage === "done") finishPartnerQuiz();
 }
 
-function racketImageBlock(racket) {
+// The shop throttles bursts of hotlinked images, so a failed image gets one delayed retry
+// before falling back to the placeholder icon.
+function retryImage(img) {
+  if (img.dataset.retried) {
+    img.parentElement.classList.add("broken");
+    return;
+  }
+  img.dataset.retried = "1";
+  setTimeout(() => { img.src = img.src.split("?")[0] + "?retry=1"; }, 1500 + Math.random() * 2000);
+}
+
+// The product name is always rendered next to the image, so the image itself is decorative (alt="").
+function racketImageBlock(racket, lazy = false) {
   if (racket.image) {
-    return `<div class="card-image"><img src="${racket.image}" alt="${racket.name}" onerror="this.parentElement.classList.add('broken')">${RACKET_ICON}</div>`;
+    return `<div class="card-image"><img src="${racket.image}" alt="" decoding="async"${lazy ? ' loading="lazy"' : ""} onerror="retryImage(this)">${RACKET_ICON}</div>`;
   }
   return `<div class="card-image card-image-placeholder">${RACKET_ICON}</div>`;
 }
@@ -2096,13 +2325,13 @@ function createRacketCard(racket, index, top, withBreakdown = false) {
   html += `<div class="rec-title">`;
   html += `<div>`;
   html += `<h2>${racket.name}</h2>`;
-  html += `<div>${racket.brand} · ${t("shape." + racket.form)} · ${formatNumber(racket.weight)} g · ${t("balance." + racket.balance)} · ${t("kernLabel")} ${t("feel." + racket.feel)} · ${t("level." + racket.level)}</div>`;
+  html += `<div>${racket.brand} · ${t("shape." + racket.form)} · ${formatNumber(racket.weight)} g · ${t("balance." + racket.balance)} · ${t("coreText")(t("feel." + racket.feel))} · ${t("level." + racket.level)}</div>`;
   html += `</div>`;
   html += `<div class="score-ring" data-target="${racket.score}"><div class="score" data-target="${racket.score}">0/100</div></div>`;
   html += `</div>`;
   html += createStatBars(racket);
   html += `<p class="reason">${reason}</p>`;
-  if (noGoLabels.length) html += `<p class="nogo-warning">${t("card.noGoWarning")(joinList(noGoLabels))}</p>`;
+  if (noGoLabels.length) html += `<p class="nogo-warning">${t("card.noGoWarning")(joinList(noGoLabels), noGoLabels.length)}</p>`;
   if (withBreakdown) html += buildScoreBreakdown(racket);
   html += `<div class="why">`;
   html += `<h3>${t("card.priceLabel")}</h3>`;
@@ -2124,6 +2353,12 @@ function formatNumber(value) {
 
 function formatPrice(value) {
   return formatNumber(value.toFixed(2));
+}
+
+function formatEuro(value, { signed = false, decimals = 2 } = {}) {
+  const sign = value < 0 ? "−" : signed && value > 0 ? "+" : "";
+  const amount = formatNumber(Math.abs(value).toFixed(decimals));
+  return LANG === "de" ? `${sign}${amount} €` : `${sign}€${amount}`;
 }
 
 function joinList(items) {
@@ -2419,7 +2654,7 @@ let deferredInstallPrompt = null;
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  showInstallBanner();
+  if (!safeGet("padelFinderInstallDismissed")) showInstallBanner();
 });
 
 function showInstallBanner() {
@@ -2441,7 +2676,10 @@ function showInstallBanner() {
       deferredInstallPrompt = null;
     }
   };
-  getElement("installDismissBtn").onclick = () => banner.remove();
+  getElement("installDismissBtn").onclick = () => {
+    banner.remove();
+    safeSet("padelFinderInstallDismissed", "1");
+  };
 }
 
 // Share links are untrusted input: only keep answers that are valid for a known question.
@@ -2480,36 +2718,63 @@ function tryRestoreSharedResult() {
   isSharedView = true;
   resultsRecorded = false;
   partnerStage = "idle";
-  document.querySelector(".hero").classList.add("hidden");
-  ["modeSelect", "quiz", "browseSection"].forEach(id => getElement(id).classList.add("hidden"));
+  partnerTargetId = "partnerContent";
+  invitedProfile = null;
+  invitedAnswers = null;
+  showScreen("results");
   showResults();
   return true;
 }
 
-function renderHeroStats() {
+// Real combinatorics of the Pro quiz's single-answer questions comfortably clears this —
+// kept as a round, defensible floor rather than the actual (much larger) number.
+const POSSIBLE_MATCHES = 10000;
+
+function renderHeroStats(animate = true) {
   const brands = new Set(RACKETS.map(r => r.brand)).size;
-  const proQuestions = QUICK_QUESTION_DEFS.length + PRO_EXTRA_QUESTION_DEFS.length;
-  const stats = [[RACKETS.length, "hero.statRackets"], [brands, "hero.statBrands"], [proQuestions, "hero.statQuestions"]];
-  getElement("heroStats").innerHTML = stats.map(([n, key]) =>
-    `<div class="hero-stat"><b data-count="${n}">${n}</b><span data-i18n="${key}">${t(key)}</span></div>`
+  const format = n => n.toLocaleString(LANG === "de" ? "de-DE" : "en-US");
+  const stats = [
+    [RACKETS.length, "hero.statRackets", ""],
+    [brands, "hero.statBrands", ""],
+    [POSSIBLE_MATCHES, "hero.statMatches", "+"]
+  ];
+  getElement("heroStats").innerHTML = stats.map(([n, key, suffix]) =>
+    `<div class="hero-stat"><b data-count="${n}" data-suffix="${suffix}">${format(n)}${suffix}</b><span data-i18n="${key}">${t(key)}</span></div>`
   ).join("");
-  if (prefersReducedMotion()) return;
+  if (!animate || prefersReducedMotion()) return;
   getElement("heroStats").querySelectorAll("[data-count]").forEach(el => {
     const target = +el.getAttribute("data-count");
+    const suffix = el.getAttribute("data-suffix") || "";
     const start = performance.now();
     const tick = now => {
       const progress = Math.min(1, (now - start) / 1100);
-      el.textContent = Math.round((1 - Math.pow(1 - progress, 3)) * target);
+      el.textContent = format(Math.round((1 - Math.pow(1 - progress, 3)) * target)) + suffix;
       if (progress < 1) requestAnimationFrame(tick);
     };
     el.textContent = "0";
     requestAnimationFrame(tick);
-    setTimeout(() => { el.textContent = target; }, 1500);
+    setTimeout(() => { el.textContent = format(target) + suffix; }, 1500);
   });
 }
 
+function renderHeroFloatImages() {
+  const container = getElement("heroFloatImages");
+  if (!container) return;
+  const withImages = RACKETS.filter(r => r.image);
+  const shuffled = [...withImages].sort(() => Math.random() - 0.5).slice(0, 3);
+  container.innerHTML = shuffled.map((r, i) =>
+    `<img class="hero-float hero-float-${i + 1}" src="${r.image}" alt="" loading="lazy">`
+  ).join("");
+}
+
 renderHeroStats();
+renderHeroFloatImages();
 applyStaticTranslations();
 getElement("langToggle").textContent = LANG === "de" ? "EN" : "DE";
-if (!tryRestoreSharedResult()) tryRestoreInvite();
-window.addEventListener("hashchange", () => { if (!tryRestoreSharedResult()) tryRestoreInvite(); });
+function restoreFromHash() {
+  if (tryRestoreSharedResult() || tryRestoreInvite()) return;
+  if (/^#(r|invite)=/.test(location.hash)) showToast(t("share.invalid"));
+}
+
+restoreFromHash();
+window.addEventListener("hashchange", restoreFromHash);

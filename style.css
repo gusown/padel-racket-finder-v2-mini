@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --bg: #0a0a09;
   --bg-card: #161614;
   --bg-card-alt: #1e1e1b;
@@ -68,7 +69,7 @@ body {
 
 .lang-toggle {
   position: fixed;
-  top: 18px;
+  top: max(18px, env(safe-area-inset-top));
   right: 18px;
   z-index: 50;
   border: 1px solid var(--border);
@@ -129,7 +130,7 @@ body {
   margin: 0 0 24px;
 }
 
-.partner-invite-link {
+.link-btn.partner-invite-link {
   display: block;
   margin-top: 10px;
 }
@@ -987,7 +988,7 @@ body {
   }
 
   .stat-bar-row {
-    grid-template-columns: 74px 1fr 38px;
+    grid-template-columns: 88px 1fr 38px;
     font-size: 12px;
   }
 
@@ -1264,10 +1265,122 @@ body {
   }
 }
 
-/* Hero background: padel court + floating ball */
+/* Hero background: padel court + floating ball, kept subtle so it doesn't fight the text */
 .hero {
   position: relative;
   isolation: isolate;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -20px 0 auto auto;
+  width: 60%;
+  height: 130%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-court {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  height: 100%;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.07;
+  transform: translateY(-50%) perspective(900px) rotateX(52deg) rotateZ(-18deg);
+  animation: courtDrift 26s ease-in-out infinite alternate;
+}
+
+.hero-court .net {
+  stroke-width: 2;
+}
+
+.hero-ball {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  right: 18%;
+  top: 10%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 34% 32%, #f6ff9e, var(--accent) 55%, #93ab12);
+  box-shadow: 0 0 50px 12px rgba(215, 242, 41, 0.12);
+  opacity: 0.55;
+  animation: ballFloat 9s ease-in-out infinite;
+}
+
+.hero-ball::before,
+.hero-ball::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.hero-ball::before { left: -64%; }
+.hero-ball::after { left: 64%; }
+
+@keyframes ballFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(18deg); }
+}
+
+@keyframes courtDrift {
+  from { transform: translateY(-50%) perspective(900px) rotateX(52deg) rotateZ(-18deg); }
+  to { transform: translateY(-52%) translateX(-16px) perspective(900px) rotateX(52deg) rotateZ(-12deg); }
+}
+
+.hero-float-images {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-float {
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  opacity: 0;
+  filter: grayscale(0.3) brightness(1.1);
+  border-radius: 14px;
+  animation: heroFloatIn 1s ease-out forwards, heroFloatDrift 8s ease-in-out infinite;
+}
+
+.hero-float-1 { top: 6%; right: 8%; animation-delay: .5s, 1.5s; }
+.hero-float-2 { top: 42%; right: 24%; width: 64px; height: 64px; animation-delay: .75s, 1.75s; }
+.hero-float-3 { top: 66%; right: 2%; width: 96px; height: 96px; animation-delay: 1s, 2s; }
+
+@keyframes heroFloatIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.9); }
+  to { opacity: 0.32; transform: translateY(0) scale(1); }
+}
+
+@keyframes heroFloatDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 720px) {
+  .hero-bg {
+    width: 85%;
+    opacity: 0.7;
+  }
+
+  .hero-float-2 {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-float {
+    display: none;
+  }
 }
 
 /* Progress shimmer */
@@ -1354,27 +1467,8 @@ body {
 
 .recommendation.top-pick {
   position: relative;
-  overflow: hidden;
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent), 0 24px 60px rgba(215, 242, 41, 0.07);
-}
-
-.recommendation.top-pick::before {
-  content: "";
-  position: absolute;
-  inset: -60%;
-  background: conic-gradient(from 0deg, transparent 0 72%, rgba(215, 242, 41, 0.1) 82%, transparent 92%);
-  animation: sweep 7s linear infinite;
-  pointer-events: none;
-}
-
-.recommendation.top-pick > * {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes sweep {
-  to { transform: rotate(360deg); }
 }
 
 /* Accessories */
@@ -1403,7 +1497,6 @@ body {
 .acc-card .card-image {
   width: 100%;
   height: 120px;
-  background: var(--bg-card);
 }
 
 .acc-category {
@@ -1504,7 +1597,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0 12px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   height: 48px;
 }
@@ -1748,8 +1841,33 @@ body {
 
 /* Live refine re-renders without replaying entry animations */
 .static .anim-in,
-.static .top-pick::after {
+.static .radar-user,
+.static .radar-racket,
+.static .radar-partner {
   animation: none !important;
+}
+
+/* Toggling a multi-select option re-renders the card without replaying the pop */
+.no-anim .option.selected {
+  animation: none;
+}
+
+.invite-own-test {
+  display: block;
+  margin-top: 14px;
+}
+
+@media (max-width: 720px) {
+  /* keeps the "71%" label clear of the fixed language toggle */
+  .progress-top {
+    padding-right: 64px;
+  }
+
+  /* iOS zooms into inputs below 16px */
+  .text-input,
+  .browse-select {
+    font-size: 16px;
+  }
 }
 
 .static .stat-bar-fill,

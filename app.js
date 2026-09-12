@@ -466,7 +466,7 @@ const PRO_EXTRA_QUESTION_DEFS = [
   { id: "level2", opts: ["A", "B", "C", "D"] },
   { id: "injuryDetail", multi: true, showIf: () => ["B", "C"].includes(getAnswer("joints")), opts: ["A", "B", "C"] },
   { id: "court", opts: ["A", "B", "C"] },
-  { id: "brand", opts: ["A", "B", "C", "D", "E", "F", "G"] },
+  { id: "brand", multi: true, exclusive: ["A"], opts: ["A", "B", "C", "D", "E", "F", "G"] },
   { id: "budgetFlex", opts: ["A", "B", "C"] },
   { id: "playstyleIcon", opts: ["A", "B", "C", "D"] }
 ];
@@ -493,7 +493,7 @@ const QUESTION_TEXT = {
     level2: { title: "Auf welchem Niveau spielst du hauptsächlich?", hint: "Dein Wettkampf-Niveau beeinflusst, wie leistungsorientiert dein Schläger sein sollte.", opts: { A: "Hobby / Freizeit", B: "Amateur-Liga", C: "Ambitioniert / Turniere", D: "Leistungssport" } },
     injuryDetail: { title: "Welche Regionen betreffen deine Beschwerden?", hint: "Schulterprobleme reagieren besonders auf kopflastige Schläger, Handgelenksprobleme auf harte Schläger.", opts: { A: "Ellenbogen", B: "Handgelenk", C: "Schulter" } },
     court: { title: "Spielst du hauptsächlich Indoor oder Outdoor?", hint: "Outdoor (Wind, Sonne) profitiert oft von etwas mehr Kontrolle und Stabilität. Indoor erlaubt kompromissloseres Powerspiel.", opts: { A: "Outdoor", B: "Indoor", C: "Beides" } },
-    brand: { title: "Hast du eine bevorzugte Marke?", hint: "Optional — passende Modelle bekommen einen kleinen Bonus, aber Performance bleibt wichtiger als Marke.", opts: { A: "Keine Präferenz", B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat", G: "Andere" } },
+    brand: { title: "Hast du bevorzugte Marken?", hint: "Optional, Mehrfachauswahl möglich. Passende Modelle bekommen einen kleinen Bonus, aber Performance bleibt wichtiger als Marke.", opts: { A: "Keine Präferenz", B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat", G: "Andere" } },
     budgetFlex: { title: "Würdest du für den perfekten Schläger auch etwas mehr zahlen?", hint: "Falls ja, lockern wir dein Budget-Limit leicht, um dir auch knapp darüber liegende Top-Modelle zu zeigen.", opts: { A: "Nein, strikt bei meinem Budget bleiben", B: "Ja, bis zu 20 € mehr", C: "Ja, bis zu 40 € mehr" } },
     playstyleIcon: { title: "Welcher Spielstil inspiriert dich am meisten?", hint: "Nur für den Vibe — hilft uns, zwischen ähnlich guten Empfehlungen die passende Note zu treffen.", opts: { A: "Kontrollierter Allrounder", B: "Aggressiver Power-Spieler", C: "Geduldiger Verteidiger", D: "Kreativer Netzspieler" } }
   },
@@ -518,7 +518,7 @@ const QUESTION_TEXT = {
     level2: { title: "What level do you mainly play at?", hint: "Your competitive level affects how performance-oriented your racket should be.", opts: { A: "Hobby / recreational", B: "Amateur league", C: "Ambitious / tournaments", D: "Competitive sport" } },
     injuryDetail: { title: "Which regions are affected by your discomfort?", hint: "Shoulder issues react especially to head-heavy rackets, wrist issues to hard rackets.", opts: { A: "Elbow", B: "Wrist", C: "Shoulder" } },
     court: { title: "Do you mainly play indoor or outdoor?", hint: "Outdoor (wind, sun) often benefits from a bit more control and stability. Indoor allows more uncompromising power play.", opts: { A: "Outdoor", B: "Indoor", C: "Both" } },
-    brand: { title: "Do you have a preferred brand?", hint: "Optional — matching models get a small bonus, but performance still matters more than brand.", opts: { A: "No preference", B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat", G: "Other" } },
+    brand: { title: "Do you have preferred brands?", hint: "Optional, multiple selections possible. Matching models get a small bonus, but performance still matters more than brand.", opts: { A: "No preference", B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat", G: "Other" } },
     budgetFlex: { title: "Would you pay a bit more for the perfect racket?", hint: "If yes, we loosen your budget limit slightly to also show top models just above it.", opts: { A: "No, stick strictly to my budget", B: "Yes, up to €20 more", C: "Yes, up to €40 more" } },
     playstyleIcon: { title: "Which playing style inspires you the most?", hint: "Just for the vibe — helps us pick the right note between similarly good recommendations.", opts: { A: "Controlled all-rounder", B: "Aggressive power player", C: "Patient defender", D: "Creative net player" } }
   }
@@ -875,8 +875,8 @@ function calculateRawScore(racket) {
   if (court === "B") score += racket.power * 0.3;
 
   const brandMap = { B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat" };
-  const brandPref = getAnswer("brand");
-  if (brandMap[brandPref] && racket.brand === brandMap[brandPref]) score += 6;
+  const brandPrefs = getList("brand").map(key => brandMap[key]).filter(Boolean);
+  if (brandPrefs.includes(racket.brand)) score += 6;
 
   const playstyle = getAnswer("playstyleIcon");
   if (playstyle === "A") score += racket.control * 0.3;
@@ -1463,7 +1463,8 @@ function generateTopReasonText(racket) {
     : t("reasonFallback");
 
   const brandMap = { B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat" };
-  if (brandMap[getAnswer("brand")] === racket.brand) {
+  const brandPrefs = getList("brand").map(key => brandMap[key]).filter(Boolean);
+  if (brandPrefs.includes(racket.brand)) {
     text += t("reasonBrand")(racket.brand);
   }
   return text;

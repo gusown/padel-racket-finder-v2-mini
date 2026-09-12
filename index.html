@@ -9,34 +9,35 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button id="langToggle" class="lang-toggle" aria-label="Switch language">EN</button>
   <main class="app">
     <header class="hero">
-      <div class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="racket-icon" aria-hidden="true"><ellipse cx="12" cy="9" rx="7" ry="8" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="17" x2="12" y2="23" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="0.9" fill="currentColor"/><circle cx="12" cy="6" r="0.9" fill="currentColor"/><circle cx="15" cy="7" r="0.9" fill="currentColor"/><circle cx="9" cy="11" r="0.9" fill="currentColor"/><circle cx="12" cy="12" r="0.9" fill="currentColor"/><circle cx="15" cy="11" r="0.9" fill="currentColor"/></svg>PADEL RACKET FINDER</div>
-      <h1>Finde deinen<br><span>perfekten Schläger.</span></h1>
-      <p>Ein kurzer Racket-Fit-Test analysiert deinen Spielstil, deine Technik, deine Wünsche und dein Budget.</p>
-      <button id="startBtn" class="primary">Test starten <span>→</span></button>
-      <div class="meta">Quick oder Pro · unabhängig · persönliches Matching</div>
+      <div class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="racket-icon" aria-hidden="true"><ellipse cx="12" cy="9" rx="7" ry="8" stroke="currentColor" stroke-width="1.6"/><line x1="12" y1="17" x2="12" y2="23" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="7" r="0.9" fill="currentColor"/><circle cx="12" cy="6" r="0.9" fill="currentColor"/><circle cx="15" cy="7" r="0.9" fill="currentColor"/><circle cx="9" cy="11" r="0.9" fill="currentColor"/><circle cx="12" cy="12" r="0.9" fill="currentColor"/><circle cx="15" cy="11" r="0.9" fill="currentColor"/></svg><span data-i18n="hero.badge">PADEL RACKET FINDER</span></div>
+      <h1><span data-i18n="hero.title1">Finde deinen</span><br><span class="muted" data-i18n="hero.title2">perfekten Schläger.</span></h1>
+      <p data-i18n="hero.desc">Ein kurzer Racket-Fit-Test analysiert deinen Spielstil, deine Technik, deine Wünsche und dein Budget.</p>
+      <button id="startBtn" class="primary"><span data-i18n="hero.cta">Test starten</span> <span class="arrow" aria-hidden="true">→</span></button>
+      <div class="meta" data-i18n="hero.meta">Quick oder Pro · unabhängig · persönliches Matching</div>
     </header>
 
     <section id="modeSelect" class="hidden mode-select">
-      <div class="badge">WÄHLE DEINEN TEST</div>
-      <h1>Quick oder Pro?</h1>
-      <p>Beide Tests matchen dich gegen dieselbe kuratierte Schläger-Auswahl — der Pro-Test stellt nur mehr und tiefere Fragen für eine präzisere Empfehlung.</p>
+      <div class="badge" data-i18n="mode.badge">WÄHLE DEINEN TEST</div>
+      <h1 data-i18n="mode.title">Quick oder Pro?</h1>
+      <p data-i18n="mode.desc">Beide Tests matchen dich gegen dieselbe kuratierte Schläger-Auswahl — der Pro-Test stellt nur mehr und tiefere Fragen für eine präzisere Empfehlung.</p>
       <div class="mode-grid">
         <button id="quickModeBtn" class="mode-card">
-          <div class="mode-card-title">Quick Test</div>
-          <div class="mode-card-meta">15 Fragen · ca. 3–5 Min</div>
-          <p class="mode-card-desc">Spielstil, Technik, Wünsche und Budget — eine schnelle, verlässliche Empfehlung.</p>
-          <span class="mode-card-cta">Quick Test starten →</span>
+          <div class="mode-card-title" data-i18n="mode.quickTitle">Quick Test</div>
+          <div class="mode-card-meta" data-i18n="mode.quickMeta">15 Fragen · ca. 3–5 Min</div>
+          <p class="mode-card-desc" data-i18n="mode.quickDesc">Spielstil, Technik, Wünsche und Budget — eine schnelle, verlässliche Empfehlung.</p>
+          <span class="mode-card-cta" data-i18n="mode.quickCta">Quick Test starten →</span>
         </button>
         <button id="proModeBtn" class="mode-card mode-card-pro">
-          <div class="mode-card-title">Pro Test</div>
-          <div class="mode-card-meta">bis zu 23 Fragen · ca. 7–9 Min</div>
-          <p class="mode-card-desc">Zusätzlich: Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Markenpräferenz und Budget-Flexibilität für die präziseste Empfehlung.</p>
-          <span class="mode-card-cta">Pro Test starten →</span>
+          <div class="mode-card-title" data-i18n="mode.proTitle">Pro Test</div>
+          <div class="mode-card-meta" data-i18n="mode.proMeta">bis zu 23 Fragen · ca. 7–9 Min</div>
+          <p class="mode-card-desc" data-i18n="mode.proDesc">Zusätzlich: Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Markenpräferenz und Budget-Flexibilität für die präziseste Empfehlung.</p>
+          <span class="mode-card-cta" data-i18n="mode.proCta">Pro Test starten →</span>
         </button>
       </div>
-      <button id="modeBackBtn" class="secondary mode-back">← Zurück</button>
+      <button id="modeBackBtn" class="secondary mode-back" data-i18n="mode.back">← Zurück</button>
     </section>
 
     <section id="quiz" class="hidden">

@@ -4,13 +4,15 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 
 ## Features
 
+- **Zweisprachig:** Deutsch/Englisch umschaltbar per Klick, Auswahl wird gespeichert
 - **Zwei Testmodi:** Quick Test (15 Fragen, ~3–5 Min) oder Pro Test (bis zu 23 Fragen, ~7–9 Min) mit zusätzlichen Fragen zu Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Marke und Budget-Flexibilität
-- **Mehrfachauswahl** bei Schwächen und Racketsport-Erfahrung
-- **49 reale, aktuell erhältliche Schläger** von 12 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, Tecnifibre, Dunlop, Oxdog, Osaka) mit echten Produktlinks
+- **Mehrfachauswahl** bei Schwächen, Racketsport-Erfahrung und Verletzungsregionen
+- **49 reale, aktuell erhältliche Schläger** von 12 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, Tecnifibre, Dunlop, Oxdog, Osaka) mit echten Produktbildern, Produktlinks und Preisen
 - **Erklärung zu jeder Frage**, damit auch Einsteiger die Fachbegriffe verstehen
 - **Visuelle Profil-Analyse:** Netzdiagramm, das dein Spielprofil mit deinem Top-Match vergleicht
 - **Detaillierte Spieler-Analyse:** Spielertyp, Entwicklungsstand, Stärken/Baustellen und persönliche Trainingstipps
-- **Top 3 Empfehlungen** mit Stat-Vergleich und nachvollziehbarer Begründung
+- **Top 3 Empfehlungen** mit Produktbild, Stat-Vergleich und nachvollziehbarer Begründung
+- **Sanfte Animationen** — Übergänge, Zähl-Effekte und Balken-Animationen bei den Ergebnissen
 - **Dunkles Design** in Tennisball-Grün
 - **Mobile-optimiert** — perfekt für Smartphone und Tablet
 - **Vollständig privat** — keine Anmeldung, Backend oder Tracking
@@ -37,7 +39,7 @@ Einfach die Datei `index.html` mit Freunden teilen — sie öffnen sie im Browse
 
 ## Woher kommen die Daten?
 
-Alle Schläger, ihre technischen Daten (Form, Gewicht, Balance, Kernhärte, Spielniveau) und Testwerte (Power, Kontrolle, Komfort, Handling, Effet, Fehlertoleranz — jeweils 0–10) stammen von **[padelreference.com](https://www.padelreference.com)**, Stand September 2026. Zwei Werte (Netzspiel, Defensive) gibt es dort nicht direkt — die leiten wir rechnerisch aus den vorhandenen Testwerten ab.
+Alle Schläger, ihre technischen Daten (Form, Gewicht, Balance, Kernhärte, Spielniveau), Testwerte (Power, Kontrolle, Komfort, Handling, Effet, Fehlertoleranz — jeweils 0–10) und Produktbilder stammen von **[padelreference.com](https://www.padelreference.com)**, Stand September 2026. Zwei Werte (Netzspiel, Defensive) gibt es dort nicht direkt — die leiten wir rechnerisch aus den vorhandenen Testwerten ab. Lädt ein Bild einmal nicht (z. B. bei einer Server-Störung), zeigt die App automatisch ein Platzhalter-Icon statt eines kaputten Bildes.
 
 ⚠️ **Wichtig:** Preise und Verfügbarkeit ändern sich laufend. Die App zeigt den Preis zum Zeitpunkt der Recherche — vor dem Kauf immer den aktuellen Preis über den Link im Shop prüfen.
 
@@ -59,9 +61,8 @@ Die App ist selbstständig — alles läuft im Browser, keine externe API oder B
 
 - [ ] Spieler-Profile speichern (localStorage)
 - [ ] Mehr Racket-Modelle hinzufügen
-- [ ] Dunkel-Modus
 - [ ] Export der Ergebnisse (PDF/Screenshot)
-- [ ] Mehrsprachig (EN, ES, FR)
+- [ ] Weitere Sprachen (ES, FR)
 
 ## Feedback & Bugs
 

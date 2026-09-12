@@ -190,7 +190,76 @@ const UI = {
     "level.Beginner": "Einsteiger",
     "level.Intermediate": "Mittelklasse",
     "level.Advanced": "Fortgeschritten/Profi",
-    "kernLabel": "Kern"
+    "kernLabel": "Kern",
+
+    "share.title": "Ergebnis teilen",
+    "share.desc": "Der Link öffnet dein Ergebnis exakt so, wie du es siehst — inklusive aller drei Schläger.",
+    "share.button": "Teilen",
+    "share.copyLink": "Link kopieren",
+    "share.copiedLink": "Link kopiert!",
+    "share.copiedText": "Ergebnis kopiert — einfach einfügen!",
+    "share.textIntro": n => `🎾 Mein Padel Racket Fit (${n}/100 Top-Match):`,
+    "share.textLine": (rank, name, score) => `#${rank} ${name} — ${score}/100`,
+    "share.textOutro": "Mach den Test selbst:",
+    "share.native": "Mein Padel Racket Fit",
+
+    "history.title": "Dein Fortschritt",
+    "history.desc": "Frühere Testergebnisse auf diesem Gerät.",
+    "history.vsLast": date => `Im Vergleich zu deinem Test vom ${date}:`,
+    "history.sameTop": "Gleiches Top-Match wie letztes Mal.",
+    "history.newTop": (from, to) => `Neues Top-Match: ${from} → ${to}.`,
+    "history.statChange": (label, from, to) => `${label} ${from} → ${to}`,
+    "history.noChange": "Keine Veränderung zu deinem letzten Test.",
+    "history.clear": "Verlauf löschen",
+    "history.entry": (date, mode, name, score) => `${date} · ${mode} · ${name} (${score}/100)`,
+
+    "partner.badge": "DOPPEL-CHECK",
+    "partner.title": "Wie passt ihr als Team zusammen?",
+    "partner.desc": "Padel wird zu zweit gespielt. Lass deinen Partner / deine Partnerin einen kurzen 15-Fragen-Check machen — wir zeigen euch, wie sich eure Profile ergänzen und wer eher Netz oder hinten spielen sollte.",
+    "partner.start": "Partner-Check starten →",
+    "partner.stepLabel": "Partner-Frage",
+    "partner.resultTitle": "Euer Team-Profil",
+    "partner.you": "Du",
+    "partner.partner": "Partner:in",
+    "partner.partnerTop": "Top-Match für deine:n Partner:in",
+    "partner.restart": "Partner-Check neu starten",
+    "compat.bothNet": "Ihr spielt beide am liebsten am Netz — sprecht ab, wer bei Bedarf zurückfällt, sonst bleibt die Hinterfeld-Absicherung offen.",
+    "compat.bothBack": "Ihr spielt beide am liebsten hinten — versucht abwechselnd auch ans Netz vorzurücken, sonst fehlt euch der Druck vorne.",
+    "compat.complementary": "Starke Rollenverteilung: Einer von euch deckt eher das Netz ab, der andere die Defensive von hinten — ein Klassiker im Doppel.",
+    "compat.balanced": "Ihr seid beide flexibel unterwegs — sprecht vor dem Match kurz ab, wer bei welchem Ballwechsel welche Seite/Position übernimmt.",
+    "compat.powerControl": "Gute Ergänzung: Eine:r bringt mehr Power, der/die andere mehr Kontrolle — nutzt das gezielt beim Punktabschluss.",
+
+    "browse.link": "Alle Schläger durchsuchen →",
+    "browse.badge": "SCHLÄGER-DATENBANK",
+    "browse.title": "Alle 49 Schläger",
+    "browse.desc": "Filtere, sortiere und vergleiche bis zu 3 Schläger direkt nebeneinander — ganz ohne Quiz.",
+    "browse.searchPlaceholder": "Modell oder Marke suchen…",
+    "browse.filterShape": "Kopfform",
+    "browse.filterBrand": "Marke",
+    "browse.filterLevel": "Niveau",
+    "browse.allShapes": "Alle Formen",
+    "browse.allBrands": "Alle Marken",
+    "browse.allLevels": "Alle Niveaus",
+    "browse.sortBy": "Sortieren nach",
+    "browse.sortControl": "Kontrolle",
+    "browse.sortPower": "Power",
+    "browse.sortPriceAsc": "Preis aufsteigend",
+    "browse.sortPriceDesc": "Preis absteigend",
+    "browse.compareAdd": "+ Vergleichen",
+    "browse.compareRemove": "− Entfernen",
+    "browse.compareFull": "Max. 3 ausgewählt",
+    "browse.compareBarText": n => `${n} von 3 zum Vergleich ausgewählt`,
+    "browse.compareButton": "Vergleichen",
+    "browse.compareTitle": "Vergleich",
+    "browse.compareClear": "Auswahl leeren",
+    "browse.noResults": "Keine Schläger gefunden — Filter anpassen.",
+    "browse.back": "← Zurück zur Startseite",
+    "browse.resultsCount": n => `${n} Schläger`,
+
+    "pwa.installTitle": "App installieren",
+    "pwa.installDesc": "Auf dem Homescreen speichern — funktioniert auch offline im Laden.",
+    "pwa.installBtn": "Installieren",
+    "pwa.installDismiss": "Nicht jetzt"
   },
   en: {
     "hero.badge": "PADEL RACKET FINDER",
@@ -291,7 +360,76 @@ const UI = {
     "level.Beginner": "Beginner",
     "level.Intermediate": "Mid-range",
     "level.Advanced": "Advanced/Pro",
-    "kernLabel": "Core"
+    "kernLabel": "Core",
+
+    "share.title": "Share result",
+    "share.desc": "The link opens your result exactly as you see it — including all three rackets.",
+    "share.button": "Share",
+    "share.copyLink": "Copy link",
+    "share.copiedLink": "Link copied!",
+    "share.copiedText": "Result copied — just paste it!",
+    "share.textIntro": n => `🎾 My Padel Racket Fit (${n}/100 top match):`,
+    "share.textLine": (rank, name, score) => `#${rank} ${name} — ${score}/100`,
+    "share.textOutro": "Take the test yourself:",
+    "share.native": "My Padel Racket Fit",
+
+    "history.title": "Your progress",
+    "history.desc": "Previous test results on this device.",
+    "history.vsLast": date => `Compared to your test on ${date}:`,
+    "history.sameTop": "Same top match as last time.",
+    "history.newTop": (from, to) => `New top match: ${from} → ${to}.`,
+    "history.statChange": (label, from, to) => `${label} ${from} → ${to}`,
+    "history.noChange": "No change since your last test.",
+    "history.clear": "Clear history",
+    "history.entry": (date, mode, name, score) => `${date} · ${mode} · ${name} (${score}/100)`,
+
+    "partner.badge": "DOUBLES CHECK",
+    "partner.title": "How well do you match as a team?",
+    "partner.desc": "Padel is played in pairs. Have your partner take a short 15-question check — we'll show you how your profiles complement each other and who should play net or back.",
+    "partner.start": "Start partner check →",
+    "partner.stepLabel": "Partner question",
+    "partner.resultTitle": "Your team profile",
+    "partner.you": "You",
+    "partner.partner": "Partner",
+    "partner.partnerTop": "Top match for your partner",
+    "partner.restart": "Restart partner check",
+    "compat.bothNet": "You both prefer the net — agree on who falls back when needed, or your backcourt coverage stays open.",
+    "compat.bothBack": "You both prefer staying back — take turns pushing up to the net, or you'll be missing pressure up front.",
+    "compat.complementary": "Strong role split: one of you covers the net, the other covers defense from the back — a doubles classic.",
+    "compat.balanced": "You're both flexible — agree beforehand on who takes which side/position on a given rally.",
+    "compat.powerControl": "Good complement: one of you brings more power, the other more control — use that deliberately when finishing points.",
+
+    "browse.link": "Browse all rackets →",
+    "browse.badge": "RACKET DATABASE",
+    "browse.title": "All 49 rackets",
+    "browse.desc": "Filter, sort and compare up to 3 rackets side by side — no quiz required.",
+    "browse.searchPlaceholder": "Search model or brand…",
+    "browse.filterShape": "Shape",
+    "browse.filterBrand": "Brand",
+    "browse.filterLevel": "Level",
+    "browse.allShapes": "All shapes",
+    "browse.allBrands": "All brands",
+    "browse.allLevels": "All levels",
+    "browse.sortBy": "Sort by",
+    "browse.sortControl": "Control",
+    "browse.sortPower": "Power",
+    "browse.sortPriceAsc": "Price: low to high",
+    "browse.sortPriceDesc": "Price: high to low",
+    "browse.compareAdd": "+ Compare",
+    "browse.compareRemove": "− Remove",
+    "browse.compareFull": "Max. 3 selected",
+    "browse.compareBarText": n => `${n} of 3 selected to compare`,
+    "browse.compareButton": "Compare",
+    "browse.compareTitle": "Comparison",
+    "browse.compareClear": "Clear selection",
+    "browse.noResults": "No rackets found — adjust your filters.",
+    "browse.back": "← Back to home",
+    "browse.resultsCount": n => `${n} rackets`,
+
+    "pwa.installTitle": "Install app",
+    "pwa.installDesc": "Save to your home screen — works offline in-store too.",
+    "pwa.installBtn": "Install",
+    "pwa.installDismiss": "Not now"
   }
 };
 
@@ -408,6 +546,13 @@ let answers = {};
 let testMode = "quick";
 let activeQuestions = QUICK_QUESTION_DEFS;
 
+// Snapshot of the most recently rendered results, used by share/history/partner features
+let lastResults = null; // { profile, topThree, mode }
+
+// Partner (doubles) mini-quiz state — always the Quick question set
+let partnerAnswers = {};
+let partnerCurrentQuestion = 0;
+
 const getElement = id => document.getElementById(id);
 
 getElement("startBtn").onclick = () => {
@@ -442,7 +587,12 @@ function applyStaticTranslations() {
     const value = t(key);
     if (value !== undefined) el.textContent = value;
   });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const value = t(el.getAttribute("data-i18n-placeholder"));
+    if (value !== undefined) el.placeholder = value;
+  });
   document.documentElement.lang = LANG;
+  if (typeof renderBrowseIfActive === "function") renderBrowseIfActive();
 }
 
 function startTest(mode) {
@@ -450,6 +600,9 @@ function startTest(mode) {
   activeQuestions = mode === "pro" ? QUICK_QUESTION_DEFS.concat(PRO_EXTRA_QUESTION_DEFS) : QUICK_QUESTION_DEFS;
   currentQuestion = 0;
   answers = {};
+  resultsRecorded = false;
+  isSharedView = false;
+  history.replaceState(null, "", location.pathname + location.search);
   getElement("modeSelect").classList.add("hidden");
   getElement("quiz").classList.remove("hidden");
   renderQuestion();
@@ -555,13 +708,35 @@ function goToPrevious() {
   }
 }
 
+let scoringSource = null;
+
 function getAnswer(id) {
-  return answers[id];
+  return (scoringSource || answers)[id];
 }
 
 function getList(id) {
-  const value = answers[id];
+  const value = (scoringSource || answers)[id];
   return Array.isArray(value) ? value : value ? [value] : [];
+}
+
+// Temporarily reads getAnswer/getList from a different answers object — used
+// to score the partner's own answers through the same scoring engine.
+function withAnswers(ansObj, fn) {
+  const previous = scoringSource;
+  scoringSource = ansObj;
+  try {
+    return fn();
+  } finally {
+    scoringSource = previous;
+  }
+}
+
+function rankRackets(ansObj) {
+  return withAnswers(ansObj, () =>
+    RACKETS
+      .map(racket => ({ ...racket, rawScore: calculateRawScore(racket) }))
+      .sort((a, b) => b.rawScore - a.rawScore)
+  );
 }
 
 function getMaxBudget() {
@@ -749,10 +924,18 @@ function pointsToString(points) {
   return points.map(p => p.join(",")).join(" ");
 }
 
-function buildRadarChart(profile, racket) {
+function racketRadarValues(racket) {
+  return [racket.control, racket.power, racket.forgiveness, racket.comfort, racket.net, racket.defense];
+}
+
+function profileRadarValues(profile) {
+  return [profile.control, profile.power, profile.forgive, profile.comfort, profile.net, profile.defense];
+}
+
+// series: [{ values: [6 numbers 0-10], cssClass: "radar-user" }, ...] — drawn in order, so put
+// filled/solid series first and dashed comparison series last so strokes stay visible on top.
+function buildRadarSVG(series) {
   const labels = [t("radar.control"), t("radar.power"), t("radar.forgiveness"), t("radar.comfort"), t("radar.net"), t("radar.defense")];
-  const userValues = [profile.control, profile.power, profile.forgive, profile.comfort, profile.net, profile.defense];
-  const racketValues = [racket.control, racket.power, racket.forgiveness, racket.comfort, racket.net, racket.defense];
   const cx = 150, cy = 150, maxR = 100;
   const total = labels.length;
 
@@ -771,16 +954,24 @@ function buildRadarChart(profile, racket) {
     return `<text x="${x}" y="${y}" class="radar-label" text-anchor="middle" dominant-baseline="middle">${label}</text>`;
   }).join("");
 
-  const userPts = userValues.map((v, i) => polarPoint(cx, cy, (Math.min(10, v) / 10) * maxR, i, total));
-  const racketPts = racketValues.map((v, i) => polarPoint(cx, cy, (Math.min(10, v) / 10) * maxR, i, total));
+  const polygons = series.map(s => {
+    const pts = s.values.map((v, i) => polarPoint(cx, cy, (Math.min(10, v) / 10) * maxR, i, total));
+    return `<polygon points="${pointsToString(pts)}" class="${s.cssClass}" />`;
+  }).join("");
 
   return `<svg viewBox="0 0 300 300" class="radar-svg" role="img" aria-label="radar">
     ${gridRings}
     ${axisLines}
-    <polygon points="${pointsToString(racketPts)}" class="radar-racket" />
-    <polygon points="${pointsToString(userPts)}" class="radar-user" />
+    ${polygons}
     ${labelEls}
   </svg>`;
+}
+
+function buildRadarChart(profile, racket) {
+  return buildRadarSVG([
+    { values: racketRadarValues(racket), cssClass: "radar-racket" },
+    { values: profileRadarValues(profile), cssClass: "radar-user" }
+  ]);
 }
 
 function createStatBars(racket) {
@@ -825,6 +1016,308 @@ function animateFillsAndScores(container) {
   });
 }
 
+// --- Share ---
+
+function encodeShareState() {
+  return btoa(encodeURIComponent(JSON.stringify({ m: testMode, a: answers })));
+}
+
+function decodeShareState(str) {
+  try {
+    return JSON.parse(decodeURIComponent(atob(str)));
+  } catch (e) {
+    return null;
+  }
+}
+
+function buildShareUrl() {
+  const base = location.href.split("#")[0];
+  return `${base}#r=${encodeShareState()}`;
+}
+
+function buildShareText() {
+  if (!lastResults) return "";
+  const lines = [t("share.textIntro")(lastResults.topThree[0].score)];
+  lastResults.topThree.forEach((r, i) => lines.push(t("share.textLine")(i + 1, r.name, r.score)));
+  lines.push(`${t("share.textOutro")} ${buildShareUrl()}`);
+  return lines.join("\n");
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return;
+  } catch (e) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e2) { /* clipboard unavailable, ignore */ }
+    document.body.removeChild(ta);
+  }
+}
+
+function showToast(message) {
+  let toast = getElement("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.remove("show");
+  void toast.offsetWidth;
+  toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+}
+
+async function shareResults() {
+  const url = buildShareUrl();
+  const text = buildShareText();
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: t("share.native"), text, url });
+      return;
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+  }
+  await copyToClipboard(text);
+  showToast(t("share.copiedText"));
+}
+
+async function copyShareLink() {
+  await copyToClipboard(buildShareUrl());
+  showToast(t("share.copiedLink"));
+}
+
+function buildShareSection() {
+  let html = `<section class="analysis anim-in">`;
+  html += `<h2 class="analysis-title">${t("share.title")}</h2>`;
+  html += `<p class="hint">${t("share.desc")}</p>`;
+  html += `<div class="share-actions">`;
+  html += `<button class="primary" onclick="shareResults()">${t("share.button")}</button>`;
+  html += `<button class="secondary" onclick="copyShareLink()">${t("share.copyLink")}</button>`;
+  html += `</div>`;
+  html += `</section>`;
+  return html;
+}
+
+// --- History / progress ---
+
+const HISTORY_KEY = "padelFinderHistory";
+let resultsRecorded = false;
+let isSharedView = false;
+
+function loadHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveHistoryEntry(entry) {
+  const history = loadHistory();
+  history.push(entry);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(-10)));
+}
+
+function clearHistory() {
+  localStorage.removeItem(HISTORY_KEY);
+  resultsRecorded = false;
+  if (lastResults) showResults();
+}
+
+function formatHistoryDate(timestamp) {
+  return new Date(timestamp).toLocaleDateString(LANG === "de" ? "de-DE" : "en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
+}
+
+function recordHistoryEntry(profile, topThree) {
+  if (isSharedView || resultsRecorded) return;
+  saveHistoryEntry({
+    date: Date.now(),
+    mode: testMode,
+    topName: topThree[0].name,
+    topScore: topThree[0].score,
+    profile: { control: profile.control, power: profile.power, forgive: profile.forgive, comfort: profile.comfort }
+  });
+  resultsRecorded = true;
+}
+
+function buildHistorySection(profile, topThree) {
+  const history = loadHistory();
+  const relevant = resultsRecorded ? history.slice(0, -1) : history;
+  const previous = relevant[relevant.length - 1];
+  if (!previous || !previous.profile) return "";
+
+  const statDefs = [
+    [t("results.control"), "control"],
+    [t("results.power"), "power"],
+    [t("results.forgiveness"), "forgive"],
+    [t("results.comfort"), "comfort"]
+  ];
+  const changes = statDefs
+    .filter(([, key]) => previous.profile[key] !== profile[key])
+    .map(([label, key]) => t("history.statChange")(label, previous.profile[key], profile[key]));
+
+  const topLine = previous.topName === topThree[0].name
+    ? t("history.sameTop")
+    : t("history.newTop")(previous.topName, topThree[0].name);
+
+  let html = `<section class="analysis anim-in">`;
+  html += `<h2 class="analysis-title">${t("history.title")}</h2>`;
+  html += `<p class="hint">${t("history.vsLast")(formatHistoryDate(previous.date))}</p>`;
+  html += `<ul class="tag-list">${(changes.length ? changes : [t("history.noChange")]).map(c => `<li>${c}</li>`).join("")}</ul>`;
+  html += `<p class="reason">${topLine}</p>`;
+  html += `<button class="secondary" onclick="clearHistory()">${t("history.clear")}</button>`;
+  html += `</section>`;
+  return html;
+}
+
+// --- Partner / doubles check ---
+
+function buildPartnerSection() {
+  return `<section class="analysis anim-in" id="partnerSection">
+    <div class="badge">${t("partner.badge")}</div>
+    <h2 class="analysis-title">${t("partner.title")}</h2>
+    <p class="hint">${t("partner.desc")}</p>
+    <div id="partnerContent"><button class="primary" onclick="startPartnerQuiz()">${t("partner.start")}</button></div>
+  </section>`;
+}
+
+function startPartnerQuiz() {
+  partnerAnswers = {};
+  partnerCurrentQuestion = 0;
+  renderPartnerQuestion();
+}
+
+function renderPartnerQuestion() {
+  const def = QUICK_QUESTION_DEFS[partnerCurrentQuestion];
+  const text = questionText(def.id);
+  const total = QUICK_QUESTION_DEFS.length;
+  const backButton = partnerCurrentQuestion > 0
+    ? `<button class="secondary" onclick="goToPreviousPartner()">${t("q.back")}</button>`
+    : `<span></span>`;
+
+  let html = `<div class="eyebrow">${t("partner.stepLabel")} ${partnerCurrentQuestion + 1}/${total}${def.multi ? t("q.multiTag") : ""}</div><h3>${text.title}</h3>`;
+  if (text.hint) html += `<p class="hint">${text.hint}</p>`;
+
+  if (def.range) {
+    const currentValue = partnerAnswers[def.id] || 5;
+    html += `<div class="range-value" id="prv">${currentValue}</div>`;
+    html += `<input class="range" id="partnerRange" type="range" min="1" max="10" value="${currentValue}">`;
+    html += `<div class="actions">${backButton}<button class="primary" onclick="submitPartnerRange()">${t("q.next")}</button></div>`;
+  } else if (def.multi) {
+    const selected = Array.isArray(partnerAnswers[def.id]) ? partnerAnswers[def.id] : [];
+    html += `<div class="options">`;
+    html += def.opts.map(key => {
+      const isSelected = selected.includes(key);
+      return `<button class="option option-multi${isSelected ? " selected" : ""}" onclick="togglePartnerAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
+    }).join("");
+    html += `</div>`;
+    html += `<div class="actions">${backButton}<button class="primary" onclick="goToNextPartner()"${selected.length ? "" : " disabled"}>${t("q.next")}</button></div>`;
+  } else {
+    html += `<div class="options">`;
+    html += def.opts.map(key =>
+      `<button class="option${partnerAnswers[def.id] === key ? " selected" : ""}" onclick="choosePartnerAnswer('${key}')">${key}) ${text.opts[key]}</button>`
+    ).join("");
+    html += `</div>`;
+    html += `<div class="actions">${backButton}</div>`;
+  }
+
+  getElement("partnerContent").innerHTML = html;
+  if (def.range) {
+    getElement("partnerRange").oninput = e => { getElement("prv").textContent = e.target.value; };
+  }
+}
+
+function choosePartnerAnswer(choice) {
+  partnerAnswers[QUICK_QUESTION_DEFS[partnerCurrentQuestion].id] = choice;
+  goToNextPartner();
+}
+
+function togglePartnerAnswer(choice) {
+  const def = QUICK_QUESTION_DEFS[partnerCurrentQuestion];
+  const exclusiveKeys = def.exclusive || [];
+  let selected = Array.isArray(partnerAnswers[def.id]) ? partnerAnswers[def.id] : [];
+  if (selected.includes(choice)) {
+    selected = selected.filter(k => k !== choice);
+  } else if (exclusiveKeys.includes(choice)) {
+    selected = [choice];
+  } else {
+    selected = selected.filter(k => !exclusiveKeys.includes(k)).concat(choice);
+  }
+  partnerAnswers[def.id] = selected;
+  renderPartnerQuestion();
+}
+
+function submitPartnerRange() {
+  partnerAnswers[QUICK_QUESTION_DEFS[partnerCurrentQuestion].id] = +getElement("partnerRange").value;
+  goToNextPartner();
+}
+
+function goToNextPartner() {
+  if (partnerCurrentQuestion < QUICK_QUESTION_DEFS.length - 1) {
+    partnerCurrentQuestion++;
+    renderPartnerQuestion();
+  } else {
+    finishPartnerQuiz();
+  }
+}
+
+function goToPreviousPartner() {
+  if (partnerCurrentQuestion > 0) {
+    partnerCurrentQuestion--;
+    renderPartnerQuestion();
+  }
+}
+
+function getCompatibilityText(partnerProfile) {
+  const mainPosition = getAnswer("position");
+  const partnerPosition = withAnswers(partnerAnswers, () => getAnswer("position"));
+  const mainProfile = lastResults ? lastResults.profile : getUserProfile();
+  const isNet = pos => pos === "C" || pos === "D";
+  const isBack = pos => pos === "A";
+
+  if (isNet(mainPosition) && isNet(partnerPosition)) return t("compat.bothNet");
+  if (isBack(mainPosition) && isBack(partnerPosition)) return t("compat.bothBack");
+  if ((isNet(mainPosition) && isBack(partnerPosition)) || (isBack(mainPosition) && isNet(partnerPosition))) return t("compat.complementary");
+  if (Math.abs(mainProfile.power - partnerProfile.power) >= 2) return t("compat.powerControl");
+  return t("compat.balanced");
+}
+
+function finishPartnerQuiz() {
+  const mainProfile = lastResults ? lastResults.profile : getUserProfile();
+  const partnerProfile = withAnswers(partnerAnswers, () => getUserProfile());
+  const partnerRanked = rankRackets(partnerAnswers).map(r => ({ ...r, score: calculateScore(r.rawScore) }));
+  const partnerTop = partnerRanked[0];
+
+  const radar = buildRadarSVG([
+    { values: profileRadarValues(partnerProfile), cssClass: "radar-partner" },
+    { values: profileRadarValues(mainProfile), cssClass: "radar-user" }
+  ]);
+  const compatText = getCompatibilityText(partnerProfile);
+  const partnerCard = withAnswers(partnerAnswers, () => createRacketCard(partnerTop, 0, partnerTop));
+
+  let html = `<h3>${t("partner.resultTitle")}</h3>`;
+  html += `<div class="radar-wrap">${radar}</div>`;
+  html += `<div class="radar-legend"><span><i class="legend-dot legend-user"></i>${t("partner.you")}</span><span><i class="legend-dot legend-partner"></i>${t("partner.partner")}</span></div>`;
+  html += `<p class="reason">${compatText}</p>`;
+  html += `<h3>${t("partner.partnerTop")}</h3>`;
+  html += partnerCard;
+  html += `<button class="secondary" onclick="startPartnerQuiz()">${t("partner.restart")}</button>`;
+
+  getElement("partnerContent").innerHTML = html;
+  animateFillsAndScores(getElement("partnerContent"));
+}
+
+// --- Results page ---
+
 function showResults() {
   const ranked = RACKETS
     .map(racket => ({ ...racket, rawScore: calculateRawScore(racket) }))
@@ -840,6 +1333,9 @@ function showResults() {
     .sort((a, b) => fitMinusOvershoot(b) - fitMinusOvershoot(a));
   const topThree = inBudget.concat(overBudget).slice(0, 3);
   const modeLabel = testMode === "pro" ? t("results.proLabel") : t("results.quickLabel");
+
+  lastResults = { profile, topThree, mode: testMode };
+  recordHistoryEntry(profile, topThree);
 
   getElement("quiz").classList.add("hidden");
   getElement("results").classList.remove("hidden");
@@ -866,6 +1362,9 @@ function showResults() {
 
   html += topThree.map((r, n) => createRacketCard(r, n, topThree[0])).join("");
   html += buildPlayerAnalysis(profile);
+  html += buildHistorySection(profile, topThree);
+  html += buildPartnerSection();
+  html += buildShareSection();
   html += `<div class="notice anim-in">${t("notice")(RACKETS.length)}</div>`;
   html += `<button class="secondary restart" onclick="location.reload()">${t("restart")}</button>`;
 
@@ -1188,5 +1687,51 @@ function buildPlayerAnalysis(profile) {
   return html;
 }
 
+// --- PWA install prompt (Chrome/Android only; iOS has no such API) ---
+
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  showInstallBanner();
+});
+
+function showInstallBanner() {
+  if (getElement("installBanner")) return;
+  const banner = document.createElement("div");
+  banner.id = "installBanner";
+  banner.className = "install-banner anim-in";
+  banner.innerHTML = `<div><b>${t("pwa.installTitle")}</b><p>${t("pwa.installDesc")}</p></div>
+    <div class="install-banner-actions">
+      <button class="primary" id="installBtn">${t("pwa.installBtn")}</button>
+      <button class="secondary" id="installDismissBtn">${t("pwa.installDismiss")}</button>
+    </div>`;
+  document.body.appendChild(banner);
+  getElement("installBtn").onclick = async () => {
+    banner.remove();
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+    }
+  };
+  getElement("installDismissBtn").onclick = () => banner.remove();
+}
+
+function tryRestoreSharedResult() {
+  if (!location.hash.startsWith("#r=")) return false;
+  const decoded = decodeShareState(location.hash.slice(3));
+  if (!decoded || !decoded.a) return false;
+  answers = decoded.a;
+  testMode = decoded.m === "pro" ? "pro" : "quick";
+  isSharedView = true;
+  document.querySelector(".hero").classList.add("hidden");
+  showResults();
+  return true;
+}
+
 applyStaticTranslations();
 getElement("langToggle").textContent = LANG === "de" ? "EN" : "DE";
+tryRestoreSharedResult();
+window.addEventListener("hashchange", tryRestoreSharedResult);

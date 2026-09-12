@@ -1,4 +1,4 @@
-const CACHE_NAME = "padel-finder-v1";
+const CACHE_NAME = "padel-finder-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,11 +7,14 @@ const APP_SHELL = [
   "./browse.js",
   "./manifest.json",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/icon-512.png",
+  "./icons/apple-touch-icon.png"
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL.map(url => new Request(url, { cache: "reload" }))))
+  );
   self.skipWaiting();
 });
 
@@ -26,24 +29,24 @@ self.addEventListener("activate", event => {
 
 // Same-origin app shell: stale-while-revalidate so the app works offline and
 // updates itself in the background. Cross-origin requests (racket photos on
-// padelreference.com) are left untouched — no offline images, but the app's
-// own icon fallback already covers a failed image load.
+// padelreference.com) are left untouched — the app's icon fallback covers failed images.
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
   if (event.request.method !== "GET" || url.origin !== location.origin) return;
+  const isNavigation = event.request.mode === "navigate";
 
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      const network = fetch(event.request)
-        .then(response => {
-          if (response.ok) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-          }
-          return response;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    caches.open(CACHE_NAME).then(cache =>
+      cache.match(event.request, { ignoreSearch: isNavigation }).then(cached => {
+        // no-cache revalidates against the server instead of reusing a stale HTTP-cache copy
+        const network = fetch(event.request, { cache: "no-cache" })
+          .then(response => {
+            if (response.ok) cache.put(event.request, response.clone());
+            return response;
+          })
+          .catch(() => cached || (isNavigation ? cache.match("./index.html") : undefined));
+        return cached || network;
+      })
+    )
   );
 });

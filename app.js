@@ -144,6 +144,13 @@ function normalizeRacket(raw) {
 
 const RACKETS = PADELREFERENCE_DATA.map(normalizeRacket);
 
+function findRacketByName(name) {
+  const needle = String(name || "").trim().toLowerCase();
+  return needle ? RACKETS.find(r => r.name.toLowerCase() === needle) : undefined;
+}
+
+const BALANCE_ORDER = { Low: 0, Medium: 1, High: 2 };
+
 // ============================== i18n ==============================
 
 let LANG = localStorage.getItem("padelFinderLang") === "en" ? "en" : "de";
@@ -160,11 +167,11 @@ const UI = {
     "mode.title": "Quick oder Pro?",
     "mode.desc": "Beide Tests matchen dich gegen dieselbe kuratierte Schläger-Auswahl — der Pro-Test stellt nur mehr und tiefere Fragen für eine präzisere Empfehlung.",
     "mode.quickTitle": "Quick Test",
-    "mode.quickMeta": "15 Fragen · ca. 3–5 Min",
+    "mode.quickMeta": "17–19 Fragen · ca. 4–6 Min",
     "mode.quickDesc": "Spielstil, Technik, Wünsche und Budget — eine schnelle, verlässliche Empfehlung.",
     "mode.quickCta": "Quick Test starten →",
     "mode.proTitle": "Pro Test",
-    "mode.proMeta": "bis zu 23 Fragen · ca. 7–9 Min",
+    "mode.proMeta": "bis zu 28 Fragen · ca. 8–10 Min",
     "mode.proDesc": "Zusätzlich: Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Markenpräferenz und Budget-Flexibilität für die präziseste Empfehlung.",
     "mode.proCta": "Pro Test starten →",
     "mode.back": "← Zurück",
@@ -172,6 +179,7 @@ const UI = {
     "q.next": "Weiter →",
     "q.multiTag": " · MEHRFACHAUSWAHL",
     "q.frage": "FRAGE",
+    "q.skip": "Überspringen",
     "results.badge": "DEIN PADEL RACKET FIT",
     "results.quickLabel": "QUICK-ANALYSE",
     "results.proLabel": "PRO-ANALYSE",
@@ -218,6 +226,9 @@ const UI = {
     "reason.shape": shape => `die gewünschte ${shape}`,
     "reason.grippy": "das von dir bevorzugte griffige Spielgefühl",
     "reason.headHeavy": "das von dir bevorzugte kopflastige Powergefühl",
+    "reason.vsCurrent": (label, diff, name) => `${diff} ${diff === 1 ? "Punkt" : "Punkte"} mehr ${label} als dein ${name}`,
+    "reason.lighterThanCurrent": (diff, name) => `${diff} g weniger Gewicht als dein ${name}`,
+    "reason.cheaperThanCurrent": (diff, name) => `rund ${diff} € Ersparnis gegenüber deinem ${name}`,
     "alt.template": parts => `Im Vergleich zu deinem Top-Match: ${parts}.`,
     "alt.fallback": "Sehr ähnliches Profil wie dein Top-Match — eine gute Alternative, falls das erste Modell nicht verfügbar ist.",
     "alt.more": list => `mehr ${list}`,
@@ -290,7 +301,7 @@ const UI = {
 
     "browse.link": "Alle Schläger durchsuchen →",
     "browse.badge": "SCHLÄGER-DATENBANK",
-    "browse.title": "Alle 49 Schläger",
+    "browse.title": n => `Alle ${n} Schläger`,
     "browse.desc": "Filtere, sortiere und vergleiche bis zu 3 Schläger direkt nebeneinander — ganz ohne Quiz.",
     "browse.searchPlaceholder": "Modell oder Marke suchen…",
     "browse.filterShape": "Kopfform",
@@ -316,7 +327,7 @@ const UI = {
     "browse.resultsCount": n => `${n} Schläger`,
 
     "pwa.installTitle": "App installieren",
-    "pwa.installDesc": "Auf dem Homescreen speichern — funktioniert auch offline im Laden.",
+    "pwa.installDesc": "Auf dem Homescreen speichern — öffnet sich wie eine App, auch bei schwachem Netz.",
     "pwa.installBtn": "Installieren",
     "pwa.installDismiss": "Nicht jetzt",
 
@@ -339,7 +350,51 @@ const UI = {
     "current.priceDiff": diff => `Preisunterschied zum Top-Match: ${diff} €.`,
     "current.notFound": "Modell nicht in der Datenbank — bitte einen Namen aus der Vorschlagsliste wählen.",
     "browse.yourScore": "Für dein Profil",
-    "browse.yourScoreHint": "Persönlicher Score auf Basis deines Tests"
+    "browse.yourScoreHint": "Persönlicher Score auf Basis deines Tests",
+
+    "meta.title": "Padel Racket Finder — finde deinen perfekten Schläger",
+    "meta.desc": "Finde den Padel-Schläger, der am besten zu deinem Spiel, Niveau und Budget passt — mit echten Testwerten, Score-Aufschlüsselung und Profil-Analyse.",
+    "hero.statRackets": "Schläger",
+    "hero.statBrands": "Marken",
+    "hero.statQuestions": "Fragen im Pro-Test",
+    "bd.title": "Warum dieser Score?",
+    "bd.desc": n => `Wo dein Top-Match gegenüber dem Durchschnitt aller ${n} Modelle Punkte holt oder verliert.`,
+    "bd.style": "Spielstil & Position",
+    "bd.wishes": "Deine Wünsche",
+    "bd.level": "Niveau & Entwicklung",
+    "bd.health": "Gelenkschonung",
+    "bd.budget": "Budget",
+    "bd.nogo": "No-Gos",
+    "bd.nogoOk": "Keine No-Gos verletzt",
+    "bd.current": "Besser als dein Schläger",
+    "bd.refine": "Deine Regler",
+    "card.noGoWarning": list => `<b>Achtung:</b> verletzt dein No-Go „${list}“ — es gibt aber kaum Alternativen, die sonst passen.`,
+    "results.browseCta": "Alle Schläger mit deinem persönlichen Score ansehen →",
+    "results.backToResults": "← Zurück zu deinem Ergebnis",
+    "browse.compareJump": "Vergleich ansehen ↓",
+    "radar.aria": "Netzdiagramm: Kontrolle, Power, Sweet Spot, Komfort, Netzspiel, Defensive",
+    "refine.aria": label => `Gewichtung ${label}`,
+    "q.rangeAria": "Wichtigkeit von 1 bis 10",
+    "acc.badge": "PASST DAZU",
+    "acc.title": "Zubehör, das zu deinem Profil passt",
+    "acc.desc": "Ausgewählt anhand deiner Antworten — pro Kategorie das passendste Produkt.",
+    "acc.why": "Passt, weil",
+    "acc.cat.overgrip": "Griffband",
+    "acc.cat.balls": "Bälle",
+    "acc.cat.protector": "Rahmenschutz",
+    "acc.cat.bag": "Tasche",
+    "acc.cat.shoes": "Schuhe",
+    "acc.cat.other": "Zubehör",
+    "need.sweaty_hands": "du stark an den Händen schwitzt",
+    "need.comfort_joints": "du Gelenkbeschwerden hast",
+    "need.more_grip": "es dir mehr Halt am Griff gibt",
+    "need.beginner": "es sich gut für den Einstieg eignet",
+    "need.frequent_player": "du viel spielst",
+    "need.outdoor": "du draußen spielst",
+    "need.indoor": "du in der Halle spielst",
+    "need.frame_protection": "es deinen Rahmen vor Schäden schützt",
+    "need.travel_storage": "du deinen Schläger oft mitnimmst",
+    "need.court_grip_footwear": "du auf dem Platz sicheren Halt brauchst"
   },
   en: {
     "hero.badge": "PADEL RACKET FINDER",
@@ -352,11 +407,11 @@ const UI = {
     "mode.title": "Quick or Pro?",
     "mode.desc": "Both tests match you against the same curated racket selection — the Pro test just asks more, deeper questions for a more precise recommendation.",
     "mode.quickTitle": "Quick Test",
-    "mode.quickMeta": "15 questions · ~3–5 min",
+    "mode.quickMeta": "17–19 questions · ~4–6 min",
     "mode.quickDesc": "Playing style, technique, preferences and budget — a fast, reliable recommendation.",
     "mode.quickCta": "Start Quick Test →",
     "mode.proTitle": "Pro Test",
-    "mode.proMeta": "up to 23 questions · ~7–9 min",
+    "mode.proMeta": "up to 28 questions · ~8–10 min",
     "mode.proDesc": "Also covers: weight, balance feel, competitive level, injury details, indoor/outdoor, brand preference and budget flexibility for the most precise recommendation.",
     "mode.proCta": "Start Pro Test →",
     "mode.back": "← Back",
@@ -364,6 +419,7 @@ const UI = {
     "q.next": "Next →",
     "q.multiTag": " · MULTIPLE CHOICE",
     "q.frage": "QUESTION",
+    "q.skip": "Skip",
     "results.badge": "YOUR PADEL RACKET FIT",
     "results.quickLabel": "QUICK ANALYSIS",
     "results.proLabel": "PRO ANALYSIS",
@@ -410,6 +466,9 @@ const UI = {
     "reason.shape": shape => `the ${shape} you wanted`,
     "reason.grippy": "the handle-light feel you prefer",
     "reason.headHeavy": "the head-heavy power feel you prefer",
+    "reason.vsCurrent": (label, diff, name) => `${diff} ${diff === 1 ? "point" : "points"} more ${label.toLowerCase()} than your ${name}`,
+    "reason.lighterThanCurrent": (diff, name) => `${diff} g less weight than your ${name}`,
+    "reason.cheaperThanCurrent": (diff, name) => `about €${diff} savings compared to your ${name}`,
     "alt.template": parts => `Compared to your top match: ${parts}.`,
     "alt.fallback": "Very similar profile to your top match — a good alternative if the first model isn't available.",
     "alt.more": list => `more ${list}`,
@@ -482,7 +541,7 @@ const UI = {
 
     "browse.link": "Browse all rackets →",
     "browse.badge": "RACKET DATABASE",
-    "browse.title": "All 49 rackets",
+    "browse.title": n => `All ${n} rackets`,
     "browse.desc": "Filter, sort and compare up to 3 rackets side by side — no quiz required.",
     "browse.searchPlaceholder": "Search model or brand…",
     "browse.filterShape": "Shape",
@@ -508,7 +567,7 @@ const UI = {
     "browse.resultsCount": n => `${n} rackets`,
 
     "pwa.installTitle": "Install app",
-    "pwa.installDesc": "Save to your home screen — works offline in-store too.",
+    "pwa.installDesc": "Save to your home screen — opens like an app, even on a weak connection.",
     "pwa.installBtn": "Install",
     "pwa.installDismiss": "Not now",
 
@@ -531,7 +590,51 @@ const UI = {
     "current.priceDiff": diff => `Price difference to your top match: €${diff}.`,
     "current.notFound": "Model not in the database — please pick a name from the suggestion list.",
     "browse.yourScore": "For your profile",
-    "browse.yourScoreHint": "Personal score based on your test"
+    "browse.yourScoreHint": "Personal score based on your test",
+
+    "meta.title": "Padel Racket Finder — find your perfect racket",
+    "meta.desc": "Find the padel racket that best fits your game, level and budget — with real test scores, a score breakdown and a player profile analysis.",
+    "hero.statRackets": "rackets",
+    "hero.statBrands": "brands",
+    "hero.statQuestions": "questions in the Pro test",
+    "bd.title": "Why this score?",
+    "bd.desc": n => `Where your top match gains or loses points compared to the average of all ${n} models.`,
+    "bd.style": "Style & position",
+    "bd.wishes": "Your wishes",
+    "bd.level": "Level & development",
+    "bd.health": "Joint friendliness",
+    "bd.budget": "Budget",
+    "bd.nogo": "No-gos",
+    "bd.nogoOk": "No-gos respected",
+    "bd.current": "Better than your racket",
+    "bd.refine": "Your sliders",
+    "card.noGoWarning": list => `<b>Heads-up:</b> breaks your no-go "${list}" — but hardly any alternatives fit otherwise.`,
+    "results.browseCta": "See all rackets with your personal score →",
+    "results.backToResults": "← Back to your result",
+    "browse.compareJump": "View comparison ↓",
+    "radar.aria": "Radar chart: control, power, sweet spot, comfort, net play, defense",
+    "refine.aria": label => `Weighting ${label}`,
+    "q.rangeAria": "Importance from 1 to 10",
+    "acc.badge": "GOES WELL WITH",
+    "acc.title": "Accessories that fit your profile",
+    "acc.desc": "Picked from your answers — the best-fitting product per category.",
+    "acc.why": "Fits because",
+    "acc.cat.overgrip": "Overgrip",
+    "acc.cat.balls": "Balls",
+    "acc.cat.protector": "Frame protection",
+    "acc.cat.bag": "Bag",
+    "acc.cat.shoes": "Shoes",
+    "acc.cat.other": "Accessory",
+    "need.sweaty_hands": "your hands sweat a lot",
+    "need.comfort_joints": "you have joint discomfort",
+    "need.more_grip": "it gives you more grip",
+    "need.beginner": "it suits beginners",
+    "need.frequent_player": "you play a lot",
+    "need.outdoor": "you play outdoors",
+    "need.indoor": "you play indoors",
+    "need.frame_protection": "it protects your frame",
+    "need.travel_storage": "you often carry your racket around",
+    "need.court_grip_footwear": "you need secure footing on court"
   }
 };
 
@@ -546,6 +649,9 @@ function t(key, ...args) {
 // Question structure is language-independent; text is resolved via QUESTION_TEXT[LANG][id]
 const QUICK_QUESTION_DEFS = [
   { id: "level", opts: ["A", "B", "C", "D"] },
+  { id: "currentRacket", racketSearch: true },
+  { id: "dislikes", multi: true, exclusive: ["I"], showIf: () => !!findRacketByName(getAnswer("currentRacket")), opts: ["A", "B", "C", "D", "E", "F", "G", "H", "I"] },
+  { id: "likes", multi: true, exclusive: ["F"], showIf: () => !!findRacketByName(getAnswer("currentRacket")), opts: ["A", "B", "C", "D", "E", "F"] },
   { id: "style", opts: ["A", "B", "C"] },
   { id: "position", opts: ["A", "B", "C", "D"] },
   { id: "power", range: true },
@@ -553,14 +659,18 @@ const QUICK_QUESTION_DEFS = [
   { id: "forgive", range: true },
   { id: "comfort", range: true },
   { id: "joints", opts: ["A", "B", "C"] },
-  { id: "weakness", multi: true, opts: ["A", "B", "C", "D", "E", "F", "G"] },
+  { id: "weakness", multi: true, exclusive: ["H"], opts: ["A", "B", "C", "D", "E", "F", "G", "H"] },
   { id: "technique", opts: ["A", "B", "C", "D"] },
   { id: "sports", multi: true, exclusive: ["A"], opts: ["A", "B", "C", "D", "E", "F"] },
   { id: "frequency", opts: ["A", "B", "C", "D"] },
   { id: "shapePreference", opts: ["A", "B", "C", "D"] },
+  { id: "noGos", multi: true, exclusive: ["F"], opts: ["A", "B", "C", "D", "E", "F"] },
   { id: "growth", opts: ["A", "B", "C", "D"] },
   { id: "budget", opts: ["A", "B", "C", "D", "E", "F"] }
 ];
+
+// The partner check is a quick standalone profile, so it skips the current-racket questions
+const PARTNER_QUESTION_DEFS = QUICK_QUESTION_DEFS.filter(q => !["currentRacket", "dislikes", "likes"].includes(q.id));
 
 const PRO_EXTRA_QUESTION_DEFS = [
   { id: "weightPref", opts: ["A", "B", "C", "D"] },
@@ -570,12 +680,16 @@ const PRO_EXTRA_QUESTION_DEFS = [
   { id: "court", opts: ["A", "B", "C"] },
   { id: "brand", multi: true, exclusive: ["A"], opts: ["A", "B", "C", "D", "E", "F", "G"] },
   { id: "budgetFlex", opts: ["A", "B", "C"] },
+  { id: "sweat", opts: ["A", "B", "C"] },
   { id: "playstyleIcon", opts: ["A", "B", "C", "D"] }
 ];
 
 const QUESTION_TEXT = {
   de: {
     level: { title: "Wie viel Padel hast du gespielt?", hint: "Eine \"Session\" ist eine Trainings- oder Spieleinheit auf dem Platz.", opts: { A: "0–5 Sessions", B: "5–20 Sessions", C: "20–50 Sessions", D: "50+ Sessions / Turniere" } },
+    currentRacket: { title: "Welchen Schläger spielst du aktuell?", hint: "Optional — tippe den Namen und wähle ihn aus der Vorschlagsliste. Dein aktueller Schläger dient als Referenz: Was dir daran fehlt, soll dein neuer besser machen. Noch keinen oder nicht in der Liste? Einfach überspringen." },
+    dislikes: { title: "Was stört dich an deinem aktuellen Schläger?", hint: "Wähle alles, was zutrifft — wir suchen gezielt Schläger, die genau hier besser sind als dein jetziger.", opts: { A: "Zu wenig Power", B: "Zu wenig Kontrolle", C: "Zu hart / zu viele Vibrationen", D: "Zu schwer", E: "Zu kopflastig / zu träge", F: "Sweet Spot zu klein", G: "Zu wenig Effet", H: "Zu teuer — der nächste soll günstiger sein", I: "Nichts — ich will einfach etwas Neues" } },
+    likes: { title: "Was magst du an deinem aktuellen Schläger?", hint: "Diese Stärken soll dein neuer Schläger behalten — Modelle, die hier schlechter sind, rutschen nach unten.", opts: { A: "Kontrolle", B: "Power", C: "Komfort", D: "Handling / Leichtigkeit", E: "Die Kopfform", F: "Nichts Besonderes" } },
     style: { title: "Wie würdest du dein Spiel beschreiben?", hint: "Defensiv = du spielst sicher und wartest auf Fehler des Gegners. Offensiv = du suchst aktiv den Punktgewinn über Smashes und Angriffe.", opts: { A: "Defensiv", B: "Allround", C: "Offensiv" } },
     position: { title: "Wo spielst du am liebsten?", hint: "Deine bevorzugte Position beeinflusst, wie wichtig Netzspiel (Volleys) gegenüber Defensive (Lobs, Abwehr) für deinen Schläger ist.", opts: { A: "Hinten", B: "Variabel", C: "Gerne am Netz", D: "Sehr offensiv" } },
     power: { title: "Wie wichtig ist dir Power?", hint: "Power beschreibt, wie viel zusätzliche Schlagkraft dir der Schläger selbst gibt — besonders hilfreich, wenn dir noch die eigene Wucht fehlt." },
@@ -583,11 +697,12 @@ const QUESTION_TEXT = {
     forgive: { title: "Wie wichtig ist dir Fehlertoleranz / großer Sweet Spot?", hint: "Der Sweet Spot ist die Zone auf dem Schlägerkopf, die den saubersten Treffer gibt. Ein großer Sweet Spot verzeiht auch Treffer, die nicht perfekt mittig sitzen." },
     comfort: { title: "Wie wichtig ist dir Komfort?", hint: "Komfort beschreibt, wie wenig Vibration beim Treffer in Arm und Schulter ankommt — wichtig für lange Sessions." },
     joints: { title: "Hast du manchmal Beschwerden in Ellenbogen, Handgelenk oder Schulter?", hint: "Im Volksmund oft \"Tennisarm\" genannt. Weichere Schläger mit neutraler oder niedriger Balance schonen die Gelenke spürbar mehr als harte Diamond-Schläger.", opts: { A: "Nein, keine Beschwerden", B: "Manchmal, leichte Beschwerden", C: "Ja, regelmäßig" } },
-    weakness: { title: "Wo siehst du aktuell deine größten Schwächen?", hint: "Wähle alles, was zutrifft. Wir gleichen deine Schwächen mit den Eigenschaften des Schlägers aus und geben dir am Ende passende Trainingstipps.", opts: { A: "Power", B: "Kontrolle", C: "Return", D: "Aufschlag", E: "Volley / Netzspiel", F: "Defensive", G: "Timing / Technik" } },
+    weakness: { title: "Wo siehst du aktuell deine größten Schwächen?", hint: "Wähle alles, was zutrifft. Wir gleichen deine Schwächen mit den Eigenschaften des Schlägers aus und geben dir am Ende passende Trainingstipps.", opts: { A: "Power", B: "Kontrolle", C: "Return", D: "Aufschlag", E: "Volley / Netzspiel", F: "Defensive", G: "Timing / Technik", H: "Keine besonderen Schwächen" } },
     technique: { title: "Wie sauber ist deine Technik?", hint: "Bei noch unsauberer Technik empfehlen wir automatisch weichere, fehlerverzeihendere Schläger mit großem Sweet Spot.", opts: { A: "Noch unsauber", B: "Solide, aber inkonstant", C: "Ziemlich sauber", D: "Sehr sauber" } },
     sports: { title: "Welche anderen Schlägersportarten hast du schon gespielt?", hint: "Vorerfahrung verbessert oft dein Ballgefühl. Sie fließt ins Kontroll-Matching und in deine persönlichen Tipps ein.", opts: { A: "Keine", B: "Tennis", C: "Badminton", D: "Tischtennis", E: "Squash", F: "Andere" } },
     frequency: { title: "Wie oft spielst du Padel?", hint: "Je öfter du spielst, desto mehr lohnt sich ein Schläger, der auch bei intensiverem Training mitwächst.", opts: { A: "Seltener als 1x im Monat", B: "1x pro Woche", C: "2–3x pro Woche", D: "4x+ pro Woche / Wettkampf" } },
     shapePreference: { title: "Kennst du schon deine bevorzugte Kopfform?", hint: "Rund = maximale Kontrolle & großer Sweet Spot. Teardrop = Allround-Mix aus Power & Kontrolle. Diamond = maximale Power, aber kleinerer Sweet Spot und anstrengender für Einsteiger.", opts: { A: "Rund", B: "Teardrop", C: "Diamond", D: "Weiß ich noch nicht" } },
+    noGos: { title: "Gibt es No-Gos für deinen Schläger?", hint: "Alles, was du auf keinen Fall willst — solche Modelle landen ganz unten und tauchen nur auf, wenn wirklich nichts anderes passt. Mehrfachauswahl möglich.", opts: { A: "Keine Diamond-Form", B: "Nichts schwerer als 365 g", C: "Kein harter Kern", D: "Nicht kopflastig", E: "Keine reinen Einsteiger-Modelle", F: "Keine No-Gos" } },
     growth: { title: "Wie lange soll der Schläger mit dir mitwachsen?", hint: "Falls du dich schnell verbessern willst, empfehlen wir Schläger mit mehr Powerreserven für die Zukunft statt reinen Einsteiger-Modellen.", opts: { A: "Hauptsächlich jetzt", B: "1 Jahr+", C: "1–2 Jahre+", D: "Möglichst lange" } },
     budget: { title: "Was ist dein maximales Budget?", hint: "Alle Preise sind Richtwerte fürs Matching. Der aktuelle Preis kann über den Link am Ende geprüft werden.", opts: { A: "Unter 100 €", B: "100–130 €", C: "130–150 €", D: "150–180 €", E: "180–220 €", F: "220 €+" } },
     weightPref: { title: "Bevorzugst du eher leichte oder schwere Schläger?", hint: "Leichtere Schläger (unter 358 g) ermöglichen schnellere Reaktionen am Netz. Schwerere (365 g+) geben mehr Power und Stabilität bei Schmetterbällen.", opts: { A: "Eher leicht", B: "Ausgewogen", C: "Eher schwer", D: "Weiß ich nicht" } },
@@ -597,10 +712,14 @@ const QUESTION_TEXT = {
     court: { title: "Spielst du hauptsächlich Indoor oder Outdoor?", hint: "Outdoor (Wind, Sonne) profitiert oft von etwas mehr Kontrolle und Stabilität. Indoor erlaubt kompromissloseres Powerspiel.", opts: { A: "Outdoor", B: "Indoor", C: "Beides" } },
     brand: { title: "Hast du bevorzugte Marken?", hint: "Optional, Mehrfachauswahl möglich. Passende Modelle bekommen einen kleinen Bonus, aber Performance bleibt wichtiger als Marke.", opts: { A: "Keine Präferenz", B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat", G: "Andere" } },
     budgetFlex: { title: "Würdest du für den perfekten Schläger auch etwas mehr zahlen?", hint: "Falls ja, lockern wir dein Budget-Limit leicht, um dir auch knapp darüber liegende Top-Modelle zu zeigen.", opts: { A: "Nein, strikt bei meinem Budget bleiben", B: "Ja, bis zu 20 € mehr", C: "Ja, bis zu 40 € mehr" } },
+    sweat: { title: "Wie stark schwitzt du an den Händen?", hint: "Entscheidet, welches Griffband zu dir passt: Bei feuchten Händen hilft ein saugfähiges Overgrip, bei trockenen Händen ein griffiges (tacky).", opts: { A: "Stark", B: "Normal", C: "Kaum" } },
     playstyleIcon: { title: "Welcher Spielstil inspiriert dich am meisten?", hint: "Nur für den Vibe — hilft uns, zwischen ähnlich guten Empfehlungen die passende Note zu treffen.", opts: { A: "Kontrollierter Allrounder", B: "Aggressiver Power-Spieler", C: "Geduldiger Verteidiger", D: "Kreativer Netzspieler" } }
   },
   en: {
     level: { title: "How much padel have you played?", hint: "A \"session\" is one training or match session on court.", opts: { A: "0–5 sessions", B: "5–20 sessions", C: "20–50 sessions", D: "50+ sessions / tournaments" } },
+    currentRacket: { title: "Which racket do you play right now?", hint: "Optional — type the name and pick it from the suggestions. Your current racket becomes the reference: whatever it lacks, your new one should do better. No racket yet or not listed? Just skip." },
+    dislikes: { title: "What bothers you about your current racket?", hint: "Pick everything that applies — we specifically look for rackets that are better than yours in exactly these areas.", opts: { A: "Not enough power", B: "Not enough control", C: "Too hard / too much vibration", D: "Too heavy", E: "Too head-heavy / sluggish", F: "Sweet spot too small", G: "Not enough spin", H: "Too expensive — next one should be cheaper", I: "Nothing — I just want something new" } },
+    likes: { title: "What do you like about your current racket?", hint: "Your new racket should keep these strengths — models that are worse here drop down the list.", opts: { A: "Control", B: "Power", C: "Comfort", D: "Handling / lightness", E: "The head shape", F: "Nothing in particular" } },
     style: { title: "How would you describe your game?", hint: "Defensive = you play safe and wait for your opponent's mistakes. Offensive = you actively look to win the point via smashes and attacks.", opts: { A: "Defensive", B: "All-round", C: "Offensive" } },
     position: { title: "Where do you like to play?", hint: "Your preferred position affects how important net play (volleys) is versus defense (lobs, retrieving) for your racket.", opts: { A: "Back", B: "Variable", C: "Love the net", D: "Very offensive" } },
     power: { title: "How important is power to you?", hint: "Power describes how much extra hitting force the racket itself gives you — especially helpful if you're still lacking your own." },
@@ -608,11 +727,12 @@ const QUESTION_TEXT = {
     forgive: { title: "How important is forgiveness / a big sweet spot to you?", hint: "The sweet spot is the zone on the racket face that gives the cleanest hit. A large sweet spot also forgives hits that aren't perfectly centered." },
     comfort: { title: "How important is comfort to you?", hint: "Comfort describes how little vibration reaches your arm and shoulder on impact — important for long sessions." },
     joints: { title: "Do you sometimes have discomfort in your elbow, wrist or shoulder?", hint: "Often called \"tennis elbow\". Softer rackets with a neutral or low balance are noticeably gentler on your joints than hard diamond rackets.", opts: { A: "No discomfort", B: "Sometimes, mild discomfort", C: "Yes, regularly" } },
-    weakness: { title: "Where do you currently see your biggest weaknesses?", hint: "Pick everything that applies. We match your weaknesses against the racket's traits and give you matching training tips at the end.", opts: { A: "Power", B: "Control", C: "Return", D: "Serve", E: "Volley / net play", F: "Defense", G: "Timing / technique" } },
+    weakness: { title: "Where do you currently see your biggest weaknesses?", hint: "Pick everything that applies. We match your weaknesses against the racket's traits and give you matching training tips at the end.", opts: { A: "Power", B: "Control", C: "Return", D: "Serve", E: "Volley / net play", F: "Defense", G: "Timing / technique", H: "No particular weaknesses" } },
     technique: { title: "How clean is your technique?", hint: "If your technique is still rough, we automatically recommend softer, more forgiving rackets with a big sweet spot.", opts: { A: "Still rough", B: "Solid but inconsistent", C: "Pretty clean", D: "Very clean" } },
     sports: { title: "Which other racket sports have you already played?", hint: "Prior experience often improves your ball feel. It feeds into your control matching and your personal tips.", opts: { A: "None", B: "Tennis", C: "Badminton", D: "Table tennis", E: "Squash", F: "Other" } },
     frequency: { title: "How often do you play padel?", hint: "The more often you play, the more a racket that grows with more intense training pays off.", opts: { A: "Less than once a month", B: "Once a week", C: "2–3x a week", D: "4x+ a week / competitive" } },
     shapePreference: { title: "Do you already know your preferred head shape?", hint: "Round = maximum control & big sweet spot. Teardrop = all-round mix of power & control. Diamond = maximum power, but a smaller sweet spot and more demanding for beginners.", opts: { A: "Round", B: "Teardrop", C: "Diamond", D: "Don't know yet" } },
+    noGos: { title: "Any no-gos for your racket?", hint: "Anything you definitely don't want — those models drop to the bottom and only appear if nothing else fits. Multiple selections possible.", opts: { A: "No diamond shape", B: "Nothing heavier than 365 g", C: "No hard core", D: "Not head-heavy", E: "No pure beginner models", F: "No no-gos" } },
     growth: { title: "How long should the racket grow with you?", hint: "If you want to improve quickly, we recommend rackets with more power reserves for the future instead of pure beginner models.", opts: { A: "Mainly for now", B: "1 year+", C: "1–2 years+", D: "As long as possible" } },
     budget: { title: "What's your maximum budget?", hint: "All prices are reference values for matching. The current price can be checked via the link at the end.", opts: { A: "Under €100", B: "€100–130", C: "€130–150", D: "€150–180", E: "€180–220", F: "€220+" } },
     weightPref: { title: "Do you prefer lighter or heavier rackets?", hint: "Lighter rackets (under 358 g) allow faster reactions at the net. Heavier ones (365 g+) give more power and stability on smashes.", opts: { A: "Lighter", B: "Balanced", C: "Heavier", D: "Don't know" } },
@@ -622,6 +742,7 @@ const QUESTION_TEXT = {
     court: { title: "Do you mainly play indoor or outdoor?", hint: "Outdoor (wind, sun) often benefits from a bit more control and stability. Indoor allows more uncompromising power play.", opts: { A: "Outdoor", B: "Indoor", C: "Both" } },
     brand: { title: "Do you have preferred brands?", hint: "Optional, multiple selections possible. Matching models get a small bonus, but performance still matters more than brand.", opts: { A: "No preference", B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat", G: "Other" } },
     budgetFlex: { title: "Would you pay a bit more for the perfect racket?", hint: "If yes, we loosen your budget limit slightly to also show top models just above it.", opts: { A: "No, stick strictly to my budget", B: "Yes, up to €20 more", C: "Yes, up to €40 more" } },
+    sweat: { title: "How much do your hands sweat?", hint: "Decides which overgrip suits you: absorbent overgrips help with sweaty hands, tacky ones with dry hands.", opts: { A: "A lot", B: "Normal", C: "Barely" } },
     playstyleIcon: { title: "Which playing style inspires you the most?", hint: "Just for the vibe — helps us pick the right note between similarly good recommendations.", opts: { A: "Controlled all-rounder", B: "Aggressive power player", C: "Patient defender", D: "Creative net player" } }
   }
 };
@@ -679,22 +800,59 @@ function setLang(lang) {
   localStorage.setItem("padelFinderLang", lang);
   getElement("langToggle").textContent = lang === "de" ? "EN" : "DE";
   applyStaticTranslations();
-  if (!getElement("quiz").classList.contains("hidden")) renderQuestion();
-  else if (!getElement("results").classList.contains("hidden")) showResults();
+  if (!getElement("quiz").classList.contains("hidden")) {
+    const range = getElement("range");
+    const pendingRange = range && range.value;
+    const typedRacket = getElement("racketSearchInput") && getElement("racketSearchInput").value;
+    renderQuestion();
+    if (pendingRange) { getElement("range").value = pendingRange; getElement("rv").textContent = pendingRange; }
+    if (typedRacket && getElement("racketSearchInput")) { getElement("racketSearchInput").value = typedRacket; getElement("racketSearchInput").oninput(); }
+  } else if (!getElement("results").classList.contains("hidden")) {
+    const scrollY = window.scrollY;
+    const typedCurrent = getElement("currentRacketInput") && getElement("currentRacketInput").value;
+    showResults({ keepScroll: true });
+    if (typedCurrent !== undefined && getElement("currentRacketInput")) {
+      getElement("currentRacketInput").value = typedCurrent;
+      applyCurrentRacket();
+    }
+    window.scrollTo(0, scrollY);
+  }
 }
 
 function applyStaticTranslations() {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    const value = t(key);
+    let value = t(key);
+    if (typeof value === "function") value = value(RACKETS.length);
     if (value !== undefined) el.textContent = value;
   });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
     const value = t(el.getAttribute("data-i18n-placeholder"));
     if (value !== undefined) el.placeholder = value;
   });
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => {
+    const value = t(el.getAttribute("data-i18n-aria"));
+    if (value !== undefined) el.setAttribute("aria-label", value);
+  });
   document.documentElement.lang = LANG;
+  document.title = t("meta.title");
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute("content", t("meta.desc"));
+  if (getElement("installBanner")) {
+    getElement("installBanner").remove();
+    showInstallBanner();
+  }
   if (typeof renderBrowseIfActive === "function") renderBrowseIfActive();
+}
+
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
+}
+
+function restartApp() {
+  location.href = location.pathname + location.search;
 }
 
 function startTest(mode) {
@@ -740,8 +898,14 @@ function renderQuestion() {
   if (def.range) {
     const currentValue = answers[def.id] || 5;
     html += `<div class="range-value" id="rv">${currentValue}</div>`;
-    html += `<input class="range" id="range" type="range" min="1" max="10" value="${currentValue}">`;
+    html += `<input class="range" id="range" type="range" min="1" max="10" value="${currentValue}" aria-label="${text.title} — ${t("q.rangeAria")}">`;
     html += `<div class="actions">${backButton}<button class="primary" onclick="submitRange()">${t("q.next")}</button></div>`;
+  } else if (def.racketSearch) {
+    const current = findRacketByName(answers[def.id]);
+    html += `<input type="text" id="racketSearchInput" class="text-input" list="quizRacketList" value="${current ? current.name : ""}" placeholder="${t("current.placeholder")}" aria-label="${t("current.placeholder")}" autocomplete="off">`;
+    html += `<datalist id="quizRacketList">${RACKETS.map(r => `<option value="${r.name}">`).join("")}</datalist>`;
+    html += `<p class="hint racket-search-status" id="racketSearchStatus"></p>`;
+    html += `<div class="actions">${backButton}<button class="secondary" onclick="skipRacketSearch()">${t("q.skip")}</button><button class="primary" id="racketSearchNext" onclick="submitRacketSearch()">${t("q.next")}</button></div>`;
   } else if (def.multi) {
     const selected = getList(def.id);
     html += `<div class="options">`;
@@ -762,6 +926,25 @@ function renderQuestion() {
 
   getElement("questionCard").innerHTML = html;
   playCardAnimation();
+  const heading = getElement("questionCard").querySelector("h2");
+  heading.setAttribute("tabindex", "-1");
+  if (document.activeElement === document.body || !getElement("questionCard").contains(document.activeElement)) {
+    heading.focus({ preventScroll: true });
+  }
+
+  if (def.racketSearch) {
+    const input = getElement("racketSearchInput");
+    const update = () => {
+      const query = input.value.trim().toLowerCase();
+      const match = findRacketByName(query);
+      const anyPartial = !query || RACKETS.some(r => r.name.toLowerCase().includes(query));
+      getElement("racketSearchNext").disabled = !match;
+      getElement("racketSearchStatus").textContent = anyPartial ? "" : t("current.notFound");
+    };
+    input.oninput = update;
+    input.onkeydown = e => { if (e.key === "Enter") submitRacketSearch(); };
+    update();
+  }
 
   if (def.range) {
     getElement("range").oninput = e => {
@@ -788,6 +971,20 @@ function toggleAnswer(choice) {
   }
   answers[def.id] = selected;
   renderQuestion();
+}
+
+function submitRacketSearch() {
+  const match = findRacketByName(getElement("racketSearchInput").value);
+  if (!match) return;
+  answers.currentRacket = match.name;
+  goToNext();
+}
+
+function skipRacketSearch() {
+  delete answers.currentRacket;
+  delete answers.dislikes;
+  delete answers.likes;
+  goToNext();
 }
 
 function submitRange() {
@@ -851,147 +1048,189 @@ function getMaxBudget() {
   return max;
 }
 
-function calculateRawScore(racket) {
-  let score = 0;
+const MAIN_BRANDS = { B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat" };
+
+function getBrandPrefs() {
+  return getList("brand").map(key => MAIN_BRANDS[key]).filter(Boolean);
+}
+
+function matchesBrandPref(racket) {
+  if (getBrandPrefs().includes(racket.brand)) return true;
+  return getList("brand").includes("G") && !Object.values(MAIN_BRANDS).includes(racket.brand);
+}
+
+const NO_GO_CHECKS = {
+  A: r => r.form === "Diamond",
+  B: r => r.weight > 365,
+  C: r => r.hardness >= 7,
+  D: r => r.balance === "High",
+  E: r => r.level === "Beginner"
+};
+
+function violatedNoGos(racket) {
+  return getList("noGos").filter(key => NO_GO_CHECKS[key] && NO_GO_CHECKS[key](racket));
+}
+
+// Every point is booked into a category so the result page can explain where a score comes from.
+function scoreBreakdown(racket) {
+  const parts = { style: 0, wishes: 0, level: 0, health: 0, budget: 0, nogo: 0, current: 0 };
   const style = getAnswer("style");
   const position = getAnswer("position");
-  const weaknesses = getList("weakness");
+  const weaknesses = getList("weakness").filter(w => w !== "H");
   const technique = getAnswer("technique");
   const joints = getAnswer("joints");
   const frequency = getAnswer("frequency");
   const shapePref = getAnswer("shapePreference");
   const sports = getList("sports");
 
-  // Style matching
-  if (style === "A") {
-    score += racket.defense * 2;
-  } else if (style === "C") {
-    score += racket.power * 2;
-  } else {
-    score += ((racket.control + racket.power) / 2) * 2;
-  }
+  // Style & position
+  if (style === "A") parts.style += racket.defense * 2;
+  else if (style === "C") parts.style += racket.power * 2;
+  else parts.style += ((racket.control + racket.power) / 2) * 2;
 
-  // Position matching
-  if (position === "C" || position === "D") {
-    score += racket.net * 1.5;
-  } else if (position === "A") {
-    score += racket.defense * 1.5;
-  } else {
-    score += ((racket.net + racket.defense) / 2) * 1.5;
-  }
-
-  // User preferences (sliders)
-  score += racket.control * (+getAnswer("control") || 7) * 1.2;
-  score += racket.power * (+getAnswer("power") || 6) * 1.1;
-  score += racket.forgiveness * (+getAnswer("forgive") || 7) * 1.1;
-  score += racket.comfort * (+getAnswer("comfort") || 7) * 0.7;
+  if (position === "C" || position === "D") parts.style += racket.net * 1.5;
+  else if (position === "A") parts.style += racket.defense * 1.5;
+  else parts.style += ((racket.net + racket.defense) / 2) * 1.5;
 
   // Weakness compensation, damped so selecting many weaknesses doesn't inflate every score
   const weaknessFactor = 1 / Math.sqrt(Math.max(1, weaknesses.length));
-  if (weaknesses.includes("A")) score += racket.power * 2 * weaknessFactor;
-  if (["B", "C", "D"].some(w => weaknesses.includes(w))) score += racket.control * 1.4 * weaknessFactor;
-  if (weaknesses.includes("E")) score += racket.net * 1.5 * weaknessFactor;
-  if (weaknesses.includes("F")) score += racket.defense * 1.7 * weaknessFactor;
-  if (weaknesses.includes("G")) score += racket.forgiveness * 1.6 * weaknessFactor;
-
-  // Technique level
-  if (technique === "A") score += racket.forgiveness * 2.2;
-  if (technique === "B") score += racket.forgiveness * 1.2;
-
-  // Experience: beginners need forgiveness and should avoid demanding power frames
-  const level = getAnswer("level");
-  if (level === "A" || level === "B") {
-    score += racket.forgiveness * 1.5;
-    if (racket.form === "Diamond") score -= 12;
-    if (racket.hardness >= 7) score -= 6;
-    if (racket.level === "Beginner") score += 6;
-  }
-  if (level === "A" && racket.level === "Advanced") score -= 6;
-  if (level === "D") {
-    score += racket.power * 0.8 + racket.growth * 0.8;
-    if (racket.level === "Beginner") score -= 8;
-  }
-
-  // Racket-sport background transfers ball feel into control
-  if (sports.includes("B") || sports.includes("C")) score += racket.control * 0.3;
-
-  // Growth potential
-  if (getAnswer("growth") === "C") score += racket.growth * 2;
-  if (getAnswer("growth") === "D") score += racket.growth * 2.5;
-
-  // Frequent players also benefit from growth reserves
-  if (frequency === "C") score += racket.growth * 1;
-  if (frequency === "D") score += racket.growth * 1.8;
-
-  // Joint health: comfort and softness matter a lot more
-  if (joints === "B") {
-    score += racket.comfort * 1.5;
-    if (racket.hardness >= 6) score -= 6;
-  }
-  if (joints === "C") {
-    score += racket.comfort * 3;
-    if (racket.hardness >= 6) score -= 14;
-    if (racket.balance === "High" || racket.form === "Diamond") score -= 10;
-  }
-
-  // Explicit shape preference
-  const shapeMap = { A: "Round", B: "Teardrop", C: "Diamond" };
-  if (shapeMap[shapePref] && racket.form === shapeMap[shapePref]) score += 10;
-
-  // Budget matching
-  const maxBudget = getMaxBudget();
-  if (racket.price <= maxBudget) {
-    score += 8;
-  } else {
-    score -= Math.min(18, (racket.price - maxBudget) * 0.18);
-  }
-
-  // Penalize overly demanding rackets for less experienced players
-  if (["A", "B"].includes(technique)) {
-    if (racket.hardness >= 7) score -= 8;
-    if (racket.balance === "High" || racket.form === "Diamond") score -= 7;
-  }
-
-  // --- Pro test only signals (no-op if unanswered) ---
-  const weightPref = getAnswer("weightPref");
-  if (weightPref === "A" && racket.weight < 358) score += 8;
-  if (weightPref === "C" && racket.weight >= 365) score += 8;
-  if (weightPref === "B" && racket.weight >= 358 && racket.weight < 365) score += 6;
-
-  const balanceFeel = getAnswer("balanceFeel");
-  if (balanceFeel === "A" && (racket.balance === "Low" || racket.balance === "Low-Medium")) score += 10;
-  if (balanceFeel === "C" && (racket.balance === "High" || racket.balance === "Medium-High")) score += 10;
-  if (balanceFeel === "B" && racket.balance === "Medium") score += 8;
-
-  const level2 = getAnswer("level2");
-  if (level2 === "C") score += racket.growth * 1.2;
-  if (level2 === "D") score += racket.power * 1.5 + racket.growth * 1.5;
-
-  const injuryRegions = getList("injuryDetail");
-  if (joints === "B" || joints === "C") {
-    if (injuryRegions.includes("C") && (racket.balance === "High" || racket.form === "Diamond")) score -= 6;
-    if (injuryRegions.includes("B") && racket.hardness >= 6) score -= 6;
-  }
+  if (weaknesses.includes("A")) parts.style += racket.power * 2 * weaknessFactor;
+  if (["B", "C", "D"].some(w => weaknesses.includes(w))) parts.style += racket.control * 1.4 * weaknessFactor;
+  if (weaknesses.includes("E")) parts.style += racket.net * 1.5 * weaknessFactor;
+  if (weaknesses.includes("F")) parts.style += racket.defense * 1.7 * weaknessFactor;
+  if (weaknesses.includes("G")) parts.style += racket.forgiveness * 1.6 * weaknessFactor;
 
   const court = getAnswer("court");
-  if (court === "A") score += racket.control * 0.4;
-  if (court === "B") score += racket.power * 0.3;
-
-  const brandMap = { B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat" };
-  const brandPrefs = getList("brand").map(key => brandMap[key]).filter(Boolean);
-  if (brandPrefs.includes(racket.brand)) score += 6;
+  if (court === "A") parts.style += racket.control * 0.4;
+  if (court === "B") parts.style += racket.power * 0.3;
 
   const playstyle = getAnswer("playstyleIcon");
-  if (playstyle === "A") score += racket.control * 0.3;
-  if (playstyle === "B") score += racket.power * 0.4;
-  if (playstyle === "C") score += racket.defense * 0.4;
-  if (playstyle === "D") score += racket.net * 0.4;
+  if (playstyle === "A") parts.style += racket.control * 0.3;
+  if (playstyle === "B") parts.style += racket.power * 0.4;
+  if (playstyle === "C") parts.style += racket.defense * 0.4;
+  if (playstyle === "D") parts.style += racket.net * 0.4;
 
-  return score;
+  // Sliders are normalized to the default total (7+6+7+7), so "everything 10" means
+  // "everything equally important" instead of inflating every racket to 100.
+  const sliders = {
+    control: +getAnswer("control") || 7,
+    power: +getAnswer("power") || 6,
+    forgive: +getAnswer("forgive") || 7,
+    comfort: +getAnswer("comfort") || 7
+  };
+  const sliderNorm = 27 / (sliders.control + sliders.power + sliders.forgive + sliders.comfort);
+  parts.wishes += racket.control * sliders.control * sliderNorm * 1.2;
+  parts.wishes += racket.power * sliders.power * sliderNorm * 1.1;
+  parts.wishes += racket.forgiveness * sliders.forgive * sliderNorm * 1.1;
+  parts.wishes += racket.comfort * sliders.comfort * sliderNorm * 0.7;
+
+  const shapeMap = { A: "Round", B: "Teardrop", C: "Diamond" };
+  if (shapeMap[shapePref] && racket.form === shapeMap[shapePref]) parts.wishes += 10;
+
+  const weightPref = getAnswer("weightPref");
+  if (weightPref === "A" && racket.weight < 358) parts.wishes += 8;
+  if (weightPref === "C" && racket.weight >= 365) parts.wishes += 8;
+  if (weightPref === "B" && racket.weight >= 358 && racket.weight < 365) parts.wishes += 6;
+
+  const balanceFeel = getAnswer("balanceFeel");
+  if (balanceFeel === "A" && racket.balance === "Low") parts.wishes += 10;
+  if (balanceFeel === "C" && racket.balance === "High") parts.wishes += 10;
+  if (balanceFeel === "B" && racket.balance === "Medium") parts.wishes += 8;
+
+  if (matchesBrandPref(racket)) parts.wishes += 6;
+
+  // Level, technique & development
+  if (technique === "A") parts.level += racket.forgiveness * 2.2;
+  if (technique === "B") parts.level += racket.forgiveness * 1.2;
+  if (["A", "B"].includes(technique)) {
+    if (racket.hardness >= 7) parts.level -= 8;
+    if (racket.balance === "High" || racket.form === "Diamond") parts.level -= 7;
+  }
+
+  const level = getAnswer("level");
+  if (level === "A" || level === "B") {
+    parts.level += racket.forgiveness * 1.5;
+    if (racket.form === "Diamond") parts.level -= 12;
+    if (racket.hardness >= 7) parts.level -= 6;
+    if (racket.level === "Beginner") parts.level += 6;
+  }
+  if (level === "A" && racket.level === "Advanced") parts.level -= 6;
+  if (level === "D") {
+    parts.level += racket.power * 0.8 + racket.growth * 0.8;
+    if (racket.level === "Beginner") parts.level -= 8;
+  }
+
+  // Any racket-sport background transfers ball feel into control
+  if (sports.some(s => s !== "A")) parts.level += racket.control * 0.3;
+
+  if (getAnswer("growth") === "C") parts.level += racket.growth * 2;
+  if (getAnswer("growth") === "D") parts.level += racket.growth * 2.5;
+  if (frequency === "C") parts.level += racket.growth * 1;
+  if (frequency === "D") parts.level += racket.growth * 1.8;
+
+  const level2 = getAnswer("level2");
+  if (level2 === "C") parts.level += racket.growth * 1.2;
+  if (level2 === "D") parts.level += racket.power * 1.5 + racket.growth * 1.5;
+
+  // Joint health
+  if (joints === "B") {
+    parts.health += racket.comfort * 1.5;
+    if (racket.hardness >= 6) parts.health -= 6;
+  }
+  if (joints === "C") {
+    parts.health += racket.comfort * 3;
+    if (racket.hardness >= 6) parts.health -= 14;
+    if (racket.balance === "High" || racket.form === "Diamond") parts.health -= 10;
+  }
+  const injuryRegions = getList("injuryDetail");
+  if (joints === "B" || joints === "C") {
+    if (injuryRegions.includes("A") && racket.hardness >= 6) parts.health -= 5;
+    if (injuryRegions.includes("A")) parts.health += racket.comfort * 0.6;
+    if (injuryRegions.includes("B") && racket.hardness >= 6) parts.health -= 6;
+    if (injuryRegions.includes("C") && (racket.balance === "High" || racket.form === "Diamond")) parts.health -= 6;
+  }
+
+  // Budget
+  const maxBudget = getMaxBudget();
+  if (racket.price <= maxBudget) parts.budget += 8;
+  else parts.budget -= Math.min(18, (racket.price - maxBudget) * 0.18);
+
+  // No-gos are soft exclusions: a violating racket can only surface if nothing else fits
+  parts.nogo -= violatedNoGos(racket).length * 35;
+
+  // Current racket as reference: fix what bothers the player, keep what they like
+  const current = findRacketByName(getAnswer("currentRacket"));
+  if (current) {
+    const dislikes = getList("dislikes");
+    const likes = getList("likes");
+    const delta = key => racket[key] - current[key];
+
+    if (dislikes.includes("A")) parts.current += delta("power") * 6;
+    if (dislikes.includes("B")) parts.current += delta("control") * 6;
+    if (dislikes.includes("C")) parts.current += (current.hardness - racket.hardness) * 3 + delta("comfort") * 4;
+    if (dislikes.includes("D")) parts.current += (current.weight - racket.weight) * 0.8;
+    if (dislikes.includes("E")) parts.current += (BALANCE_ORDER[current.balance] - BALANCE_ORDER[racket.balance]) * 8 + delta("maneuver") * 3;
+    if (dislikes.includes("F")) parts.current += delta("forgiveness") * 6;
+    if (dislikes.includes("G")) parts.current += delta("effect") * 5;
+    if (dislikes.includes("H")) parts.current += (current.price - racket.price) * 0.12;
+
+    if (likes.includes("A")) parts.current -= Math.max(0, -delta("control")) * 6;
+    if (likes.includes("B")) parts.current -= Math.max(0, -delta("power")) * 6;
+    if (likes.includes("C")) parts.current -= Math.max(0, -delta("comfort")) * 6;
+    if (likes.includes("D")) parts.current -= Math.max(0, -delta("maneuver")) * 5;
+    if (likes.includes("E") && racket.form === current.form) parts.current += 10;
+  }
+
+  return parts;
 }
 
-function calculateScore(rawScore) {
-  return Math.round(Math.max(0, Math.min(100, rawScore / SCORE_DIVISORS[testMode])));
+function calculateRawScore(racket) {
+  const parts = scoreBreakdown(racket);
+  return Object.keys(parts).reduce((sum, key) => sum + parts[key], 0);
+}
+
+function calculateScore(rawScore, mode = testMode) {
+  return Math.round(Math.max(0, Math.min(100, rawScore / SCORE_DIVISORS[mode])));
 }
 
 function getUserProfile() {
@@ -1062,7 +1301,7 @@ function buildRadarSVG(series) {
     return `<polygon points="${pointsToString(pts)}" class="${s.cssClass}" />`;
   }).join("");
 
-  return `<svg viewBox="0 0 300 300" class="radar-svg" role="img" aria-label="radar">
+  return `<svg viewBox="0 0 300 300" class="radar-svg" role="img" aria-label="${t("radar.aria")}">
     ${gridRings}
     ${axisLines}
     ${polygons}
@@ -1094,14 +1333,25 @@ function createStatBars(racket) {
     </div>`).join("")}</div>`;
 }
 
-function animateFillsAndScores(container) {
-  // Scheduled with setTimeout (not requestAnimationFrame) so the fill still
-  // happens even if the tab is backgrounded and rAF never gets a frame.
-  setTimeout(() => {
-    container.querySelectorAll(".stat-bar-fill[data-target], .stage-fill[data-target]").forEach(el => {
+function animateFillsAndScores(container, instant = false) {
+  const applyFills = () => {
+    container.querySelectorAll(".stat-bar-fill[data-target], .stage-fill[data-target], .bd-fill[data-target]").forEach(el => {
       el.style.width = el.getAttribute("data-target") + "%";
     });
-  }, 20);
+    container.querySelectorAll(".score-ring[data-target]").forEach(el => {
+      el.style.setProperty("--p", el.getAttribute("data-target"));
+    });
+  };
+  if (instant || prefersReducedMotion()) {
+    applyFills();
+    container.querySelectorAll(".score[data-target]").forEach(el => {
+      el.textContent = el.getAttribute("data-target") + "/100";
+    });
+    return;
+  }
+  // Scheduled with setTimeout (not requestAnimationFrame) so the fill still
+  // happens even if the tab is backgrounded and rAF never gets a frame.
+  setTimeout(applyFills, 20);
 
   container.querySelectorAll(".score[data-target]").forEach(el => {
     const target = +el.getAttribute("data-target");
@@ -1168,6 +1418,8 @@ function showToast(message) {
     toast = document.createElement("div");
     toast.id = "toast";
     toast.className = "toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
     document.body.appendChild(toast);
   }
   toast.textContent = message;
@@ -1272,18 +1524,36 @@ function refineBonus(racket) {
     + refineWeights.price * (150 - racket.price) * 0.15;
 }
 
-function computeTopThree() {
-  const ranked = RACKETS
-    .map(racket => ({ ...racket, rawScore: calculateRawScore(racket) + refineBonus(racket) }))
-    .sort((a, b) => b.rawScore - a.rawScore)
-    .map(racket => ({ ...racket, score: calculateScore(racket.rawScore) }));
+// In-budget rackets always come first; over-budget ones are ranked by fit minus overshoot.
+// Reads the budget via getAnswer, so call inside withAnswers when scoring someone else.
+function orderByBudget(ranked) {
   const maxBudget = getMaxBudget();
   const inBudget = ranked.filter(r => r.price <= maxBudget);
   const fitMinusOvershoot = r => r.rawScore - (r.price - maxBudget) * 1.5;
   const overBudget = ranked
     .filter(r => r.price > maxBudget)
     .sort((a, b) => fitMinusOvershoot(b) - fitMinusOvershoot(a));
-  return inBudget.concat(overBudget).slice(0, 3);
+  return inBudget.concat(overBudget);
+}
+
+function computeTopThree() {
+  const currentName = (findRacketByName(getAnswer("currentRacket")) || {}).name;
+  const ranked = RACKETS
+    .filter(racket => racket.name !== currentName)
+    .map(racket => ({ ...racket, rawScore: calculateRawScore(racket) + refineBonus(racket) }))
+    .sort((a, b) => b.rawScore - a.rawScore)
+    .map(racket => ({ ...racket, score: calculateScore(racket.rawScore) }));
+  return orderByBudget(ranked).slice(0, 3);
+}
+
+const REFINE_KEYS = ["control", "power", "comfort", "price"];
+
+function sanitizeRefine(raw) {
+  const out = {};
+  REFINE_KEYS.forEach(key => {
+    out[key] = Math.max(-2, Math.min(2, Math.round(+((raw || {})[key]) || 0)));
+  });
+  return out;
 }
 
 function buildRefinePanel() {
@@ -1291,7 +1561,7 @@ function buildRefinePanel() {
     `<div class="refine-row">
       <span class="refine-label">${label}</span>
       <span class="refine-end">${t("refine.less")}</span>
-      <input type="range" class="refine-slider" id="${id}" min="-2" max="2" step="1" value="${refineWeights[key]}" oninput="applyRefine()">
+      <input type="range" class="refine-slider" id="${id}" min="-2" max="2" step="1" value="${refineWeights[key]}" oninput="applyRefine()" aria-label="${t("refine.aria")(label)}">
       <span class="refine-end">${t("refine.more")}</span>
     </div>`;
   return `<section class="analysis anim-in refine-panel">
@@ -1306,30 +1576,65 @@ function buildRefinePanel() {
 }
 
 function applyRefine() {
-  refineWeights = {
-    control: +getElement("refineControl").value,
-    power: +getElement("refinePower").value,
-    comfort: +getElement("refineComfort").value,
-    price: +getElement("refinePrice").value
-  };
-  renderResultsBody(lastResults.profile, computeTopThree());
+  refineWeights = sanitizeRefine({
+    control: getElement("refineControl").value,
+    power: getElement("refinePower").value,
+    comfort: getElement("refineComfort").value,
+    price: getElement("refinePrice").value
+  });
+  renderResultsBody(lastResults.profile, computeTopThree(), true);
 }
 
 function resetRefine() {
   ["refineControl", "refinePower", "refineComfort", "refinePrice"].forEach(id => { getElement(id).value = 0; });
-  refineWeights = { control: 0, power: 0, comfort: 0, price: 0 };
-  renderResultsBody(lastResults.profile, computeTopThree());
+  refineWeights = sanitizeRefine({});
+  renderResultsBody(lastResults.profile, computeTopThree(), true);
 }
 
 function buildConfidenceBadge(topThree) {
   if (topThree.length < 2) return "";
-  const gap = topThree[0].score - topThree[1].score;
+  // Raw scores, not the clamped 0-100 value: two rackets can both display 100 yet differ clearly.
+  const gap = Math.round((topThree[0].rawScore - topThree[1].rawScore) / SCORE_DIVISORS[testMode]);
   const isClose = gap < 6;
   return `<div class="confidence-badge ${isClose ? "close" : "clear"} anim-in">${isClose ? t("confidence.close") : t("confidence.clear")(gap)}</div>`;
 }
 
-function renderResultsBody(profile, topThree) {
+const BREAKDOWN_KEYS = ["style", "wishes", "level", "health", "budget", "nogo", "current"];
+
+function buildScoreBreakdown(racket) {
+  const divisor = SCORE_DIVISORS[testMode];
+  const all = RACKETS.map(scoreBreakdown);
+  const mine = scoreBreakdown(racket);
+  const rows = BREAKDOWN_KEYS.map(key => {
+    const average = all.reduce((sum, parts) => sum + parts[key], 0) / all.length;
+    return [key, (mine[key] - average) / divisor];
+  });
+  const bonus = refineBonus(racket) / divisor;
+  if (Math.abs(bonus) >= 0.5) rows.push(["refine", bonus]);
+  const visible = rows.filter(([, value]) => Math.abs(value) >= 0.5).sort((a, b) => b[1] - a[1]);
+  if (!visible.length) return "";
+  const maxAbs = Math.max(...visible.map(([, value]) => Math.abs(value)));
+  const rowsHtml = visible.map(([key, value]) => {
+    const rounded = Math.round(value);
+    const cls = value >= 0 ? "pos" : "neg";
+    const label = rounded > 0 ? `+${rounded}` : rounded < 0 ? `−${-rounded}` : "±0";
+    return `<div class="bd-row ${cls}">
+      <span class="bd-label">${t(key === "nogo" && value > 0 ? "bd.nogoOk" : "bd." + key)}</span>
+      <div class="bd-track"><div class="bd-fill" data-target="${Math.round(Math.abs(value) / maxAbs * 100)}" style="width:0%"></div></div>
+      <span class="bd-value">${label}</span>
+    </div>`;
+  }).join("");
+  return `<details class="breakdown" open>
+    <summary>${t("bd.title")}</summary>
+    <p class="hint">${t("bd.desc")(RACKETS.length)}</p>
+    ${rowsHtml}
+  </details>`;
+}
+
+function renderResultsBody(profile, topThree, instant = false) {
   lastResults.topThree = topThree;
+  const body = getElement("resultsBody");
+  if (instant) body.style.minHeight = body.offsetHeight + "px";
   let html = `<section class="analysis anim-in">`;
   html += `<h2 class="analysis-title">${t("analysis.title")}</h2>`;
   html += `<p class="hint">${t("analysis.desc")}</p>`;
@@ -1337,10 +1642,96 @@ function renderResultsBody(profile, topThree) {
   html += `<div class="radar-legend"><span><i class="legend-dot legend-user"></i>${t("analysis.legendUser")}</span><span><i class="legend-dot legend-racket"></i>${topThree[0].name}</span></div>`;
   html += `</section>`;
   html += buildConfidenceBadge(topThree);
-  html += topThree.map((r, n) => createRacketCard(r, n, topThree[0])).join("");
-  getElement("resultsBody").innerHTML = html;
-  animateFillsAndScores(getElement("resultsBody"));
+  html += topThree.map((r, n) => createRacketCard(r, n, topThree[0], n === 0)).join("");
+  body.innerHTML = html;
+  body.classList.toggle("static", instant);
+  animateFillsAndScores(body, instant);
+  if (instant) requestAnimationFrame(() => { body.style.minHeight = ""; });
   if (getElement("currentRacketInput")) applyCurrentRacket();
+}
+
+// --- Accessory recommendations (real products from padelreference.com) ---
+
+const PR_IMG = "https://www.padelreference.com/storage/";
+const PR_URL = "https://www.padelreference.com/en/";
+
+// Verified on padelreference.com (September 2026). Shoes are left out on purpose: every model is gendered.
+const ACCESSORIES = [
+  { name: "Padel Reference Overgrip White x4", brand: "Padel Reference", category: "overgrip", price: 6.9, url: PR_URL + "padel-accessories/p/overgrip-padel-reference-white-x4", image: PR_IMG + "767/surgrip-padel-reference-blanc.webp", goodFor: ["beginner", "frequent_player"] },
+  { name: "Wilson Absorbx Black Overgrip", brand: "Wilson", category: "overgrip", price: 8.9, url: PR_URL + "accesorios-de-padel/p/wilson-absorbx-black-overgrip", image: PR_IMG + "22525/4skNaj7FE5Wg02SEU64R1Ft7iraVdQ-metaU3VyZ3JpcC13aWxzb24tYWJzb3JieC1ub2lyLndlYnA%3D-.webp", goodFor: ["sweaty_hands", "more_grip", "frequent_player"] },
+  { name: "Dunlop Tour Pro Overgrips White x3", brand: "Dunlop", category: "overgrip", price: 6.9, url: PR_URL + "padel-accessories/p/dunlop-tour-pro-overgrips-white-x3", image: PR_IMG + "22053/2hfBDBTuqxLyk9Svs2myOpQpitVD0P-metaNjIzNzk4XzAxLmpwZw%3D%3D-.webp", goodFor: ["more_grip", "sweaty_hands", "comfort_joints", "frequent_player"] },
+  { name: "Head Prime Tour White Overgrip x12", brand: "HEAD", category: "overgrip", price: 21.9, url: PR_URL + "padel-accessories/p/head-prime-tour-white-overgrip-x12", image: PR_IMG + "13281/W4i4UX1cGwdD1AEoskcG3zPL2hCp7H-metaMS5wbmc%3D-.webp", goodFor: ["sweaty_hands", "more_grip", "frequent_player"] },
+  { name: "Oxdog Supertech Black Overgrips x2", brand: "Oxdog", category: "overgrip", price: 6.9, url: PR_URL + "padel-accessories/p/oxdog-supertech-black-overgrips-x2", image: PR_IMG + "19312/iWr7KgUuSiU8IWmfQ2UNE97owkTSsG-metac2hvcHBpbmcuanBlZw%3D%3D-.webp", goodFor: ["more_grip", "frequent_player"] },
+  { name: "Bullpadel Hesacore Gel Grip", brand: "Bullpadel", category: "overgrip", price: 16.9, url: PR_URL + "accessoires-de-padel/p/grip-bullpadel-hesacore-gel", image: PR_IMG + "799/grip-bullpadel-hesacore-carbon-.webp", goodFor: ["comfort_joints", "more_grip", "sweaty_hands"] },
+  { name: "Shockout Duo Grip Pro + Overgrip", brand: "Shockout", category: "overgrip", price: 8.5, url: PR_URL + "shockout-padel-accessories/p/shockout-duo-grip-pro-and-overgrip-black-yellow", image: PR_IMG + "723/shockout-duo-grip-pro-surgrip-de-padel-noirjaune.webp", goodFor: ["more_grip", "comfort_joints", "sweaty_hands"] },
+  { name: "Head Pro S+ x Padel Reference Balls", brand: "HEAD", category: "balls", price: 5.9, url: PR_URL + "padel-balls/p/head-pro-s-plus-x-padelreference-padel-balls", image: PR_IMG + "15989/A7XaodbQCUSBt3lcVHzXzlNVGntaLK-metaVmlzdWVscyByYXF1ZXR0ZXMucG5n-.webp", goodFor: ["frequent_player", "outdoor"] },
+  { name: "Dunlop Fort Padel", brand: "Dunlop", category: "balls", price: 5.9, url: PR_URL + "padel-balls/p/dunlop-fort-padel", image: PR_IMG + "17231/0u6Lo4XN7Yya1OcF7QdjZCQYdjeVOQ-metaYm9pdGUtZGUtYmFsbGVzLWR1bmxvcC1mb3J0LXBhZGVsLmpwZw%3D%3D-.webp", goodFor: ["frequent_player"] },
+  { name: "Bullpadel Premium Pro", brand: "Bullpadel", category: "balls", price: 4.9, url: PR_URL + "padel-balls/p/bullpadel-premium-pro", image: PR_IMG + "17542/PbYilHQaXrzpCPWouYSMqAZIvsN8Uc-metadHViZS1kZS1iYWxsZXMtYnVsbHBhZGVsLXByZW1pdW0tcHJvLndlYnA%3D-.webp", goodFor: ["frequent_player"] },
+  { name: "Head Pro+ Padel Balls", brand: "HEAD", category: "balls", price: 5.9, url: PR_URL + "padel-balls/p/head-pro-plus-padel-balls", image: PR_IMG + "11003/3RbclAXD6qGX34CH4pmjw7xC205K7n-metaMy1iYWxsLWhlYWQtcGFkZWwtcHJvLXNpbmdsZS1jYW4ucG5n-.webp", goodFor: ["frequent_player"] },
+  { name: "3 Tubes Dunlop Eco Padel Balls", brand: "Dunlop", category: "balls", price: 23.9, url: PR_URL + "padel-balls/p/3-tubes-of-dunlop-eco-padel-balls", image: PR_IMG + "19980/AoABepRqX54Pk9egMPgzdfeux1Ry50-metaMTE5ODU0LXRyaXBhY2stZGUtYm90ZXMtZGUtMy1ib2xhcy1kdW5sb3AtZWNvLXBhZGVsLTYwMTU1NGV1LTEyMDB4MTIwM.webp", goodFor: ["frequent_player"] },
+  { name: "Bullpadel Racket Protector Transparent", brand: "Bullpadel", category: "protector", price: 4.9, url: PR_URL + "padel-accessories/p/bullpadel-racket-protector-transparent", image: PR_IMG + "10349/B5XaFOOw04eV7cReyI4AXj3qFyF0h6-metaNTQucG5n-.webp", goodFor: ["frame_protection", "beginner"] },
+  { name: "Padel Reference Racket Protector", brand: "Padel Reference", category: "protector", price: 5.5, url: PR_URL + "padel-accessories/p/padel-reference-racket-protector-transparent", image: PR_IMG + "11292/X4PqN2YrX3x0czeqV2hdqpfoykdVri-metaNjMucG5n-.webp", goodFor: ["frame_protection", "beginner"] },
+  { name: "Head Antishock Skin", brand: "HEAD", category: "protector", price: 6.9, url: PR_URL + "padel-accessories/p/head-antishock-skin-overgrip", image: PR_IMG + "9716/yVVCT1N33iFwODcgFpkqVlg3vhWIpu-metaYW50aXNob2NrLXNraW4tcGFkZWwtMi5qcGc%3D-.webp", goodFor: ["frame_protection", "beginner"] },
+  { name: "Oxdog No.2 Transparent Racket Protector", brand: "Oxdog", category: "protector", price: 7.9, url: PR_URL + "padel-accessories/p/oxdog-no2-transparent-racket-protector", image: PR_IMG + "19321/6kVNXbj47SfGa5kSfboxLlER2em33m-metabm8yLWZyYW1lLXByb3RlY3Rvci5qcGVn-.webp", goodFor: ["frame_protection", "beginner"] },
+  { name: "Babolat Court Lite Backpack", brand: "Babolat", category: "bag", price: 44.9, url: PR_URL + "padel-bag/p/babolat-court-lite-navy-blue-backpack", image: PR_IMG + "22504/3p8rLqz0O8g3TXJtQZE3Y5vgXFNbue-metaNzQwMTAwMDkwXzEud2VicA%3D%3D-.webp", goodFor: ["travel_storage"] },
+  { name: "Dunlop Club Thermo Backpack", brand: "Dunlop", category: "bag", price: 44.9, url: PR_URL + "padel-bag/p/dunlop-club-thermo-backpack-blackgrey", image: PR_IMG + "26335/Sac-de-padel-Dunlop-noir-thermos.webp", goodFor: ["travel_storage", "frequent_player"] },
+  { name: "Head Tour 25L Backpack", brand: "HEAD", category: "bag", price: 69.9, url: PR_URL + "padel-bag/p/head-tour-25l-black-backpack", image: PR_IMG + "22545/m96ejm1dS0wdoUYcJMrStd3gATPW2h-metaMzIzNzk3LmpwZw%3D%3D-.webp", goodFor: ["travel_storage"] },
+  { name: "Adidas Multigame 2026 Padel Bag", brand: "Adidas", category: "bag", price: 89.9, url: PR_URL + "padel-bag/p/adidas-multigame-2026-black-red-padel-bag", image: PR_IMG + "24366/120481-paletero-adidas-multigame-black-red-2026-ab1pa7u22-1500x1500-1.jpg.webp", goodFor: ["travel_storage", "frequent_player"] },
+  { name: "HEAD Padel Tour Bag L", brand: "HEAD", category: "bag", price: 89.9, url: PR_URL + "padel-bag/p/head-padel-tour-bag-l-green", image: PR_IMG + "22437/JFitzzQnZ01ucBd07NxlKdKYAuLuTf-metaMzI0MjgxLmpwZw%3D%3D-.webp", goodFor: ["travel_storage", "frequent_player", "outdoor"] },
+  { name: "Bullpadel Ease Vibe Dampeners x4", brand: "Bullpadel", category: "other", price: 14.9, notForBrand: "Babolat", url: PR_URL + "padel-accessories/p/bullpadel-ease-vibe-white-dampeners-x4", image: PR_IMG + "20221/wNXQv9Ph1nAnnAhFvTOczkPKP9uKo1-metaMTIxNjA0LWJsaXN0ZXItNHVkcy00OTUxNDEtMTUwMHgxNTAwLXZpc3RhMS5qcGcud2VicA%3D%3D-.webp", goodFor: ["comfort_joints"] },
+  { name: "4ON Total Grip Spray", brand: "4ON", category: "other", price: 22.9, url: PR_URL + "padel-accessories/p/4-on-total-grip-spray-", image: PR_IMG + "750/4-on-total-grip-spray-.webp", goodFor: ["sweaty_hands", "more_grip"] },
+  { name: "Head Wristband Anthracite 5\"", brand: "HEAD", category: "other", price: 8.9, url: PR_URL + "padel-accessories/p/head-wristband-anthracite-5", image: PR_IMG + "17600/AO1vrFK5injkEagCwzOqEPQXoabv9Z-metaMjg1MDcwLWFuX2dyaXNfMS5qcGc%3D-.webp", goodFor: ["sweaty_hands"] }
+];
+
+function getPlayerNeeds() {
+  const needs = new Set();
+  const sweat = getAnswer("sweat");
+  if (sweat === "A") needs.add("sweaty_hands");
+  if (sweat !== "A") needs.add("more_grip");
+  if (["B", "C"].includes(getAnswer("joints"))) needs.add("comfort_joints");
+  const level = getAnswer("level");
+  if (level === "A" || level === "B") ["beginner", "frame_protection", "court_grip_footwear"].forEach(n => needs.add(n));
+  const frequency = getAnswer("frequency");
+  if (frequency === "C" || frequency === "D") ["frequent_player", "frame_protection", "travel_storage", "court_grip_footwear"].forEach(n => needs.add(n));
+  const court = getAnswer("court");
+  if (court === "A" || court === "C") needs.add("outdoor");
+  if (court === "B" || court === "C") needs.add("indoor");
+  return needs;
+}
+
+function recommendAccessories() {
+  const needs = getPlayerNeeds();
+  const topBrand = lastResults && lastResults.topThree[0] ? lastResults.topThree[0].brand : "";
+  const bestByCategory = {};
+  ACCESSORIES.forEach(item => {
+    if (item.notForBrand && item.notForBrand === topBrand) return;
+    const matched = (item.goodFor || []).filter(n => needs.has(n));
+    if (!matched.length) return;
+    const best = bestByCategory[item.category];
+    const better = !best || matched.length > best.matched.length
+      || (matched.length === best.matched.length && item.price < best.item.price);
+    if (better) bestByCategory[item.category] = { item, matched };
+  });
+  return Object.values(bestByCategory).sort((a, b) => b.matched.length - a.matched.length).slice(0, 5);
+}
+
+function buildAccessoriesSection() {
+  const picks = recommendAccessories();
+  if (!picks.length) return "";
+  let html = `<section class="analysis anim-in"><div class="badge">${t("acc.badge")}</div>`;
+  html += `<h2 class="analysis-title">${t("acc.title")}</h2><p class="hint">${t("acc.desc")}</p><div class="acc-grid">`;
+  html += picks.map(({ item, matched }) => `<article class="acc-card">
+    ${racketImageBlock(item)}
+    <div class="acc-body">
+      <div class="acc-category">${t("acc.cat." + item.category)}</div>
+      <h3>${item.name}</h3>
+      <p class="acc-why">${t("acc.why")} ${joinList(matched.map(n => t("need." + n)))}.</p>
+      <div class="acc-price">${formatPrice(item.price)} €</div>
+      <a class="buy" href="${item.url}" target="_blank" rel="noopener">${t("card.buy")}</a>
+    </div>
+  </article>`).join("");
+  html += `</div></section>`;
+  return html;
 }
 
 // --- Upgrade check: compare your current racket against your top match ---
@@ -1350,7 +1741,7 @@ function buildCurrentRacketSection() {
     <div class="badge">${t("current.badge")}</div>
     <h2 class="analysis-title">${t("current.title")}</h2>
     <p class="hint">${t("current.desc")}</p>
-    <input type="text" id="currentRacketInput" class="text-input" list="racketNamesList" placeholder="${t("current.placeholder")}" oninput="applyCurrentRacket()" autocomplete="off">
+    <input type="text" id="currentRacketInput" class="text-input" list="racketNamesList" placeholder="${t("current.placeholder")}" aria-label="${t("current.placeholder")}" value="${(findRacketByName(getAnswer("currentRacket")) || {}).name || ""}" oninput="applyCurrentRacket()" autocomplete="off">
     <datalist id="racketNamesList">${RACKETS.map(r => `<option value="${r.name}">`).join("")}</datalist>
     <div id="currentRacketResult"></div>
   </section>`;
@@ -1362,7 +1753,7 @@ function applyCurrentRacket() {
   if (!input || !container || !lastResults) return;
   const name = input.value.trim();
   if (!name) { container.innerHTML = ""; return; }
-  const current = RACKETS.find(r => r.name === name);
+  const current = findRacketByName(name);
   if (!current) { container.innerHTML = `<p class="hint">${t("current.notFound")}</p>`; return; }
 
   const top = lastResults.topThree[0];
@@ -1388,6 +1779,7 @@ function applyCurrentRacket() {
 }
 
 function buildHistorySection(profile, topThree) {
+  if (isSharedView) return "";
   const history = loadHistory();
   const relevant = resultsRecorded ? history.slice(0, -1) : history;
   const previous = relevant[relevant.length - 1];
@@ -1428,16 +1820,19 @@ function buildPartnerSection() {
   </section>`;
 }
 
+let partnerStage = "idle"; // idle | quiz | done — lets a language switch restore the partner block
+
 function startPartnerQuiz() {
   partnerAnswers = {};
   partnerCurrentQuestion = 0;
+  partnerStage = "quiz";
   renderPartnerQuestion();
 }
 
 function renderPartnerQuestion() {
-  const def = QUICK_QUESTION_DEFS[partnerCurrentQuestion];
+  const def = PARTNER_QUESTION_DEFS[partnerCurrentQuestion];
   const text = questionText(def.id);
-  const total = QUICK_QUESTION_DEFS.length;
+  const total = PARTNER_QUESTION_DEFS.length;
   const backButton = partnerCurrentQuestion > 0
     ? `<button class="secondary" onclick="goToPreviousPartner()">${t("q.back")}</button>`
     : `<span></span>`;
@@ -1448,14 +1843,14 @@ function renderPartnerQuestion() {
   if (def.range) {
     const currentValue = partnerAnswers[def.id] || 5;
     html += `<div class="range-value" id="prv">${currentValue}</div>`;
-    html += `<input class="range" id="partnerRange" type="range" min="1" max="10" value="${currentValue}">`;
+    html += `<input class="range" id="partnerRange" type="range" min="1" max="10" value="${currentValue}" aria-label="${text.title} — ${t("q.rangeAria")}">`;
     html += `<div class="actions">${backButton}<button class="primary" onclick="submitPartnerRange()">${t("q.next")}</button></div>`;
   } else if (def.multi) {
     const selected = Array.isArray(partnerAnswers[def.id]) ? partnerAnswers[def.id] : [];
     html += `<div class="options">`;
     html += def.opts.map(key => {
       const isSelected = selected.includes(key);
-      return `<button class="option option-multi${isSelected ? " selected" : ""}" onclick="togglePartnerAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
+      return `<button class="option option-multi${isSelected ? " selected" : ""}" aria-pressed="${isSelected}" onclick="togglePartnerAnswer('${key}')"><span class="check" aria-hidden="true"></span>${text.opts[key]}</button>`;
     }).join("");
     html += `</div>`;
     html += `<div class="actions">${backButton}<button class="primary" onclick="goToNextPartner()"${selected.length ? "" : " disabled"}>${t("q.next")}</button></div>`;
@@ -1475,12 +1870,12 @@ function renderPartnerQuestion() {
 }
 
 function choosePartnerAnswer(choice) {
-  partnerAnswers[QUICK_QUESTION_DEFS[partnerCurrentQuestion].id] = choice;
+  partnerAnswers[PARTNER_QUESTION_DEFS[partnerCurrentQuestion].id] = choice;
   goToNextPartner();
 }
 
 function togglePartnerAnswer(choice) {
-  const def = QUICK_QUESTION_DEFS[partnerCurrentQuestion];
+  const def = PARTNER_QUESTION_DEFS[partnerCurrentQuestion];
   const exclusiveKeys = def.exclusive || [];
   let selected = Array.isArray(partnerAnswers[def.id]) ? partnerAnswers[def.id] : [];
   if (selected.includes(choice)) {
@@ -1495,12 +1890,12 @@ function togglePartnerAnswer(choice) {
 }
 
 function submitPartnerRange() {
-  partnerAnswers[QUICK_QUESTION_DEFS[partnerCurrentQuestion].id] = +getElement("partnerRange").value;
+  partnerAnswers[PARTNER_QUESTION_DEFS[partnerCurrentQuestion].id] = +getElement("partnerRange").value;
   goToNextPartner();
 }
 
 function goToNextPartner() {
-  if (partnerCurrentQuestion < QUICK_QUESTION_DEFS.length - 1) {
+  if (partnerCurrentQuestion < PARTNER_QUESTION_DEFS.length - 1) {
     partnerCurrentQuestion++;
     renderPartnerQuestion();
   } else {
@@ -1532,8 +1927,9 @@ function getCompatibilityText(partnerProfile) {
 function finishPartnerQuiz() {
   const mainProfile = lastResults ? lastResults.profile : getUserProfile();
   const partnerProfile = withAnswers(partnerAnswers, () => getUserProfile());
-  const partnerRanked = rankRackets(partnerAnswers).map(r => ({ ...r, score: calculateScore(r.rawScore) }));
-  const partnerTop = partnerRanked[0];
+  partnerStage = "done";
+  const partnerRanked = rankRackets(partnerAnswers).map(r => ({ ...r, score: calculateScore(r.rawScore, "quick") }));
+  const partnerTop = withAnswers(partnerAnswers, () => orderByBudget(partnerRanked))[0];
 
   const radar = buildRadarSVG([
     { values: profileRadarValues(partnerProfile), cssClass: "radar-partner" },
@@ -1556,7 +1952,7 @@ function finishPartnerQuiz() {
 
 // --- Results page ---
 
-function showResults() {
+function showResults(options = {}) {
   const profile = getUserProfile();
   const topThree = computeTopThree();
   const modeLabel = testMode === "pro" ? t("results.proLabel") : t("results.quickLabel");
@@ -1566,7 +1962,7 @@ function showResults() {
 
   getElement("quiz").classList.add("hidden");
   getElement("results").classList.remove("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (!options.keepScroll) scrollToTop();
 
   let html = `<div class="results-head anim-in">`;
   html += `<div class="badge">${RACKET_ICON}${t("results.badge")} · ${modeLabel}</div>`;
@@ -1581,18 +1977,22 @@ function showResults() {
   html += `</div>`;
 
   html += `<div id="resultsBody"></div>`;
+  if (!isSharedView) html += `<button class="link-btn results-browse" onclick="openBrowse()">${t("results.browseCta")}</button>`;
   html += buildRefinePanel();
   html += buildCurrentRacketSection();
+  html += buildAccessoriesSection();
   html += buildPlayerAnalysis(profile);
   html += buildHistorySection(profile, topThree);
   html += buildPartnerSection();
   html += buildShareSection();
   html += `<div class="notice anim-in">${t("notice")(RACKETS.length)}</div>`;
-  html += `<button class="secondary restart" onclick="location.reload()">${t("restart")}</button>`;
+  html += `<button class="secondary restart" onclick="restartApp()">${t("restart")}</button>`;
 
   getElement("results").innerHTML = html;
-  renderResultsBody(profile, topThree);
-  animateFillsAndScores(getElement("results"));
+  renderResultsBody(profile, topThree, !!options.keepScroll);
+  animateFillsAndScores(getElement("results"), !!options.keepScroll);
+  if (partnerStage === "quiz") renderPartnerQuestion();
+  if (partnerStage === "done") finishPartnerQuiz();
 }
 
 function racketImageBlock(racket) {
@@ -1602,13 +2002,14 @@ function racketImageBlock(racket) {
   return `<div class="card-image card-image-placeholder">${RACKET_ICON}</div>`;
 }
 
-function createRacketCard(racket, index, top) {
+function createRacketCard(racket, index, top, withBreakdown = false) {
   const reason = index === 0
     ? generateTopReasonText(racket)
     : generateAlternativeText(racket, top);
   const overBudgetNote = racket.price > getMaxBudget() ? t("card.overBudget") : "";
+  const noGoLabels = violatedNoGos(racket).map(key => questionText("noGos").opts[key]);
 
-  let html = `<article class="recommendation anim-in" style="animation-delay:${0.15 + index * 0.08}s">`;
+  let html = `<article class="recommendation anim-in${index === 0 ? " top-pick" : ""}" style="animation-delay:${0.15 + index * 0.08}s">`;
   html += `<div class="rank">${t("card.rank")(index + 1)}</div>`;
   html += `<div class="rec-body">`;
   html += racketImageBlock(racket);
@@ -1618,10 +2019,12 @@ function createRacketCard(racket, index, top) {
   html += `<h2>${racket.name}</h2>`;
   html += `<div>${racket.brand} · ${t("shape." + racket.form)} · ${formatNumber(racket.weight)} g · ${t("balance." + racket.balance)} · ${t("kernLabel")} ${t("feel." + racket.feel)} · ${t("level." + racket.level)}</div>`;
   html += `</div>`;
-  html += `<div class="score" data-target="${racket.score}">0/100</div>`;
+  html += `<div class="score-ring" data-target="${racket.score}"><div class="score" data-target="${racket.score}">0/100</div></div>`;
   html += `</div>`;
   html += createStatBars(racket);
   html += `<p class="reason">${reason}</p>`;
+  if (noGoLabels.length) html += `<p class="nogo-warning">${t("card.noGoWarning")(joinList(noGoLabels))}</p>`;
+  if (withBreakdown) html += buildScoreBreakdown(racket);
   html += `<div class="why">`;
   html += `<h3>${t("card.priceLabel")}</h3>`;
   html += `<p>${t("card.priceText")(formatPrice(racket.price))}${overBudgetNote}</p>`;
@@ -1674,20 +2077,39 @@ function generateTopReasonText(racket) {
   }
 
   const balanceFeel = getAnswer("balanceFeel");
-  if (balanceFeel === "A" && (racket.balance === "Low" || racket.balance === "Low-Medium")) {
+  if (balanceFeel === "A" && racket.balance === "Low") {
     reasons.push(t("reason.grippy"));
   }
-  if (balanceFeel === "C" && (racket.balance === "High" || racket.balance === "Medium-High")) {
+  if (balanceFeel === "C" && racket.balance === "High") {
     reasons.push(t("reason.headHeavy"));
+  }
+
+  const current = findRacketByName(getAnswer("currentRacket"));
+  if (current) {
+    const dislikes = getList("dislikes");
+    const vsCurrent = [];
+    [["A", "power", t("stat.power")], ["B", "control", t("stat.control")], ["F", "forgiveness", t("stat.forgiveness")], ["G", "effect", t("stat.effect")]]
+      .forEach(([key, stat, label]) => {
+        const diff = Math.round((racket[stat] - current[stat]) * 10) / 10;
+        if (dislikes.includes(key) && diff >= 1) vsCurrent.push(t("reason.vsCurrent")(label, diff, current.name));
+      });
+    if (dislikes.includes("C") && racket.comfort - current.comfort >= 1) {
+      vsCurrent.push(t("reason.vsCurrent")(t("stat.comfort"), racket.comfort - current.comfort, current.name));
+    }
+    if (dislikes.includes("D") && current.weight - racket.weight >= 5) {
+      vsCurrent.push(t("reason.lighterThanCurrent")(formatNumber(current.weight - racket.weight), current.name));
+    }
+    if (dislikes.includes("H") && current.price - racket.price >= 15) {
+      vsCurrent.push(t("reason.cheaperThanCurrent")(Math.round(current.price - racket.price), current.name));
+    }
+    reasons.unshift(...vsCurrent);
   }
 
   let text = reasons.length
     ? t("reasonTemplate")(joinList(reasons.slice(0, 4)))
     : t("reasonFallback");
 
-  const brandMap = { B: "NOX", C: "Bullpadel", D: "HEAD", E: "Adidas", F: "Babolat" };
-  const brandPrefs = getList("brand").map(key => brandMap[key]).filter(Boolean);
-  if (brandPrefs.includes(racket.brand)) {
+  if (getBrandPrefs().includes(racket.brand)) {
     text += t("reasonBrand")(racket.brand);
   }
   return text;
@@ -1757,7 +2179,7 @@ function getProgressStage() {
   const values = ["level", "technique", "frequency", "level2"]
     .map(id => scale[getAnswer(id)])
     .filter(value => value !== undefined);
-  const average = values.reduce((sum, value) => sum + value, 0) / values.length;
+  const average = values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0;
   return {
     index: Math.round(average / 3 * (STAGES[LANG].length - 1)),
     percent: Math.max(6, Math.round(average / 3 * 100))
@@ -1847,7 +2269,7 @@ function buildPlayerAnalysis(profile) {
   const stage = getProgressStage();
   const stages = STAGES[LANG];
   const type = getPlayerType(profile, stage.index);
-  const weaknesses = getList("weakness");
+  const weaknesses = getList("weakness").filter(key => key !== "H");
   const sports = getList("sports");
   const position = getAnswer("position");
   const joints = getAnswer("joints");
@@ -1943,19 +2365,71 @@ function showInstallBanner() {
   getElement("installDismissBtn").onclick = () => banner.remove();
 }
 
+// Share links are untrusted input: only keep answers that are valid for a known question.
+function sanitizeAnswers(raw) {
+  const clean = {};
+  if (!raw || typeof raw !== "object") return clean;
+  QUICK_QUESTION_DEFS.concat(PRO_EXTRA_QUESTION_DEFS).forEach(def => {
+    const value = raw[def.id];
+    if (value === undefined || value === null) return;
+    if (def.range) {
+      const n = Math.round(+value);
+      if (n >= 1 && n <= 10) clean[def.id] = n;
+    } else if (def.racketSearch) {
+      const match = findRacketByName(value);
+      if (match) clean[def.id] = match.name;
+    } else if (def.multi) {
+      const list = (Array.isArray(value) ? value : [value]).filter(key => def.opts.includes(key));
+      if (list.length) clean[def.id] = [...new Set(list)];
+    } else if (def.opts.includes(value)) {
+      clean[def.id] = value;
+    }
+  });
+  return clean;
+}
+
 function tryRestoreSharedResult() {
   if (!location.hash.startsWith("#r=")) return false;
   const decoded = decodeShareState(location.hash.slice(3));
-  if (!decoded || !decoded.a) return false;
-  answers = decoded.a;
+  if (!decoded || typeof decoded !== "object") return false;
+  const cleanAnswers = sanitizeAnswers(decoded.a);
+  if (!Object.keys(cleanAnswers).length) return false;
+  answers = cleanAnswers;
   testMode = decoded.m === "pro" ? "pro" : "quick";
-  refineWeights = { control: 0, power: 0, comfort: 0, price: 0, ...(decoded.r || {}) };
+  activeQuestions = testMode === "pro" ? QUICK_QUESTION_DEFS.concat(PRO_EXTRA_QUESTION_DEFS) : QUICK_QUESTION_DEFS;
+  refineWeights = sanitizeRefine(decoded.r);
   isSharedView = true;
+  resultsRecorded = false;
+  partnerStage = "idle";
   document.querySelector(".hero").classList.add("hidden");
+  ["modeSelect", "quiz", "browseSection"].forEach(id => getElement(id).classList.add("hidden"));
   showResults();
   return true;
 }
 
+function renderHeroStats() {
+  const brands = new Set(RACKETS.map(r => r.brand)).size;
+  const proQuestions = QUICK_QUESTION_DEFS.length + PRO_EXTRA_QUESTION_DEFS.length;
+  const stats = [[RACKETS.length, "hero.statRackets"], [brands, "hero.statBrands"], [proQuestions, "hero.statQuestions"]];
+  getElement("heroStats").innerHTML = stats.map(([n, key]) =>
+    `<div class="hero-stat"><b data-count="${n}">${n}</b><span data-i18n="${key}">${t(key)}</span></div>`
+  ).join("");
+  if (prefersReducedMotion()) return;
+  getElement("heroStats").querySelectorAll("[data-count]").forEach(el => {
+    const target = +el.getAttribute("data-count");
+    const start = performance.now();
+    const tick = now => {
+      const progress = Math.min(1, (now - start) / 1100);
+      el.textContent = Math.round((1 - Math.pow(1 - progress, 3)) * target);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    el.textContent = "0";
+    requestAnimationFrame(tick);
+    setTimeout(() => { el.textContent = target; }, 1500);
+  });
+}
+
+renderHeroStats();
 applyStaticTranslations();
 getElement("langToggle").textContent = LANG === "de" ? "EN" : "DE";
 tryRestoreSharedResult();

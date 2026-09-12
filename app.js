@@ -287,6 +287,11 @@ const UI = {
     "partner.title": "Wie passt ihr als Team zusammen?",
     "partner.desc": "Padel wird zu zweit gespielt. Lass deinen Partner / deine Partnerin einen kurzen 15-Fragen-Check machen — wir zeigen euch, wie sich eure Profile ergänzen und wer eher Netz oder hinten spielen sollte.",
     "partner.start": "Partner-Check starten →",
+    "partner.inviteLink": "Einladungslink für Partner kopieren",
+    "invite.badge": "DOPPEL-CHECK EINLADUNG",
+    "invite.title": "Du wurdest eingeladen.",
+    "invite.desc": "Ein:e Freund:in hat dir seinen/ihren Padel-Profil-Check geschickt. Mach den kurzen Check und seht, wie gut ihr als Doppel zusammenpasst.",
+    "invite.start": "Check starten",
     "partner.stepLabel": "Partner-Frage",
     "partner.resultTitle": "Euer Team-Profil",
     "partner.you": "Du",
@@ -299,7 +304,7 @@ const UI = {
     "compat.balanced": "Ihr seid beide flexibel unterwegs — sprecht vor dem Match kurz ab, wer bei welchem Ballwechsel welche Seite/Position übernimmt.",
     "compat.powerControl": "Gute Ergänzung: Eine:r bringt mehr Power, der/die andere mehr Kontrolle — nutzt das gezielt beim Punktabschluss.",
 
-    "browse.link": "Alle Schläger durchsuchen →",
+    "browse.link": "Schläger vergleichen",
     "browse.badge": "SCHLÄGER-DATENBANK",
     "browse.title": n => `Alle ${n} Schläger`,
     "browse.desc": "Filtere, sortiere und vergleiche bis zu 3 Schläger direkt nebeneinander — ganz ohne Quiz.",
@@ -369,7 +374,7 @@ const UI = {
     "bd.current": "Besser als dein Schläger",
     "bd.refine": "Deine Regler",
     "card.noGoWarning": list => `<b>Achtung:</b> verletzt dein No-Go „${list}“ — es gibt aber kaum Alternativen, die sonst passen.`,
-    "results.browseCta": "Alle Schläger mit deinem persönlichen Score ansehen →",
+    "results.browseCta": "Schläger vergleichen (mit deinem Score)",
     "results.backToResults": "← Zurück zu deinem Ergebnis",
     "browse.compareJump": "Vergleich ansehen ↓",
     "radar.aria": "Netzdiagramm: Kontrolle, Power, Sweet Spot, Komfort, Netzspiel, Defensive",
@@ -527,6 +532,11 @@ const UI = {
     "partner.title": "How well do you match as a team?",
     "partner.desc": "Padel is played in pairs. Have your partner take a short 15-question check — we'll show you how your profiles complement each other and who should play net or back.",
     "partner.start": "Start partner check →",
+    "partner.inviteLink": "Copy invite link for partner",
+    "invite.badge": "DOUBLES CHECK INVITE",
+    "invite.title": "You've been invited.",
+    "invite.desc": "A friend sent you their padel profile check. Take the short check and see how well you match up as a doubles pair.",
+    "invite.start": "Start check",
     "partner.stepLabel": "Partner question",
     "partner.resultTitle": "Your team profile",
     "partner.you": "You",
@@ -539,7 +549,7 @@ const UI = {
     "compat.balanced": "You're both flexible — agree beforehand on who takes which side/position on a given rally.",
     "compat.powerControl": "Good complement: one of you brings more power, the other more control — use that deliberately when finishing points.",
 
-    "browse.link": "Browse all rackets →",
+    "browse.link": "Compare rackets",
     "browse.badge": "RACKET DATABASE",
     "browse.title": n => `All ${n} rackets`,
     "browse.desc": "Filter, sort and compare up to 3 rackets side by side — no quiz required.",
@@ -609,7 +619,7 @@ const UI = {
     "bd.current": "Better than your racket",
     "bd.refine": "Your sliders",
     "card.noGoWarning": list => `<b>Heads-up:</b> breaks your no-go "${list}" — but hardly any alternatives fit otherwise.`,
-    "results.browseCta": "See all rackets with your personal score →",
+    "results.browseCta": "Compare rackets (with your score)",
     "results.backToResults": "← Back to your result",
     "browse.compareJump": "View comparison ↓",
     "radar.aria": "Radar chart: control, power, sweet spot, comfort, net play, defense",
@@ -816,6 +826,9 @@ function setLang(lang) {
       applyCurrentRacket();
     }
     window.scrollTo(0, scrollY);
+  } else if (!getElement("partnerInvite").classList.contains("hidden")) {
+    if (partnerStage === "quiz") renderPartnerQuestion();
+    else if (partnerStage === "done") finishPartnerQuiz();
   }
 }
 
@@ -1817,16 +1830,74 @@ function buildPartnerSection() {
     <h2 class="analysis-title">${t("partner.title")}</h2>
     <p class="hint">${t("partner.desc")}</p>
     <div id="partnerContent"><button class="primary" onclick="startPartnerQuiz()">${t("partner.start")}</button></div>
+    <button class="link-btn partner-invite-link" onclick="copyPartnerInvite()">${t("partner.inviteLink")}</button>
   </section>`;
 }
 
 let partnerStage = "idle"; // idle | quiz | done — lets a language switch restore the partner block
+let partnerTargetId = "partnerContent"; // swapped to "inviteContent" when opened via an invite link
+let invitedProfile = null; // set when this page was opened via a partner invite link
+let invitedAnswers = null; // { position, style } from the inviter, sanitized
 
 function startPartnerQuiz() {
   partnerAnswers = {};
   partnerCurrentQuestion = 0;
   partnerStage = "quiz";
   renderPartnerQuestion();
+}
+
+// --- Partner invite link: lets you send your profile so a friend can run the
+// doubles check from their own device, without doing the full quiz themselves ---
+
+function buildPartnerInviteUrl() {
+  const profile = lastResults ? lastResults.profile : getUserProfile();
+  const payload = {
+    p: [profile.control, profile.power, profile.forgive, profile.comfort, profile.net, profile.defense],
+    pos: getAnswer("position"),
+    sty: getAnswer("style")
+  };
+  const base = location.href.split("#")[0];
+  return `${base}#invite=${btoa(encodeURIComponent(JSON.stringify(payload)))}`;
+}
+
+async function copyPartnerInvite() {
+  await copyToClipboard(buildPartnerInviteUrl());
+  showToast(t("share.copiedLink"));
+}
+
+function decodeInviteState(str) {
+  try {
+    return JSON.parse(decodeURIComponent(atob(str)));
+  } catch (e) {
+    return null;
+  }
+}
+
+function sanitizeInvitedProfile(raw) {
+  if (!raw || !Array.isArray(raw.p) || raw.p.length !== 6) return null;
+  const [control, power, forgive, comfort, net, defense] = raw.p.map(v => Math.max(0, Math.min(10, Math.round(+v) || 0)));
+  return { control, power, forgive, comfort, net, defense };
+}
+
+function tryRestoreInvite() {
+  if (!location.hash.startsWith("#invite=")) return false;
+  const decoded = decodeInviteState(location.hash.slice(8));
+  const profile = sanitizeInvitedProfile(decoded);
+  if (!profile) return false;
+  invitedProfile = profile;
+  invitedAnswers = {
+    position: ["A", "B", "C", "D"].includes(decoded.pos) ? decoded.pos : undefined,
+    style: ["A", "B", "C"].includes(decoded.sty) ? decoded.sty : undefined
+  };
+  document.querySelector(".hero").classList.add("hidden");
+  ["modeSelect", "quiz", "results", "browseSection"].forEach(id => getElement(id).classList.add("hidden"));
+  getElement("partnerInvite").classList.remove("hidden");
+  return true;
+}
+
+function startInvitedPartnerQuiz() {
+  partnerTargetId = "inviteContent";
+  startPartnerQuiz();
 }
 
 function renderPartnerQuestion() {
@@ -1863,7 +1934,7 @@ function renderPartnerQuestion() {
     html += `<div class="actions">${backButton}</div>`;
   }
 
-  getElement("partnerContent").innerHTML = html;
+  getElement(partnerTargetId).innerHTML = html;
   if (def.range) {
     getElement("partnerRange").oninput = e => { getElement("prv").textContent = e.target.value; };
   }
@@ -1911,9 +1982,9 @@ function goToPreviousPartner() {
 }
 
 function getCompatibilityText(partnerProfile) {
-  const mainPosition = getAnswer("position");
+  const mainPosition = invitedAnswers ? invitedAnswers.position : getAnswer("position");
   const partnerPosition = withAnswers(partnerAnswers, () => getAnswer("position"));
-  const mainProfile = lastResults ? lastResults.profile : getUserProfile();
+  const mainProfile = invitedProfile || (lastResults ? lastResults.profile : getUserProfile());
   const isNet = pos => pos === "C" || pos === "D";
   const isBack = pos => pos === "A";
 
@@ -1925,7 +1996,7 @@ function getCompatibilityText(partnerProfile) {
 }
 
 function finishPartnerQuiz() {
-  const mainProfile = lastResults ? lastResults.profile : getUserProfile();
+  const mainProfile = invitedProfile || (lastResults ? lastResults.profile : getUserProfile());
   const partnerProfile = withAnswers(partnerAnswers, () => getUserProfile());
   partnerStage = "done";
   const partnerRanked = rankRackets(partnerAnswers).map(r => ({ ...r, score: calculateScore(r.rawScore, "quick") }));
@@ -1937,17 +2008,20 @@ function finishPartnerQuiz() {
   ]);
   const compatText = getCompatibilityText(partnerProfile);
   const partnerCard = withAnswers(partnerAnswers, () => createRacketCard(partnerTop, 0, partnerTop));
+  // In invite mode, the person taking this quiz is the friend, not the inviter — swap the labels accordingly.
+  const mainLabel = invitedProfile ? t("partner.partner") : t("partner.you");
+  const takerLabel = invitedProfile ? t("partner.you") : t("partner.partner");
 
   let html = `<h3>${t("partner.resultTitle")}</h3>`;
   html += `<div class="radar-wrap">${radar}</div>`;
-  html += `<div class="radar-legend"><span><i class="legend-dot legend-user"></i>${t("partner.you")}</span><span><i class="legend-dot legend-partner"></i>${t("partner.partner")}</span></div>`;
+  html += `<div class="radar-legend"><span><i class="legend-dot legend-user"></i>${mainLabel}</span><span><i class="legend-dot legend-partner"></i>${takerLabel}</span></div>`;
   html += `<p class="reason">${compatText}</p>`;
   html += `<h3>${t("partner.partnerTop")}</h3>`;
   html += partnerCard;
   html += `<button class="secondary" onclick="startPartnerQuiz()">${t("partner.restart")}</button>`;
 
-  getElement("partnerContent").innerHTML = html;
-  animateFillsAndScores(getElement("partnerContent"));
+  getElement(partnerTargetId).innerHTML = html;
+  animateFillsAndScores(getElement(partnerTargetId));
 }
 
 // --- Results page ---
@@ -1977,7 +2051,12 @@ function showResults(options = {}) {
   html += `</div>`;
 
   html += `<div id="resultsBody"></div>`;
-  if (!isSharedView) html += `<button class="link-btn results-browse" onclick="openBrowse()">${t("results.browseCta")}</button>`;
+  if (!isSharedView) {
+    html += `<button class="secondary results-browse" onclick="openBrowse()">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 3v18M16 3v18M4 8l4-5 4 5M20 16l-4 5-4-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ${t("results.browseCta")}
+    </button>`;
+  }
   html += buildRefinePanel();
   html += buildCurrentRacketSection();
   html += buildAccessoriesSection();
@@ -2432,5 +2511,5 @@ function renderHeroStats() {
 renderHeroStats();
 applyStaticTranslations();
 getElement("langToggle").textContent = LANG === "de" ? "EN" : "DE";
-tryRestoreSharedResult();
-window.addEventListener("hashchange", tryRestoreSharedResult);
+if (!tryRestoreSharedResult()) tryRestoreInvite();
+window.addEventListener("hashchange", () => { if (!tryRestoreSharedResult()) tryRestoreInvite(); });

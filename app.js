@@ -196,6 +196,7 @@ const UI = {
     "stat.comfort": "Komfort",
     "stat.maneuver": "Handling",
     "stat.effect": "Effet",
+    "stat.weight": "Gewicht",
     "card.rank": n => `#${n} BEST MATCH`,
     "card.priceLabel": "Preis",
     "card.priceText": price => `Shop-Preis <b>${price} €</b> (Stand: September 2026). Preise können sich ändern — bitte vor dem Kauf im Shop prüfen.`,
@@ -317,7 +318,28 @@ const UI = {
     "pwa.installTitle": "App installieren",
     "pwa.installDesc": "Auf dem Homescreen speichern — funktioniert auch offline im Laden.",
     "pwa.installBtn": "Installieren",
-    "pwa.installDismiss": "Nicht jetzt"
+    "pwa.installDismiss": "Nicht jetzt",
+
+    "refine.title": "Ergebnis verfeinern",
+    "refine.desc": "Passt nicht ganz? Verschiebe die Regler — deine Top 3 werden sofort neu berechnet, ohne den Test zu wiederholen.",
+    "refine.control": "Kontrolle",
+    "refine.power": "Power",
+    "refine.comfort": "Komfort",
+    "refine.cheaper": "Günstiger",
+    "refine.less": "weniger",
+    "refine.more": "mehr",
+    "refine.reset": "Zurücksetzen",
+    "confidence.clear": gap => `Klarer Favorit — ${gap} Punkte Vorsprung auf Platz 2.`,
+    "confidence.close": "Kopf-an-Kopf-Rennen — Platz 1 und 2 passen fast gleich gut. Entscheide nach Preis, Optik oder Verfügbarkeit.",
+    "current.badge": "UPGRADE-CHECK",
+    "current.title": "Welchen Schläger spielst du gerade?",
+    "current.desc": "Wähle dein aktuelles Modell aus der Liste — wir zeigen dir, was sich mit deinem Top-Match konkret verbessern würde.",
+    "current.placeholder": "Aktuellen Schläger eingeben…",
+    "current.vsTop": name => `Dein aktueller Schläger → ${name}`,
+    "current.priceDiff": diff => `Preisunterschied zum Top-Match: ${diff} €.`,
+    "current.notFound": "Modell nicht in der Datenbank — bitte einen Namen aus der Vorschlagsliste wählen.",
+    "browse.yourScore": "Für dein Profil",
+    "browse.yourScoreHint": "Persönlicher Score auf Basis deines Tests"
   },
   en: {
     "hero.badge": "PADEL RACKET FINDER",
@@ -366,6 +388,7 @@ const UI = {
     "stat.comfort": "Comfort",
     "stat.maneuver": "Handling",
     "stat.effect": "Spin",
+    "stat.weight": "Weight",
     "card.rank": n => `#${n} BEST MATCH`,
     "card.priceLabel": "Price",
     "card.priceText": price => `Shop price <b>€${price}</b> (as of September 2026). Prices can change — please check the shop before buying.`,
@@ -487,7 +510,28 @@ const UI = {
     "pwa.installTitle": "Install app",
     "pwa.installDesc": "Save to your home screen — works offline in-store too.",
     "pwa.installBtn": "Install",
-    "pwa.installDismiss": "Not now"
+    "pwa.installDismiss": "Not now",
+
+    "refine.title": "Refine your result",
+    "refine.desc": "Not quite right? Move the sliders — your top 3 recalculate instantly without redoing the test.",
+    "refine.control": "Control",
+    "refine.power": "Power",
+    "refine.comfort": "Comfort",
+    "refine.cheaper": "Cheaper",
+    "refine.less": "less",
+    "refine.more": "more",
+    "refine.reset": "Reset",
+    "confidence.clear": gap => `Clear favorite — ${gap} points ahead of #2.`,
+    "confidence.close": "Neck and neck — #1 and #2 fit almost equally well. Decide by price, looks or availability.",
+    "current.badge": "UPGRADE CHECK",
+    "current.title": "Which racket do you play right now?",
+    "current.desc": "Pick your current model from the list — we'll show you exactly what would improve with your top match.",
+    "current.placeholder": "Enter your current racket…",
+    "current.vsTop": name => `Your current racket → ${name}`,
+    "current.priceDiff": diff => `Price difference to your top match: €${diff}.`,
+    "current.notFound": "Model not in the database — please pick a name from the suggestion list.",
+    "browse.yourScore": "For your profile",
+    "browse.yourScoreHint": "Personal score based on your test"
   }
 };
 
@@ -660,6 +704,7 @@ function startTest(mode) {
   answers = {};
   resultsRecorded = false;
   isSharedView = false;
+  refineWeights = { control: 0, power: 0, comfort: 0, price: 0 };
   history.replaceState(null, "", location.pathname + location.search);
   getElement("modeSelect").classList.add("hidden");
   getElement("quiz").classList.remove("hidden");
@@ -1077,7 +1122,7 @@ function animateFillsAndScores(container) {
 // --- Share ---
 
 function encodeShareState() {
-  return btoa(encodeURIComponent(JSON.stringify({ m: testMode, a: answers })));
+  return btoa(encodeURIComponent(JSON.stringify({ m: testMode, a: answers, r: refineWeights })));
 }
 
 function decodeShareState(str) {
@@ -1205,6 +1250,141 @@ function recordHistoryEntry(profile, topThree) {
     profile: { control: profile.control, power: profile.power, forgive: profile.forgive, comfort: profile.comfort }
   });
   resultsRecorded = true;
+  hasOwnProfile = true;
+}
+
+// True once the user has completed their own quiz (not a shared link) — gates
+// the "for your profile" personal score shown in browse/compare mode.
+let hasOwnProfile = false;
+
+function personalScoreFor(racket) {
+  return calculateScore(calculateRawScore(racket));
+}
+
+// --- Refine: live re-weighting on top of the quiz result, no retake needed ---
+
+let refineWeights = { control: 0, power: 0, comfort: 0, price: 0 };
+
+function refineBonus(racket) {
+  return refineWeights.control * racket.control * 2.5
+    + refineWeights.power * racket.power * 2.5
+    + refineWeights.comfort * racket.comfort * 2.5
+    + refineWeights.price * (150 - racket.price) * 0.15;
+}
+
+function computeTopThree() {
+  const ranked = RACKETS
+    .map(racket => ({ ...racket, rawScore: calculateRawScore(racket) + refineBonus(racket) }))
+    .sort((a, b) => b.rawScore - a.rawScore)
+    .map(racket => ({ ...racket, score: calculateScore(racket.rawScore) }));
+  const maxBudget = getMaxBudget();
+  const inBudget = ranked.filter(r => r.price <= maxBudget);
+  const fitMinusOvershoot = r => r.rawScore - (r.price - maxBudget) * 1.5;
+  const overBudget = ranked
+    .filter(r => r.price > maxBudget)
+    .sort((a, b) => fitMinusOvershoot(b) - fitMinusOvershoot(a));
+  return inBudget.concat(overBudget).slice(0, 3);
+}
+
+function buildRefinePanel() {
+  const slider = (id, key, label) =>
+    `<div class="refine-row">
+      <span class="refine-label">${label}</span>
+      <span class="refine-end">${t("refine.less")}</span>
+      <input type="range" class="refine-slider" id="${id}" min="-2" max="2" step="1" value="${refineWeights[key]}" oninput="applyRefine()">
+      <span class="refine-end">${t("refine.more")}</span>
+    </div>`;
+  return `<section class="analysis anim-in refine-panel">
+    <h2 class="analysis-title">${t("refine.title")}</h2>
+    <p class="hint">${t("refine.desc")}</p>
+    ${slider("refineControl", "control", t("refine.control"))}
+    ${slider("refinePower", "power", t("refine.power"))}
+    ${slider("refineComfort", "comfort", t("refine.comfort"))}
+    ${slider("refinePrice", "price", t("refine.cheaper"))}
+    <button class="secondary" onclick="resetRefine()">${t("refine.reset")}</button>
+  </section>`;
+}
+
+function applyRefine() {
+  refineWeights = {
+    control: +getElement("refineControl").value,
+    power: +getElement("refinePower").value,
+    comfort: +getElement("refineComfort").value,
+    price: +getElement("refinePrice").value
+  };
+  renderResultsBody(lastResults.profile, computeTopThree());
+}
+
+function resetRefine() {
+  ["refineControl", "refinePower", "refineComfort", "refinePrice"].forEach(id => { getElement(id).value = 0; });
+  refineWeights = { control: 0, power: 0, comfort: 0, price: 0 };
+  renderResultsBody(lastResults.profile, computeTopThree());
+}
+
+function buildConfidenceBadge(topThree) {
+  if (topThree.length < 2) return "";
+  const gap = topThree[0].score - topThree[1].score;
+  const isClose = gap < 6;
+  return `<div class="confidence-badge ${isClose ? "close" : "clear"} anim-in">${isClose ? t("confidence.close") : t("confidence.clear")(gap)}</div>`;
+}
+
+function renderResultsBody(profile, topThree) {
+  lastResults.topThree = topThree;
+  let html = `<section class="analysis anim-in">`;
+  html += `<h2 class="analysis-title">${t("analysis.title")}</h2>`;
+  html += `<p class="hint">${t("analysis.desc")}</p>`;
+  html += `<div class="radar-wrap">${buildRadarChart(profile, topThree[0])}</div>`;
+  html += `<div class="radar-legend"><span><i class="legend-dot legend-user"></i>${t("analysis.legendUser")}</span><span><i class="legend-dot legend-racket"></i>${topThree[0].name}</span></div>`;
+  html += `</section>`;
+  html += buildConfidenceBadge(topThree);
+  html += topThree.map((r, n) => createRacketCard(r, n, topThree[0])).join("");
+  getElement("resultsBody").innerHTML = html;
+  animateFillsAndScores(getElement("resultsBody"));
+  if (getElement("currentRacketInput")) applyCurrentRacket();
+}
+
+// --- Upgrade check: compare your current racket against your top match ---
+
+function buildCurrentRacketSection() {
+  return `<section class="analysis anim-in">
+    <div class="badge">${t("current.badge")}</div>
+    <h2 class="analysis-title">${t("current.title")}</h2>
+    <p class="hint">${t("current.desc")}</p>
+    <input type="text" id="currentRacketInput" class="text-input" list="racketNamesList" placeholder="${t("current.placeholder")}" oninput="applyCurrentRacket()" autocomplete="off">
+    <datalist id="racketNamesList">${RACKETS.map(r => `<option value="${r.name}">`).join("")}</datalist>
+    <div id="currentRacketResult"></div>
+  </section>`;
+}
+
+function applyCurrentRacket() {
+  const input = getElement("currentRacketInput");
+  const container = getElement("currentRacketResult");
+  if (!input || !container || !lastResults) return;
+  const name = input.value.trim();
+  if (!name) { container.innerHTML = ""; return; }
+  const current = RACKETS.find(r => r.name === name);
+  if (!current) { container.innerHTML = `<p class="hint">${t("current.notFound")}</p>`; return; }
+
+  const top = lastResults.topThree[0];
+  const stats = [
+    [t("stat.control"), current.control, top.control],
+    [t("stat.power"), current.power, top.power],
+    [t("stat.forgiveness"), current.forgiveness, top.forgiveness],
+    [t("stat.comfort"), current.comfort, top.comfort],
+    [t("stat.maneuver"), current.maneuver, top.maneuver],
+    [t("stat.effect"), current.effect, top.effect]
+  ];
+  let html = `<h3>${t("current.vsTop")(top.name)}</h3><div class="upgrade-list">`;
+  stats.forEach(([label, from, to]) => {
+    const diff = Math.round((to - from) * 10) / 10;
+    const cls = diff > 0.3 ? "up" : diff < -0.3 ? "down" : "same";
+    const arrow = diff > 0.3 ? `+${diff}` : diff < -0.3 ? `${diff}` : "±0";
+    html += `<div class="upgrade-row ${cls}"><span class="upgrade-label">${label}</span><span class="upgrade-values">${from} → ${to}</span><span class="upgrade-diff">${arrow}</span></div>`;
+  });
+  html += `</div>`;
+  const priceDiff = Math.round(top.price - current.price);
+  html += `<p class="reason">${t("current.priceDiff")(priceDiff > 0 ? "+" + priceDiff : String(priceDiff))}</p>`;
+  container.innerHTML = html;
 }
 
 function buildHistorySection(profile, topThree) {
@@ -1377,19 +1557,8 @@ function finishPartnerQuiz() {
 // --- Results page ---
 
 function showResults() {
-  const ranked = RACKETS
-    .map(racket => ({ ...racket, rawScore: calculateRawScore(racket) }))
-    .sort((a, b) => b.rawScore - a.rawScore)
-    .map(racket => ({ ...racket, score: calculateScore(racket.rawScore) }));
-
   const profile = getUserProfile();
-  const maxBudget = getMaxBudget();
-  const inBudget = ranked.filter(r => r.price <= maxBudget);
-  const fitMinusOvershoot = r => r.rawScore - (r.price - maxBudget) * 1.5;
-  const overBudget = ranked
-    .filter(r => r.price > maxBudget)
-    .sort((a, b) => fitMinusOvershoot(b) - fitMinusOvershoot(a));
-  const topThree = inBudget.concat(overBudget).slice(0, 3);
+  const topThree = computeTopThree();
   const modeLabel = testMode === "pro" ? t("results.proLabel") : t("results.quickLabel");
 
   lastResults = { profile, topThree, mode: testMode };
@@ -1411,14 +1580,9 @@ function showResults() {
   html += `<div class="stat"><b>${profile.comfort}/10</b><span>${t("results.comfort")}</span></div>`;
   html += `</div>`;
 
-  html += `<section class="analysis anim-in" style="animation-delay:.1s">`;
-  html += `<h2 class="analysis-title">${t("analysis.title")}</h2>`;
-  html += `<p class="hint">${t("analysis.desc")}</p>`;
-  html += `<div class="radar-wrap">${buildRadarChart(profile, topThree[0])}</div>`;
-  html += `<div class="radar-legend"><span><i class="legend-dot legend-user"></i>${t("analysis.legendUser")}</span><span><i class="legend-dot legend-racket"></i>${topThree[0].name}</span></div>`;
-  html += `</section>`;
-
-  html += topThree.map((r, n) => createRacketCard(r, n, topThree[0])).join("");
+  html += `<div id="resultsBody"></div>`;
+  html += buildRefinePanel();
+  html += buildCurrentRacketSection();
   html += buildPlayerAnalysis(profile);
   html += buildHistorySection(profile, topThree);
   html += buildPartnerSection();
@@ -1427,6 +1591,7 @@ function showResults() {
   html += `<button class="secondary restart" onclick="location.reload()">${t("restart")}</button>`;
 
   getElement("results").innerHTML = html;
+  renderResultsBody(profile, topThree);
   animateFillsAndScores(getElement("results"));
 }
 
@@ -1784,6 +1949,7 @@ function tryRestoreSharedResult() {
   if (!decoded || !decoded.a) return false;
   answers = decoded.a;
   testMode = decoded.m === "pro" ? "pro" : "quick";
+  refineWeights = { control: 0, power: 0, comfort: 0, price: 0, ...(decoded.r || {}) };
   isSharedView = true;
   document.querySelector(".hero").classList.add("hidden");
   showResults();

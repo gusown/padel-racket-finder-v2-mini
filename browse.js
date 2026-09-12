@@ -86,14 +86,56 @@ function browseCard(racket) {
   const full = compareSelection.length >= 3 && !selected;
   const label = selected ? t("browse.compareRemove") : (full ? t("browse.compareFull") : t("browse.compareAdd"));
   const safeName = racket.name.replace(/'/g, "\\'");
+  const scoreBadge = hasOwnProfile
+    ? `<div class="browse-score" title="${t("browse.yourScoreHint")}">${t("browse.yourScore")}: <b>${personalScoreFor(racket)}/100</b></div>`
+    : "";
   return `<article class="browse-card">
     ${racketImageBlock(racket)}
     <div class="browse-card-body">
       <h3>${racket.name}</h3>
       <div class="browse-card-meta">${racket.brand} · ${t("shape." + racket.form)} · ${formatPrice(racket.price)} €</div>
+      ${scoreBadge}
       <button class="secondary browse-toggle${selected ? " selected" : ""}"${full ? " disabled" : ""} onclick="toggleCompare('${safeName}')">${label}</button>
     </div>
   </article>`;
+}
+
+function buildCompareTable(rackets) {
+  const scoreRows = [
+    [t("stat.control"), r => r.control],
+    [t("stat.power"), r => r.power],
+    [t("stat.forgiveness"), r => r.forgiveness],
+    [t("stat.comfort"), r => r.comfort],
+    [t("stat.maneuver"), r => r.maneuver],
+    [t("stat.effect"), r => r.effect]
+  ];
+  let html = `<div class="compare-table-wrap"><table class="compare-table"><thead><tr><th></th>`;
+  html += rackets.map(r => `<th>${r.name}</th>`).join("");
+  html += `</tr></thead><tbody>`;
+  scoreRows.forEach(([label, getter]) => {
+    const values = rackets.map(getter);
+    const best = Math.max(...values);
+    html += `<tr><td class="compare-row-label">${label}</td>`;
+    html += values.map(v => `<td class="${v === best ? "compare-best" : ""}">${v}/10</td>`).join("");
+    html += `</tr>`;
+  });
+  const prices = rackets.map(r => r.price);
+  const bestPrice = Math.min(...prices);
+  html += `<tr><td class="compare-row-label">${t("card.priceLabel")}</td>`;
+  html += prices.map(p => `<td class="${p === bestPrice ? "compare-best" : ""}">${formatPrice(p)} €</td>`).join("");
+  html += `</tr>`;
+  html += `<tr><td class="compare-row-label">${t("stat.weight")}</td>`;
+  html += rackets.map(r => `<td>${formatNumber(r.weight)} g</td>`).join("");
+  html += `</tr>`;
+  if (hasOwnProfile) {
+    const scores = rackets.map(r => personalScoreFor(r));
+    const bestScore = Math.max(...scores);
+    html += `<tr class="compare-personal-row"><td class="compare-row-label">${t("browse.yourScore")}</td>`;
+    html += scores.map(s => `<td class="${s === bestScore ? "compare-best" : ""}">${s}/100</td>`).join("");
+    html += `</tr>`;
+  }
+  html += `</tbody></table></div>`;
+  return html;
 }
 
 function renderBrowseGrid() {
@@ -162,6 +204,7 @@ function renderCompareView() {
   let html = `<section class="analysis anim-in"><h2 class="analysis-title">${t("browse.compareTitle")}</h2>`;
   html += `<div class="radar-wrap">${radar}</div>`;
   html += `<div class="radar-legend">${rackets.map((r, i) => `<span><i class="legend-dot ${COMPARE_LEGEND_CLASSES[i]}"></i>${r.name}</span>`).join("")}</div>`;
+  html += buildCompareTable(rackets);
   html += `</section>`;
   html += rackets.map(browseCompareCard).join("");
   view.innerHTML = html;

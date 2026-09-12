@@ -15,7 +15,11 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 - **Ergebnis teilen:** Ein Link öffnet dein Ergebnis 1:1 nach — inklusive aller drei empfohlenen Schläger. Zusätzlich als Text zum Einfügen in WhatsApp & Co. kopierbar
 - **Doppel-Check:** Dein:e Partner:in macht einen kurzen Check, ihr bekommt ein gemeinsames Team-Profil, eine Rollenverteilungs-Einschätzung (Netz/Hinten) und den passenden Schläger für beide
 - **Fortschritt über Zeit:** Frühere Testergebnisse werden lokal gespeichert; beim nächsten Test siehst du, was sich verändert hat
-- **Browse & Vergleichen:** Alle 107 Schläger filtern, sortieren und bis zu 3 direkt im Netzdiagramm vergleichen — ganz ohne Quiz
+- **Browse & Vergleichen:** Alle 107 Schläger filtern, sortieren und bis zu 3 direkt im Netzdiagramm und in einer Vergleichstabelle gegenüberstellen — der beste Wert pro Zeile wird hervorgehoben, ganz ohne Quiz
+- **Ergebnis verfeinern:** Regler für Kontrolle, Power, Komfort und Preis berechnen die Top 3 live neu — ohne den Test zu wiederholen
+- **Upgrade-Check:** Deinen aktuellen Schläger auswählen und sehen, was sich mit dem Top-Match konkret verbessert (pro Wert und beim Preis)
+- **Persönlicher Score im Browse-Modus:** Nach dem Test zeigt jede Schläger-Karte und die Vergleichstabelle, wie gut das Modell zu deinem Profil passt
+- **Sieger-Abstand:** Zeigt, ob Platz 1 ein klarer Favorit ist oder ein Kopf-an-Kopf-Rennen mit Platz 2
 - **Installierbar (PWA):** Auf dem Homescreen speichern, funktioniert dank Offline-Cache auch ohne Netz im Laden
 - **Sanfte Animationen** — Übergänge, Zähl-Effekte und Balken-Animationen bei den Ergebnissen
 - **Dunkles Design** in Tennisball-Grün

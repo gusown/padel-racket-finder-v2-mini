@@ -5,8 +5,12 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 ## Features
 
 - **Zweisprachig:** Deutsch/Englisch umschaltbar per Klick, Auswahl wird gespeichert
-- **Zwei Testmodi:** Quick Test (15 Fragen, ~3–5 Min) oder Pro Test (bis zu 23 Fragen, ~7–9 Min) mit zusätzlichen Fragen zu Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Marke und Budget-Flexibilität
-- **Mehrfachauswahl** bei Schwächen, Racketsport-Erfahrung und Verletzungsregionen
+- **Zwei Testmodi:** Quick Test (17–19 Fragen, ~4–6 Min) oder Pro Test (bis zu 28 Fragen, ~8–10 Min) mit zusätzlichen Fragen zu Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Marke, Budget-Flexibilität und Handschweiß
+- **Dein aktueller Schläger als Referenz:** Optional deinen jetzigen Schläger auswählen und angeben, was dich stört (z. B. zu wenig Power, zu hart, zu schwer) und was du magst — die Empfehlungen verbessern gezielt genau diese Punkte
+- **No-Gos:** Ausschließen, was du auf keinen Fall willst (Diamond-Form, über 365 g, harter Kern, kopflastig, Einsteiger-Modelle)
+- **Score-Aufschlüsselung:** Beim Top-Match siehst du, in welchen Bereichen (Spielstil, Wünsche, Niveau, Gelenke, Budget, No-Gos, Vergleich mit deinem Schläger) er gegenüber dem Durchschnitt aller Modelle Punkte holt oder verliert
+- **Passendes Zubehör:** Echte Produkte von padelreference.com (Overgrips, Bälle, Rahmenschutz, Taschen, Dämpfer, Griffspray) — ausgewählt nach Handschweiß, Gelenken, Spielhäufigkeit, Niveau und Indoor/Outdoor
+- **Mehrfachauswahl** bei Schwächen, Racketsport-Erfahrung, Verletzungsregionen, Marken und No-Gos
 - **107 reale Schläger** von 17 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, Tecnifibre, Dunlop, Oxdog, Osaka, Drop Shot, Joma, Varlion, Black Crown, Royal Padel) mit echten Produktbildern, Produktlinks und Preisen
 - **Erklärung zu jeder Frage**, damit auch Einsteiger die Fachbegriffe verstehen
 - **Visuelle Profil-Analyse:** Netzdiagramm, das dein Spielprofil mit deinem Top-Match vergleicht

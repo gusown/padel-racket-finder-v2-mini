@@ -5,14 +5,17 @@
 
 let browseFilters = { search: "", shape: "", brand: "", level: "", sort: "control" };
 let compareSelection = [];
+let browseOpenedFromResults = false;
 
 function openBrowse() {
+  browseOpenedFromResults = !getElement("results").classList.contains("hidden");
   document.querySelector(".hero").classList.add("hidden");
   getElement("modeSelect").classList.add("hidden");
   getElement("quiz").classList.add("hidden");
   getElement("results").classList.add("hidden");
   getElement("browseSection").classList.remove("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (hasOwnProfile && browseFilters.sort === "control") browseFilters.sort = "personal";
+  scrollToTop();
   renderBrowseControls();
   renderBrowseGrid();
   renderCompareView();
@@ -20,8 +23,13 @@ function openBrowse() {
 
 function closeBrowse() {
   getElement("browseSection").classList.add("hidden");
-  document.querySelector(".hero").classList.remove("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (browseOpenedFromResults) getElement("results").classList.remove("hidden");
+  else document.querySelector(".hero").classList.remove("hidden");
+  scrollToTop();
+}
+
+function scrollToCompare() {
+  getElement("browseCompareView").scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
 }
 
 function renderBrowseControls() {
@@ -44,13 +52,22 @@ function renderBrowseControls() {
     levels.map(l => `<option value="${l}">${t("level." + l)}</option>`).join("");
   levelSelect.value = browseFilters.level;
 
+  getElement("browseSection").querySelector(".browse-back").textContent =
+    browseOpenedFromResults ? t("results.backToResults") : t("browse.back");
+  shapeSelect.setAttribute("aria-label", t("browse.allShapes"));
+  brandSelect.setAttribute("aria-label", t("browse.allBrands"));
+  levelSelect.setAttribute("aria-label", t("browse.allLevels"));
+  getElement("browseSearch").setAttribute("aria-label", t("browse.searchPlaceholder"));
+
   const sortSelect = getElement("browseSort");
-  sortSelect.innerHTML = [
+  const sortOptions = hasOwnProfile ? [["personal", t("browse.yourScore")]] : [];
+  sortSelect.setAttribute("aria-label", t("browse.sortControl"));
+  sortSelect.innerHTML = sortOptions.concat([
     ["control", t("browse.sortControl")],
     ["power", t("browse.sortPower")],
     ["priceAsc", t("browse.sortPriceAsc")],
     ["priceDesc", t("browse.sortPriceDesc")]
-  ].map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
+  ]).map(([value, label]) => `<option value="${value}">${label}</option>`).join("");
   sortSelect.value = browseFilters.sort;
 
   getElement("browseSearch").value = browseFilters.search;
@@ -66,6 +83,7 @@ function renderBrowseControls() {
 function getFilteredRackets() {
   const q = browseFilters.search.trim().toLowerCase();
   const sorters = {
+    personal: (a, b) => personalScoreFor(b) - personalScoreFor(a),
     control: (a, b) => b.control - a.control,
     power: (a, b) => b.power - a.power,
     priceAsc: (a, b) => a.price - b.price,
@@ -171,7 +189,10 @@ function renderCompareBar() {
     return;
   }
   bar.classList.remove("hidden");
-  bar.innerHTML = `<span>${t("browse.compareBarText")(compareSelection.length)}</span><button class="secondary" onclick="clearCompare()">${t("browse.compareClear")}</button>`;
+  const jump = compareSelection.length >= 2
+    ? `<button class="primary" onclick="scrollToCompare()">${t("browse.compareJump")}</button>`
+    : "";
+  bar.innerHTML = `<span>${t("browse.compareBarText")(compareSelection.length)}</span><div class="compare-bar-actions">${jump}<button class="secondary" onclick="clearCompare()">${t("browse.compareClear")}</button></div>`;
 }
 
 const COMPARE_RADAR_CLASSES = ["radar-user", "radar-partner", "radar-racket"];

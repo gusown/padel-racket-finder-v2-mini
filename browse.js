@@ -6,26 +6,33 @@
 let browseFilters = { search: "", shape: "", brand: "", level: "", sort: "control" };
 let compareSelection = [];
 let browseOpenedFromResults = false;
+let browseReturnScroll = 0;
 
-function openBrowse() {
+function openBrowse(options = {}) {
   browseOpenedFromResults = !getElement("results").classList.contains("hidden");
-  document.querySelector(".hero").classList.add("hidden");
-  getElement("modeSelect").classList.add("hidden");
-  getElement("quiz").classList.add("hidden");
-  getElement("results").classList.add("hidden");
-  getElement("browseSection").classList.remove("hidden");
+  if (browseOpenedFromResults) browseReturnScroll = window.scrollY;
+  showScreen("browse");
+  if (!options.fromHistory) pushScreen("browse");
   if (hasOwnProfile && browseFilters.sort === "control") browseFilters.sort = "personal";
-  scrollToTop();
+  window.scrollTo(0, 0);
   renderBrowseControls();
   renderBrowseGrid();
   renderCompareView();
 }
 
-function closeBrowse() {
-  getElement("browseSection").classList.add("hidden");
-  if (browseOpenedFromResults) getElement("results").classList.remove("hidden");
-  else document.querySelector(".hero").classList.remove("hidden");
-  scrollToTop();
+function closeBrowse(options = {}) {
+  // The on-page back button goes through history too, so the browser back button stays in sync.
+  if (!options.fromHistory && history.state && history.state.screen === "browse") {
+    history.back();
+    return;
+  }
+  const toResults = browseOpenedFromResults && lastResults;
+  showScreen(toResults ? "results" : "hero");
+  if (toResults && resultsNeedRerender) {
+    resultsNeedRerender = false;
+    showResults({ keepScroll: true });
+  }
+  window.scrollTo(0, toResults ? browseReturnScroll : 0);
 }
 
 function scrollToCompare() {
@@ -54,14 +61,14 @@ function renderBrowseControls() {
 
   getElement("browseSection").querySelector(".browse-back").textContent =
     browseOpenedFromResults ? t("results.backToResults") : t("browse.back");
-  shapeSelect.setAttribute("aria-label", t("browse.allShapes"));
-  brandSelect.setAttribute("aria-label", t("browse.allBrands"));
-  levelSelect.setAttribute("aria-label", t("browse.allLevels"));
+  shapeSelect.setAttribute("aria-label", t("browse.filterShape"));
+  brandSelect.setAttribute("aria-label", t("browse.filterBrand"));
+  levelSelect.setAttribute("aria-label", t("browse.filterLevel"));
   getElement("browseSearch").setAttribute("aria-label", t("browse.searchPlaceholder"));
 
   const sortSelect = getElement("browseSort");
   const sortOptions = hasOwnProfile ? [["personal", t("browse.yourScore")]] : [];
-  sortSelect.setAttribute("aria-label", t("browse.sortControl"));
+  sortSelect.setAttribute("aria-label", t("browse.sortBy"));
   sortSelect.innerHTML = sortOptions.concat([
     ["control", t("browse.sortControl")],
     ["power", t("browse.sortPower")],
@@ -82,8 +89,13 @@ function renderBrowseControls() {
 
 function getFilteredRackets() {
   const q = browseFilters.search.trim().toLowerCase();
+  const scores = new Map();
+  const scoreOf = racket => {
+    if (!scores.has(racket.name)) scores.set(racket.name, personalScoreFor(racket));
+    return scores.get(racket.name);
+  };
   const sorters = {
-    personal: (a, b) => personalScoreFor(b) - personalScoreFor(a),
+    personal: (a, b) => scoreOf(b) - scoreOf(a),
     control: (a, b) => b.control - a.control,
     power: (a, b) => b.power - a.power,
     priceAsc: (a, b) => a.price - b.price,
@@ -108,12 +120,12 @@ function browseCard(racket) {
     ? `<div class="browse-score" title="${t("browse.yourScoreHint")}">${t("browse.yourScore")}: <b>${personalScoreFor(racket)}/100</b></div>`
     : "";
   return `<article class="browse-card">
-    ${racketImageBlock(racket)}
+    ${racketImageBlock(racket, true)}
     <div class="browse-card-body">
       <h3>${racket.name}</h3>
-      <div class="browse-card-meta">${racket.brand} · ${t("shape." + racket.form)} · ${formatPrice(racket.price)} €</div>
+      <div class="browse-card-meta">${racket.brand} · ${t("shape." + racket.form)} · ${formatEuro(racket.price)}</div>
       ${scoreBadge}
-      <button class="secondary browse-toggle${selected ? " selected" : ""}"${full ? " disabled" : ""} onclick="toggleCompare('${safeName}')">${label}</button>
+      <button class="secondary browse-toggle${selected ? " selected" : ""}"${full ? " disabled" : ""} aria-pressed="${selected}" data-name="${racket.name.replace(/"/g, "&quot;")}" onclick="toggleCompare('${safeName}')">${label}</button>
     </div>
   </article>`;
 }
@@ -140,7 +152,7 @@ function buildCompareTable(rackets) {
   const prices = rackets.map(r => r.price);
   const bestPrice = Math.min(...prices);
   html += `<tr><td class="compare-row-label">${t("card.priceLabel")}</td>`;
-  html += prices.map(p => `<td class="${p === bestPrice ? "compare-best" : ""}">${formatPrice(p)} €</td>`).join("");
+  html += prices.map(p => `<td class="${p === bestPrice ? "compare-best" : ""}">${formatEuro(p)}</td>`).join("");
   html += `</tr>`;
   html += `<tr><td class="compare-row-label">${t("stat.weight")}</td>`;
   html += rackets.map(r => `<td>${formatNumber(r.weight)} g</td>`).join("");
@@ -173,6 +185,8 @@ function toggleCompare(name) {
   }
   renderBrowseGrid();
   renderCompareView();
+  const toggle = [...document.querySelectorAll(".browse-toggle")].find(button => button.dataset.name === name);
+  if (toggle) toggle.focus({ preventScroll: true });
 }
 
 function clearCompare() {
@@ -204,7 +218,7 @@ function browseCompareCard(racket, index) {
       ${racketImageBlock(racket)}
       <div class="rec-main">
         <h2>${racket.name}</h2>
-        <div>${racket.brand} · ${t("shape." + racket.form)} · ${formatNumber(racket.weight)} g · ${t("balance." + racket.balance)} · ${t("kernLabel")} ${t("feel." + racket.feel)} · ${t("level." + racket.level)}</div>
+        <div>${racket.brand} · ${t("shape." + racket.form)} · ${formatNumber(racket.weight)} g · ${t("balance." + racket.balance)} · ${t("coreText")(t("feel." + racket.feel))} · ${t("level." + racket.level)}</div>
         ${createStatBars(racket)}
         <div class="why"><h3>${t("card.priceLabel")}</h3><p>${t("card.priceText")(formatPrice(racket.price))}</p></div>
         <a class="buy" href="${racket.url}" target="_blank" rel="noopener">${t("card.buy")}</a>

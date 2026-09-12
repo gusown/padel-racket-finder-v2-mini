@@ -6,6 +6,12 @@
   <title>Padel Racket Finder · Mini</title>
   <meta name="description" content="Finde den Padel-Schläger, der am besten zu deinem Spiel, Niveau und Budget passt — inkl. visueller Profil-Analyse.">
   <meta name="theme-color" content="#0a0a09">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Padel Finder">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,6 +23,7 @@
       <p data-i18n="hero.desc">Ein kurzer Racket-Fit-Test analysiert deinen Spielstil, deine Technik, deine Wünsche und dein Budget.</p>
       <button id="startBtn" class="primary"><span data-i18n="hero.cta">Test starten</span> <span class="arrow" aria-hidden="true">→</span></button>
       <div class="meta" data-i18n="hero.meta">Quick oder Pro · unabhängig · persönliches Matching</div>
+      <button class="link-btn" onclick="openBrowse()" data-i18n="browse.link">Alle Schläger durchsuchen →</button>
     </header>
 
     <section id="modeSelect" class="hidden mode-select">
@@ -49,7 +56,30 @@
     </section>
 
     <section id="results" class="hidden"></section>
+
+    <section id="browseSection" class="hidden browse-section">
+      <button class="secondary browse-back" onclick="closeBrowse()" data-i18n="browse.back">← Zurück zur Startseite</button>
+      <div class="badge" data-i18n="browse.badge">SCHLÄGER-DATENBANK</div>
+      <h1 data-i18n="browse.title">Alle 49 Schläger</h1>
+      <p data-i18n="browse.desc">Filtere, sortiere und vergleiche bis zu 3 Schläger direkt nebeneinander — ganz ohne Quiz.</p>
+      <div class="browse-controls">
+        <input type="text" id="browseSearch" class="text-input" data-i18n-placeholder="browse.searchPlaceholder" placeholder="Modell oder Marke suchen…">
+        <select id="browseShape" class="browse-select"></select>
+        <select id="browseBrand" class="browse-select"></select>
+        <select id="browseLevel" class="browse-select"></select>
+        <select id="browseSort" class="browse-select"></select>
+      </div>
+      <div id="browseCompareBar" class="hidden compare-bar"></div>
+      <div id="browseGrid"></div>
+      <div id="browseCompareView"></div>
+    </section>
   </main>
   <script src="app.js"></script>
+  <script src="browse.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+    }
+  </script>
 </body>
 </html>

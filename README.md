@@ -12,10 +12,15 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 - **Visuelle Profil-Analyse:** Netzdiagramm, das dein Spielprofil mit deinem Top-Match vergleicht
 - **Detaillierte Spieler-Analyse:** Spielertyp, Entwicklungsstand, Stärken/Baustellen und persönliche Trainingstipps
 - **Top 3 Empfehlungen** mit Produktbild, Stat-Vergleich und nachvollziehbarer Begründung
+- **Ergebnis teilen:** Ein Link öffnet dein Ergebnis 1:1 nach — inklusive aller drei empfohlenen Schläger. Zusätzlich als Text zum Einfügen in WhatsApp & Co. kopierbar
+- **Doppel-Check:** Dein:e Partner:in macht einen kurzen Check, ihr bekommt ein gemeinsames Team-Profil, eine Rollenverteilungs-Einschätzung (Netz/Hinten) und den passenden Schläger für beide
+- **Fortschritt über Zeit:** Frühere Testergebnisse werden lokal gespeichert; beim nächsten Test siehst du, was sich verändert hat
+- **Browse & Vergleichen:** Alle 49 Schläger filtern, sortieren und bis zu 3 direkt im Netzdiagramm vergleichen — ganz ohne Quiz
+- **Installierbar (PWA):** Auf dem Homescreen speichern, funktioniert dank Offline-Cache auch ohne Netz im Laden
 - **Sanfte Animationen** — Übergänge, Zähl-Effekte und Balken-Animationen bei den Ergebnissen
 - **Dunkles Design** in Tennisball-Grün
 - **Mobile-optimiert** — perfekt für Smartphone und Tablet
-- **Vollständig privat** — keine Anmeldung, Backend oder Tracking
+- **Vollständig privat** — keine Anmeldung, kein Backend, kein Tracking (Verlauf & Sprache liegen nur lokal im Browser)
 
 ## Schnelleinstieg
 
@@ -50,19 +55,23 @@ Das Projekt ist bewusst ein **Finder**, nicht ein **Shop**. Eine kuratierte Ausw
 ## Code-Struktur
 
 ```
-index.html    — Markup, Semantik, Meta-Tags
-style.css     — Responsive Design, Theming
-app.js        — Quiz-Logik, Matching-Algorithmus
+index.html    — Markup, Semantik, Meta-Tags, PWA-Verknüpfung
+style.css     — Responsive Design, Theming, Animationen
+app.js        — Daten, i18n, Quiz-Logik, Matching, Share/Verlauf/Partner-Modus
+browse.js     — Browse- & Vergleichs-Modus (baut auf app.js auf)
+sw.js         — Service Worker fürs Offline-Caching
+manifest.json — PWA-Manifest
+icons/        — App-Icons (generiert)
 ```
 
-Die App ist selbstständig — alles läuft im Browser, keine externe API oder Backend nötig.
+Die App ist selbstständig — alles läuft im Browser, keine externe API oder Backend nötig. Geteilte Ergebnisse werden als Link kodiert (keine Server-Speicherung), Verlauf und Spracheinstellung liegen im `localStorage` des jeweiligen Geräts.
 
 ## Roadmap / Ideen
 
-- [ ] Spieler-Profile speichern (localStorage)
 - [ ] Mehr Racket-Modelle hinzufügen
-- [ ] Export der Ergebnisse (PDF/Screenshot)
+- [ ] Export der Ergebnisse als Bild (Canvas-Screenshot)
 - [ ] Weitere Sprachen (ES, FR)
+- [ ] Team-Modus für mehr als 2 Spieler:innen (Americano/Mixicano-Vorbereitung)
 
 ## Feedback & Bugs
 

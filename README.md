@@ -7,7 +7,7 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 - **Zweisprachig:** Deutsch/Englisch umschaltbar per Klick, Auswahl wird gespeichert
 - **Zwei Testmodi:** Quick Test (15 Fragen, ~3–5 Min) oder Pro Test (bis zu 23 Fragen, ~7–9 Min) mit zusätzlichen Fragen zu Gewicht, Balance-Gefühl, Wettkampf-Niveau, Verletzungsdetails, Indoor/Outdoor, Marke und Budget-Flexibilität
 - **Mehrfachauswahl** bei Schwächen, Racketsport-Erfahrung und Verletzungsregionen
-- **49 reale, aktuell erhältliche Schläger** von 12 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, Tecnifibre, Dunlop, Oxdog, Osaka) mit echten Produktbildern, Produktlinks und Preisen
+- **107 reale Schläger** von 17 Marken (HEAD, Adidas, Babolat, Wilson, Bullpadel, NOX, Siux, StarVie, Tecnifibre, Dunlop, Oxdog, Osaka, Drop Shot, Joma, Varlion, Black Crown, Royal Padel) mit echten Produktbildern, Produktlinks und Preisen
 - **Erklärung zu jeder Frage**, damit auch Einsteiger die Fachbegriffe verstehen
 - **Visuelle Profil-Analyse:** Netzdiagramm, das dein Spielprofil mit deinem Top-Match vergleicht
 - **Detaillierte Spieler-Analyse:** Spielertyp, Entwicklungsstand, Stärken/Baustellen und persönliche Trainingstipps
@@ -15,7 +15,7 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 - **Ergebnis teilen:** Ein Link öffnet dein Ergebnis 1:1 nach — inklusive aller drei empfohlenen Schläger. Zusätzlich als Text zum Einfügen in WhatsApp & Co. kopierbar
 - **Doppel-Check:** Dein:e Partner:in macht einen kurzen Check, ihr bekommt ein gemeinsames Team-Profil, eine Rollenverteilungs-Einschätzung (Netz/Hinten) und den passenden Schläger für beide
 - **Fortschritt über Zeit:** Frühere Testergebnisse werden lokal gespeichert; beim nächsten Test siehst du, was sich verändert hat
-- **Browse & Vergleichen:** Alle 49 Schläger filtern, sortieren und bis zu 3 direkt im Netzdiagramm vergleichen — ganz ohne Quiz
+- **Browse & Vergleichen:** Alle 107 Schläger filtern, sortieren und bis zu 3 direkt im Netzdiagramm vergleichen — ganz ohne Quiz
 - **Installierbar (PWA):** Auf dem Homescreen speichern, funktioniert dank Offline-Cache auch ohne Netz im Laden
 - **Sanfte Animationen** — Übergänge, Zähl-Effekte und Balken-Animationen bei den Ergebnissen
 - **Dunkles Design** in Tennisball-Grün
@@ -46,11 +46,11 @@ Einfach die Datei `index.html` mit Freunden teilen — sie öffnen sie im Browse
 
 Alle Schläger, ihre technischen Daten (Form, Gewicht, Balance, Kernhärte, Spielniveau), Testwerte (Power, Kontrolle, Komfort, Handling, Effet, Fehlertoleranz — jeweils 0–10) und Produktbilder stammen von **[padelreference.com](https://www.padelreference.com)**, Stand September 2026. Zwei Werte (Netzspiel, Defensive) gibt es dort nicht direkt — die leiten wir rechnerisch aus den vorhandenen Testwerten ab. Lädt ein Bild einmal nicht (z. B. bei einer Server-Störung), zeigt die App automatisch ein Platzhalter-Icon statt eines kaputten Bildes.
 
-⚠️ **Wichtig:** Preise und Verfügbarkeit ändern sich laufend. Die App zeigt den Preis zum Zeitpunkt der Recherche — vor dem Kauf immer den aktuellen Preis über den Link im Shop prüfen.
+⚠️ **Wichtig:** Preise und Verfügbarkeit ändern sich laufend. Die App zeigt den Preis zum Zeitpunkt der Recherche — vor dem Kauf immer den aktuellen Preis und die Verfügbarkeit über den Link im Shop prüfen. Manche Modelle können bei padelreference.com zeitweise ausverkauft sein; da die meisten Nutzer:innen den Schläger ohnehin bei ihrem eigenen Händler suchen, ist ein Modell trotzdem gelistet — es muss nur wirklich existieren und echte Daten haben.
 
-## Die Auswahl: Warum nur 49 Modelle?
+## Die Auswahl: Warum "nur" 107 Modelle?
 
-Das Projekt ist bewusst ein **Finder**, nicht ein **Shop**. Eine kuratierte Auswahl über alle Preisklassen, Kopfformen und Spielniveaus verhindert, dass das Ergebnis durch hunderte kaum unterscheidbare Modelle verwässert wird — deckt aber trotzdem Einsteiger- bis Profi-Schläger von 9 Marken ab.
+Das Projekt ist bewusst ein **Finder**, nicht ein **Shop**. Eine kuratierte Auswahl über alle Preisklassen, Kopfformen und Spielniveaus verhindert, dass das Ergebnis durch tausende kaum unterscheidbare Modelle verwässert wird — deckt aber trotzdem Einsteiger- bis Profi-Schläger von 17 Marken ab.
 
 ## Code-Struktur
 

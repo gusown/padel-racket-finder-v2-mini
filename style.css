@@ -61,8 +61,34 @@ body {
   color: var(--text);
 }
 
-.hero h1 span {
+.hero h1 .muted {
   color: var(--text-muted);
+}
+
+.lang-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 50;
+  border: 1px solid var(--border);
+  background: var(--bg-card-alt);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 9px 14px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lang-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lang-toggle:active {
+  transform: scale(0.94);
 }
 
 .hero p {
@@ -184,8 +210,14 @@ body {
   background: #e4ff5c;
 }
 
-.primary span {
+.primary .arrow {
   margin-left: 18px;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.primary:hover .arrow {
+  transform: translateX(3px);
 }
 
 .secondary {
@@ -198,8 +230,35 @@ body {
   background: #26261f;
 }
 
+.primary:active,
+.secondary:active,
+.option:active,
+.buy:active {
+  transform: scale(0.97);
+}
+
 .hidden {
   display: none !important;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim-in {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-in {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Progress */
@@ -494,6 +553,56 @@ body {
   margin-bottom: 14px;
 }
 
+.rec-body {
+  display: flex;
+  gap: 20px;
+}
+
+.rec-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-image {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.card-image-placeholder,
+.card-image.broken {
+  color: var(--text-muted);
+}
+
+.card-image .racket-icon {
+  display: none;
+  width: 32px;
+  height: 32px;
+}
+
+.card-image-placeholder .racket-icon,
+.card-image.broken .racket-icon {
+  display: block;
+}
+
+.card-image.broken img {
+  display: none;
+}
+
 .rec-title {
   display: flex;
   justify-content: space-between;
@@ -556,6 +665,7 @@ body {
   height: 100%;
   background: var(--accent);
   border-radius: 99px;
+  transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stat-bar-value {
@@ -719,6 +829,7 @@ body {
   height: 100%;
   background: var(--accent);
   border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stage-labels {
@@ -839,6 +950,22 @@ body {
 
   .analysis {
     padding: 20px 14px;
+  }
+
+  .rec-body {
+    flex-direction: column;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 140px;
+  }
+
+  .lang-toggle {
+    top: 12px;
+    right: 12px;
+    padding: 7px 12px;
+    font-size: 11px;
   }
 }
 

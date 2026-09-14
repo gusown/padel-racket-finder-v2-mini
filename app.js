@@ -2291,21 +2291,41 @@ function showResults(options = {}) {
   if (partnerStage === "done") finishPartnerQuiz();
 }
 
-// The shop throttles bursts of hotlinked images, so a failed image gets one delayed retry
-// before falling back to the placeholder icon.
-function retryImage(img) {
-  if (img.dataset.retried) {
-    img.parentElement.classList.add("broken");
+// The shop's original photos are up to 2000px / 1 MB and load slowly or fail when many are
+// requested at once (measured: 5 of 40 failed, ~5 s median) — which left tiles empty on phones.
+// Images are therefore loaded as small cached thumbnails through images.weserv.nl first,
+// with the original shop URL as fallback and one delayed final retry.
+const IMAGE_PROXY = "https://images.weserv.nl/?url=";
+
+function thumbnailUrl(url, size = 480) {
+  if (!/^https:\/\/www\.padelreference\.com\//.test(url)) return url;
+  return `${IMAGE_PROXY}${encodeURIComponent(url.replace(/^https:\/\//, ""))}&w=${size}&h=${size}&fit=inside&we&output=webp&q=82`;
+}
+
+const escapeAttr = value => String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+
+function handleImageError(img) {
+  const original = img.dataset.original;
+  if (original && !img.dataset.fellBack) {
+    img.dataset.fellBack = "1";
+    img.src = original;
     return;
   }
-  img.dataset.retried = "1";
-  setTimeout(() => { img.src = img.src.split("?")[0] + "?retry=1"; }, 1500 + Math.random() * 2000);
+  if (!img.dataset.retried) {
+    img.dataset.retried = "1";
+    const retryUrl = (original || img.src.split("?")[0]) + "?retry=1";
+    setTimeout(() => { img.src = retryUrl; }, 1500 + Math.random() * 2000);
+    return;
+  }
+  img.parentElement.classList.add("broken");
 }
 
 // The product name is always rendered next to the image, so the image itself is decorative (alt="").
 function racketImageBlock(racket, lazy = false) {
   if (racket.image) {
-    return `<div class="card-image"><img src="${racket.image}" alt="" decoding="async"${lazy ? ' loading="lazy"' : ""} onerror="retryImage(this)">${RACKET_ICON}</div>`;
+    const thumb = thumbnailUrl(racket.image);
+    const fallback = thumb !== racket.image ? ` data-original="${escapeAttr(racket.image)}"` : "";
+    return `<div class="card-image"><img src="${escapeAttr(thumb)}"${fallback} alt="" decoding="async"${lazy ? ' loading="lazy"' : ""} onerror="handleImageError(this)">${RACKET_ICON}</div>`;
   }
   return `<div class="card-image card-image-placeholder">${RACKET_ICON}</div>`;
 }
@@ -2763,7 +2783,7 @@ function renderHeroFloatImages() {
   const withImages = RACKETS.filter(r => r.image);
   const shuffled = [...withImages].sort(() => Math.random() - 0.5).slice(0, 3);
   container.innerHTML = shuffled.map((r, i) =>
-    `<img class="hero-float hero-float-${i + 1}" src="${r.image}" alt="" loading="lazy">`
+    `<img class="hero-float hero-float-${i + 1}" src="${escapeAttr(thumbnailUrl(r.image, 200))}" alt="" onerror="this.remove()">`
   ).join("");
 }
 

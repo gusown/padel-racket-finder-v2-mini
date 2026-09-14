@@ -613,6 +613,8 @@ body {
   background: radial-gradient(circle at 42% 38%, #f3f4ee, #d9dbcd 78%);
   border: 1px solid var(--border);
   overflow: hidden;
+  /* keeps the multiply blend confined to the tile (WebKit otherwise blends against ancestors) */
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;

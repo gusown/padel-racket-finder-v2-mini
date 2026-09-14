@@ -1,6 +1,6 @@
 // Every gusown Pages project shares the github.io origin, so only caches with this prefix are ours.
 const CACHE_PREFIX = "padel-finder-";
-const CACHE_NAME = CACHE_PREFIX + "v4";
+const CACHE_NAME = CACHE_PREFIX + "v5";
 const APP_SHELL = [
   "./",
   "./index.html",

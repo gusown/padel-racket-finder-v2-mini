@@ -1,7 +1,7 @@
 // Browse & compare mode — lets you explore all rackets without doing the quiz.
 // Relies on globals defined in app.js: RACKETS, t, LANG, getElement, formatNumber,
 // formatPrice, buildRadarSVG, racketRadarValues, createStatBars, racketImageBlock,
-// animateFillsAndScores, RACKET_ICON.
+// animateFillsAndScores, RACKET_ICON, buildShopLinksHtml.
 
 let browseFilters = { search: "", shape: "", brand: "", level: "", sort: "control" };
 let compareSelection = [];
@@ -222,6 +222,7 @@ function browseCompareCard(racket, index) {
         ${createStatBars(racket)}
         <div class="why"><h3>${t("card.priceLabel")}</h3><p>${t("card.priceText")(formatPrice(racket.price))}</p></div>
         <a class="buy" href="${racket.url}" target="_blank" rel="noopener">${t("card.buy")}</a>
+        ${buildShopLinksHtml(racket)}
       </div>
     </div>
   </article>`;

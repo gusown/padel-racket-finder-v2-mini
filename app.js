@@ -312,9 +312,10 @@ const UI = {
     "card.priceText": price => `Shop-Preis <b>${price} €</b> (Stand: September 2026). Preise können sich ändern — bitte vor dem Kauf im Shop prüfen.`,
     "card.overBudget": " <b>Liegt über deinem Budget</b> — im Finder gibt es nicht genug passende Modelle in deiner Preisklasse.",
     "card.buy": "Im Shop ansehen ↗",
+    "card.moreShops": "Preise vergleichen:",
     "card.source": "Testwerte &amp; Daten: padelreference.com",
     "card.noImage": "Kein Bild verfügbar",
-    "notice": n => `<b>Hinweis:</b> Alle ${n} Schläger, ihre Specs, Testwerte (Power, Kontrolle, Komfort, Handling, Effet, Fehlertoleranz), Preise und Links stammen von padelreference.com (Stand: September 2026). Die Werte für Netzspiel und Defensive leiten wir daraus ab. Preise und Verfügbarkeit können sich ändern.`,
+    "notice": n => `<b>Hinweis:</b> Alle ${n} Schläger, ihre Specs, Testwerte (Power, Kontrolle, Komfort, Handling, Effet, Fehlertoleranz), Preise und Links stammen von padelreference.com (Stand: September 2026). Die Werte für Netzspiel und Defensive leiten wir daraus ab. Preise und Verfügbarkeit können sich ändern. Die zusätzlichen Links zu idealo.de, Padel-Point.de und Tennis-Point.de sind automatische Shop-Suchen nach dem Modellnamen, keine geprüften Produktseiten — bitte das gefundene Angebot vor dem Kauf mit dem Modell abgleichen.`,
     "restart": "Test erneut starten",
     "and": "und",
     "reasonFallback": "Dieser Schläger erzielt über alle deine Antworten hinweg die beste Gesamtbewertung.",
@@ -564,9 +565,10 @@ const UI = {
     "card.priceText": price => `Shop price <b>€${price}</b> (as of September 2026). Prices can change — please check the shop before buying.`,
     "card.overBudget": " <b>Above your budget</b> — the finder doesn't have enough matching models in your price range.",
     "card.buy": "View in shop ↗",
+    "card.moreShops": "Compare prices:",
     "card.source": "Test scores &amp; data: padelreference.com",
     "card.noImage": "No image available",
-    "notice": n => `<b>Note:</b> All ${n} rackets, their specs, test scores (power, control, comfort, handling, spin, forgiveness), prices and links come from padelreference.com (as of September 2026). Net play and defense values are derived from those scores. Prices and availability can change.`,
+    "notice": n => `<b>Note:</b> All ${n} rackets, their specs, test scores (power, control, comfort, handling, spin, forgiveness), prices and links come from padelreference.com (as of September 2026). Net play and defense values are derived from those scores. Prices and availability can change. The extra links to idealo.de, Padel-Point.de and Tennis-Point.de are automatic shop searches by model name, not verified product pages — please check the listing matches the model before buying.`,
     "restart": "Restart test",
     "and": "and",
     "reasonFallback": "This racket scores best overall across all your answers.",
@@ -2358,12 +2360,30 @@ function createRacketCard(racket, index, top, withBreakdown = false) {
   html += `<p>${t("card.priceText")(formatPrice(racket.price))}${overBudgetNote}</p>`;
   html += `</div>`;
   html += `<a class="buy" href="${racket.url}" target="_blank" rel="noopener">${t("card.buy")}</a>`;
+  html += buildShopLinksHtml(racket);
   html += `<p class="source-note">${t("card.source")}</p>`;
   html += `</div>`;
   html += `</div>`;
   html += `</article>`;
 
   return html;
+}
+
+// Search links, not direct product links: with 184 rackets across several shops, hardcoding
+// exact product URLs can't be kept accurate (pages move, models go out of stock). A search
+// query always resolves to something useful, and idealo covers many more German shops at once.
+const SHOP_SEARCH_LINKS = [
+  { key: "idealo", label: "idealo.de", url: q => `https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q=${q}` },
+  { key: "padelpoint", label: "Padel-Point.de", url: q => `https://www.padel-point.de/search?q=${q}` },
+  { key: "tennispoint", label: "Tennis-Point.de", url: q => `https://www.tennis-point.de/search?q=${q}` }
+];
+
+function buildShopLinksHtml(racket) {
+  const q = encodeURIComponent(racket.name);
+  const links = SHOP_SEARCH_LINKS.map(shop =>
+    `<a class="shop-link" href="${shop.url(q)}" target="_blank" rel="noopener sponsored">${shop.label}</a>`
+  ).join("");
+  return `<div class="shop-links"><span class="shop-links-label">${t("card.moreShops")}</span>${links}</div>`;
 }
 
 function formatNumber(value) {

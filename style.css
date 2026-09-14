@@ -784,6 +784,29 @@ body {
   margin: 10px 0 0;
 }
 
+.shop-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.shop-links-label {
+  color: var(--text-muted);
+}
+
+.shop-link {
+  color: var(--accent-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.shop-link:hover {
+  border-bottom-color: currentColor;
+}
+
 /* Selected & multi-select options */
 .option.selected {
   border-color: var(--accent);

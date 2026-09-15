@@ -35,23 +35,19 @@ Ein persönlicher Finder für den passenden Padel-Schläger — mit echten Model
 
 ## Schnelleinstieg
 
-Öffne die Datei `index.html` in deinem Browser oder teste online:
-- [GitHub Pages](https://username.github.io/padel-racket-finder) (nach dem Deploy)
+👉 **[gusown.github.io/padel-racket-finder-v2-mini](https://gusown.github.io/padel-racket-finder-v2-mini/)** — läuft bereits, einfach öffnen und teilen.
 
-## Teilen mit Freunden
+Alternativ lokal: Repo klonen und die Datei `index.html` im Browser öffnen (kein Build-Schritt nötig).
 
-### Option 1: GitHub Pages (kostenlos, einfach)
+## Eigene Kopie deployen
+
+Willst du eine eigene, unabhängige Version betreiben (z. B. mit eigenen Anpassungen)?
+
 1. Dieses Repo zu deinem GitHub-Account forken
-2. In Settings → Pages: Deploy from `main` branch aktivieren
-3. Fertig — dein Link ist `https://username.github.io/padel-racket-finder-v2-mini`
+2. In den Repo-Settings → Pages: Deploy from a branch → `main` (oder wie hier per `gh-pages`) aktivieren
+3. Fertig — dein Link ist `https://<dein-username>.github.io/padel-racket-finder-v2-mini`
 
-### Option 2: Netlify oder Vercel (auch kostenlos)
-1. Diese Repo auf einer dieser Plattformen connecten
-2. Automatisches Deploy bei jedem Push
-3. Kostenlose eigene Domain oder Netlify-Domain
-
-### Option 3: Lokal teilen
-Einfach die Datei `index.html` mit Freunden teilen — sie öffnen sie im Browser, fertig.
+Funktioniert genauso mit Netlify oder Vercel (Repo verbinden, automatisches Deploy bei jedem Push) oder ganz ohne Hosting — einfach `index.html` mit Freunden teilen, sie öffnen sie direkt im Browser.
 
 ## Woher kommen die Daten?
 
@@ -72,7 +68,7 @@ app.js        — Daten, i18n, Quiz-Logik, Matching, Share/Verlauf/Partner-Modus
 browse.js     — Browse- & Vergleichs-Modus (baut auf app.js auf)
 sw.js         — Service Worker fürs Offline-Caching
 manifest.json — PWA-Manifest
-icons/        — App-Icons (generiert)
+icons/        — App-Icons und Link-Vorschaubild (generiert)
 ```
 
 Die App ist selbstständig — alles läuft im Browser, keine externe API oder Backend nötig. Geteilte Ergebnisse werden als Link kodiert (keine Server-Speicherung), Verlauf und Spracheinstellung liegen im `localStorage` des jeweiligen Geräts.
@@ -90,4 +86,4 @@ Ganz oben im Projekt → Issues oder einen Pull Request öffnen.
 
 ## Lizenz
 
-Dieses Projekt ist kostenlos nutzbar, teilbar und veränderbar — für persönliche und Freunde-Zwecke.
+[MIT](LICENSE) — kostenlos nutzbar, teilbar und veränderbar, für persönliche und Freunde-Zwecke.
